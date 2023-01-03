@@ -54,31 +54,26 @@ class UserController {
         if (avatar == undefined) {
             res.status(400)
             res.json({err: "avatar inválido"})
-            return
         }
 
         if (nome == undefined) {
             res.status(400)
             res.json({err: "nome inválido"})
-            return
         }
 
         if (email == undefined) {
             res.status(400)
             res.json({err: "email inválido"})
-            return
         }
 
         if (senha == undefined) {
             res.status(400)
             res.json({err: "senha inválida"})
-            return
         }
 
         if (senha.length < 8) {
             res.status(400)
             res.json({err: "A senha precisa ter no mínimo 8 caracteres"})
-            return
         }
 
         // Verificando se o email já foi cadastrado
@@ -86,7 +81,6 @@ class UserController {
         if (emailExists) {
             res.status(406)
             res.json({err: "Email já está cadastrado"})
-            return
         }
 
         try {
@@ -94,35 +88,40 @@ class UserController {
             
             await unlinkAsync(avatar) // Deletando imagem da pasta "temp"
             await User.novo(cdn.secure_url, cdn.public_id, nome, email.toLowerCase(), senha) // Criando o usuário
+
             // Fazendo login depois de ter criado a conta
             let user = await User.findByEmail(email);
             if(user != undefined){
+                try {
+                    let token = await jwt.sign({id: user.id, nome: user.nome, email: user.email, avatar: user.avatar, role: user.role}, secret, { expiresIn: 604800});
     
-                let token = jwt.sign({id: user.id, nome: user.nome, email: user.email, avatar: user.avatar, role: user.role}, secret, { expiresIn: 604800});
+                    let tokenValido = await User.findBlacklist(token)
+    
+                    if (tokenValido == undefined) {
+                        try {
+                            let decoded = await jwt.verify(token,secret);
 
-                req.session.token = token
-
-                const tokenValido = await User.findBlacklist(token)
-
-                if (tokenValido == undefined) {
-                    const decoded = jwt.verify(token,secret);
-        
-                    req.session.user = decoded
-                    res.status(200);
-                    res.json({token: token,decoded: decoded});
-                    return
-                } else {
-                    res.status(403);
-                    res.json({err: "Token invalido"});
-                    return;
+                            res.status(200);
+                            res.json({token: token,UserDecoded: decoded});
+                        } catch (error) {
+                            res.status(401);
+                            res.json({err: "Token invalido"});
+                        }
+                    } else {
+                        res.status(403);
+                        res.json({err: "Token invalido"});
+                    }
+                } catch (error) {
+                    res.status(400)
+                    res.json({err:"Falha interna"})
                 }
             }else{
                 res.status(404);
-                res.json({err: "Usuário não encontrado"});
-                return
+                res.json({err: "Erro ao fazer login depois de criar a conta, usuário não encontrado"});
             }
         } catch (error) {
-            console.log(error);
+            res.status(400)
+            res.json({err:"Erro ao criar conta"})
         }
     }
 
@@ -132,13 +131,11 @@ class UserController {
         if (email == undefined) {
             res.status(400)
             res.json({err: "email inválido"})
-            return
         }
 
         if (senha.length < 8) {
             res.status(400)
             res.json({err: "A senha precisa ter no mínimo 8 caracteres"})
-            return
         }
 
         let user = await User.findByEmail(email);
@@ -151,26 +148,25 @@ class UserController {
 
                 let token = jwt.sign({id: user.id, nome: user.nome, email: user.email, avatar: user.avatar, role: user.role}, secret, { expiresIn: 604800});
 
-                req.session.token = token
-
-                const tokenValido = await User.findBlacklist(token)
+                let tokenValido = await User.findBlacklist(token)
 
                 if (tokenValido == undefined) {
-                    const decoded = jwt.verify(token,secret);
-        
-                    req.session.user = decoded
-                    res.status(200);
-                    res.json({token: token,decoded: decoded});
-                    return
+                    try {                        
+                        let decoded = jwt.verify(token,secret);
+
+                        res.status(200);
+                        res.json({token: token,UserDecoded: decoded});
+                    } catch (error) {
+                        res.status(401);
+                        res.json({err: "Token invalido"});
+                    }
                 } else {
                     res.status(403);
                     res.json({err: "Token invalido"});
-                    return;
                 }
             }else{
                 res.status(406);
                 res.json({err: "Senha incorreta"});
-                return
             }
 
         }else{
@@ -181,8 +177,8 @@ class UserController {
     }
 
     async logout(req, res){
-        let token = req.session.token
-        req.session.token = undefined
+        let token = req.headers["authorization"]
+
         try {
             await User.blacklistToken(token)
         } catch (error) {
@@ -199,11 +195,9 @@ class UserController {
             Email.enviarDeleteLink(email, result.token)
             res.status(200);
             res.json({result: "Email de deleção enviado com sucesso"})
-            return
         }else{
             res.status(406)
             res.json({err: "Erro, talvez o email usado não exista"})
-            return
         }
     }
     
@@ -216,38 +210,27 @@ class UserController {
                 await User.MyDelete(tokenValido.token.user_id, tokenValido.token.token);
                 res.status(200);
                 res.json("Conta deletada");
-                return
             } catch (error) {
                 res.status(400);
                 res.json({err: "Erro ao deletar a conta"});
-                return
             }
         }else{
             res.status(406);
             res.json({err: "Token inválido ou inexistente!"});
-            return
         }
     }
 
     async AdmRemove(req, res){
         let id = req.params.id;
 
-        if (id == req.session.user.id) { // Deletando o token antigo
-            req.session.token = undefined
-            User.blacklistToken(req.session.token)
-            return
-        }
-
         try {
             let result = await User.delete(id);
             if(result.status){
                 res.status(200);
                 res.send("Usuário deletado!");
-                return
             }else{
                 res.status(406);
                 res.json({err: result.err});
-                return
             }   
         } catch (error) {
             res.status(400);
@@ -256,9 +239,9 @@ class UserController {
     }
 
     async edit(req, res){
-
         let {id, nome, email, role} = req.body;
         let avatar = req.file.destination+req.file.filename
+        let token = req.headers["authorization"]
 
         try {
             let cdn = await FileManager.upload(avatar) // Upload da imagem para a Cloudinary e retornando a cdn
@@ -267,8 +250,7 @@ class UserController {
             await User.update(id, cdn.secure_url, cdn.public_id, nome, email); // Editando o usuário
             
             // Deletando o token antigo
-            req.session.token = undefined
-            User.blacklistToken(req.session.token)
+            User.blacklistToken(token)
 
             // Fazendo login depois de ter editado a conta
             let user = await User.findById(id);
@@ -276,10 +258,8 @@ class UserController {
     
                 let token = jwt.sign({id: user.id, nome: user.nome, email: user.email, avatar: user.avatar, role: user.role}, secret, { expiresIn: 604800});
 
-                req.session.token = token
                 res.status(200);
-                res.json({token: token});
-                return
+                res.json({token: token,UserDecoded: decoded});
             }else{
                 res.status(404);
                 res.json({err: "Usuário não encontrado"});
@@ -314,7 +294,6 @@ class UserController {
         if (senha.length < 8) {
             res.status(400)
             res.json({err: "A senha precisa ter no mínimo 8 caracteres"})
-            return
         }
 
         let tokenValido = await PasswordToken.validate(token);
@@ -327,14 +306,11 @@ class UserController {
                 res.status(400);
                 res.json("Erro ao alterar senha");
             }
-            return
         }else{
             res.status(406);
             res.json({err: "Token inválido ou inexistente!"});
-            return
         }
     }
-    
 }
 
 module.exports = new UserController()

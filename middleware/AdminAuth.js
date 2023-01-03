@@ -3,34 +3,36 @@ const secret = "paçoca";
 const User = require("../models/User")
 
 module.exports = async function(req, res, next){
-    const authToken = req.session.token
+    const authToken = req.headers["authorization"]
     
     if(authToken != undefined){
-        const token = authToken
-        const tokenValido = await User.findBlacklist(token)
+        const tk = authToken
+        const tokenValido = await User.findBlacklist(tk)
+        const bearer = tk.split(" ")
+        let token = bearer[1]
 
         if (tokenValido == undefined) {
-            const decoded = jwt.verify(token,secret);
-            
-            if(decoded.role == 1){
-                req.session.user = decoded
-                next();
-            }else{
-                res.status(403);
-                res.redirect("/")
-                // res.json({err: "Você não tem permissão para acessar essa rota!"});
-                return;
-            }
+            jwt.verify(token,secret, (err, decoded) => {
+                if (err) {
+                    res.status(401);
+                    res.json({err: "Token inválido"});
+                } else {                    
+                    if(decoded.role == 1){
+                        res.status(200);
+                        res.send("Permissão para acessar a rota");
+                        next();
+                    }else{
+                        res.status(403);
+                        res.json({err: "Você não tem permissão para acessar essa rota!"});
+                    }
+                }
+            });
         } else {
             res.status(403);
-            res.redirect("/login")
-            // res.json({err: "Token invalido"});
-            return;
+            res.json({err: "Token invalido"});
         }
     }else{
         res.status(403);
-        res.redirect("/login")
-        // res.json({err: "Você não está autenticado"});
-        return;
+        res.json({err: "Você não está autenticado"});
     }
 }
