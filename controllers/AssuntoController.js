@@ -1,7 +1,7 @@
 import Apontamento from "../models/Apontamento.js";
 import Assunto from "../models/Assunto.js";
 
-export class AssuntoController {
+export default class AssuntoController {
 
     // CRUD
 

@@ -2,7 +2,7 @@ import knex from "../database/connection.js";
 import User from "./User.js";
 import { v4 as uuidv4 } from 'uuid';
 
-export class DeleteToken{
+export default class DeleteToken{
     async create(email){
         let user = await User.findByEmail(email);
         if(user != undefined){

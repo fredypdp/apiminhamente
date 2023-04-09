@@ -7,12 +7,12 @@ import Email from "../models/EnviarEmail.js";
 import FileManager from "../models/fileManager.js";
 
 import fs from "fs";
-import promisify from "util";
+import { promisify } from "util";
 const unlinkAsync = promisify(fs.unlink)
 
 const secret = process.env.SECRET;
 
-export class UserController {
+export default class UserController {
 
     async Usuarios(req, res){
         try {

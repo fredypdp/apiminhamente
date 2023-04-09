@@ -2,7 +2,7 @@ import database from "../database/connection.js";
 import slugify from "slugify";
 import FileManager from "./fileManager.js";
 
-export class Apontamento {
+export default class Apontamento {
 
     async novo(titulo, conteudo, assuntos, miniatura, miniatura_public_id){
         try {

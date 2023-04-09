@@ -1,9 +1,9 @@
 import bcrypt from "bcrypt";
 import knex from "../database/connection.js";
-import PasswordToken from "./PassWordToken.js";
+import PasswordToken from "./PasswordToken.js";
 import FileManager from "./fileManager.js";
 
-export class User {
+export default class User {
 
     async findEmail(email){
         try {

@@ -1,7 +1,7 @@
 import database from "../database/connection.js";
 import slugify from "slugify";
 
-export class Assunto {
+export default class Assunto {
 
     async novo(nome, icone){
         let assunto = await this.encontrarPorNome(nome)

@@ -17,7 +17,7 @@ const siteEmail = process.env.SITE_EMAIL
 const urlSenha = process.env.URL_PAGINA_MUDAR_SENHA
 const urlDelete = process.env.URL_PAGINA_DELETAR_CONTA
 
-export class Email{
+export default class Email{
 
     enviarNovaSenhaLink(email, token){
 

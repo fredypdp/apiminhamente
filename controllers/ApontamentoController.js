@@ -6,7 +6,7 @@ import fs from "fs";
 import { promisify } from "util";
 const unlinkAsync = promisify(fs.unlink)
 
-export class ApontamentoController {
+export default class ApontamentoController {
 
     // CRUD
 
