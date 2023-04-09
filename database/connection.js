@@ -1,12 +1,10 @@
-const database = require('knex')({
-    client: 'mysql2',
-    connection: {
-      host : process.env.DB_HOST,
-      user : process.env.DB_USER,
-      password : process.env.DB_PASSWORD,
-      database : process.env.DB_DATABASE,
-      timezone: process.env.DB_TIMEZONE
-    }
-  });
+const mongoose = require('mongoose')
+mongoose.Promise = global.Promise
 
-  module.exports = database
+const uri = `mongodb+srv://fredy:${process.env.DB_SENHA}@cluster1.im5qg0x.mongodb.net/?retryWrites=true&w=majority`;
+
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+.then( () => console.log("Conectado ao servidor"))
+.catch( (erro) => console.log(erro))
+
+module.exports = mongoose

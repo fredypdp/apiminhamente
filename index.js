@@ -4,6 +4,7 @@ require("dotenv").config()
 const bodyParser = require("body-parser")
 const session = require("express-session")
 const router = require("./routes/routes")
+require("./database/connection");
 
 // View engine
 app.set("view engine", "ejs")
