@@ -1,4 +1,4 @@
-const nodemailer = require("nodemailer")
+import nodemailer from "nodemailer";
 
 const transporter = nodemailer.createTransport({
     host: "smtp.gmail.com",
@@ -17,7 +17,7 @@ const siteEmail = process.env.SITE_EMAIL
 const urlSenha = process.env.URL_PAGINA_MUDAR_SENHA
 const urlDelete = process.env.URL_PAGINA_DELETAR_CONTA
 
-class Email{
+export class Email{
 
     enviarNovaSenhaLink(email, token){
 
@@ -51,5 +51,3 @@ class Email{
 
     }
 }
-
-module.exports = new Email()

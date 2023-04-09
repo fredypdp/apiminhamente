@@ -1,19 +1,18 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const multer = require("multer")
-const User = require("../models/User")
-const PasswordToken = require("../models/PasswordToken");
-const DeleteToken = require("../models/DeleteToken");
-const Email = require("../models/EnviarEmail");
-const FileManager = require("../models/fileManager");
+import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import User from "../models/User.js";
+import PasswordToken from "../models/PasswordToken.js";
+import DeleteToken from "../models/DeleteToken.js";
+import Email from "../models/EnviarEmail.js";
+import FileManager from "../models/fileManager.js";
 
-const fs = require('fs')
-const { promisify } = require('util')
+import fs from "fs";
+import promisify from "util";
 const unlinkAsync = promisify(fs.unlink)
 
 const secret = process.env.SECRET;
 
-class UserController {
+export class UserController {
 
     async Usuarios(req, res){
         try {
@@ -312,5 +311,3 @@ class UserController {
         }
     }
 }
-
-module.exports = new UserController()

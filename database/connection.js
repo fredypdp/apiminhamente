@@ -7,4 +7,4 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
 .then( () => console.log("Conectado ao servidor"))
 .catch( (erro) => console.log(erro))
 
-module.exports = mongoose
+export default mongoose

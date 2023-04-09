@@ -1,10 +1,10 @@
-const express = require("express")
+import express from "express";
 const app = express()
-require("dotenv").config()
-const bodyParser = require("body-parser")
-const session = require("express-session")
-const router = require("./routes/routes")
-require("./database/connection");
+import * as dotenv from 'dotenv'
+import bodyParser from "body-parser";
+import session from "express-session";
+import router from "./routes/routes.js";
+import "./database/connection.js";
 
 // View engine
 app.set("view engine", "ejs")

@@ -1,13 +1,12 @@
-const multer = require("multer")
-const Apontamento = require("../models/Apontamento")
-const Assunto = require("../models/Assunto")
-const FileManager = require("../models/fileManager");
+import Apontamento from "../models/Apontamento.js";
+import Assunto from "../models/Assunto.js";
+import FileManager from "../models/fileManager.js";
 
-const fs = require('fs')
-const { promisify } = require('util');
+import fs from "fs";
+import { promisify } from "util";
 const unlinkAsync = promisify(fs.unlink)
 
-class ApontamentoController {
+export class ApontamentoController {
 
     // CRUD
 
@@ -300,5 +299,3 @@ class ApontamentoController {
         }
     }
 }
-
-module.exports = new ApontamentoController()

@@ -1,7 +1,7 @@
-const database = require("../database/connection")
-const slugify = require("slugify")
+import database from "../database/connection.js";
+import slugify from "slugify";
 
-class Assunto {
+export class Assunto {
 
     async novo(nome, icone){
         let assunto = await this.encontrarPorNome(nome)
@@ -89,5 +89,3 @@ class Assunto {
     }
 
 }
-
-module.exports = new Assunto()

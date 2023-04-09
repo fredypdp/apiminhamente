@@ -1,7 +1,7 @@
-const Apontamento = require("../models/Apontamento")
-const Assunto = require("../models/Assunto")
+import Apontamento from "../models/Apontamento.js";
+import Assunto from "../models/Assunto.js";
 
-class AssuntoController {
+export class AssuntoController {
 
     // CRUD
 
@@ -127,5 +127,3 @@ class AssuntoController {
     }
     
 }
-
-module.exports = new AssuntoController()

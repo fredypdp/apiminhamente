@@ -1,9 +1,8 @@
-const database = require("../database/connection")
-const slugify = require("slugify");
-const Assunto = require("./Assunto");
-const FileManager = require("./fileManager");
+import database from "../database/connection.js";
+import slugify from "slugify";
+import FileManager from "./fileManager.js";
 
-class Apontamento {
+export class Apontamento {
 
     async novo(titulo, conteudo, assuntos, miniatura, miniatura_public_id){
         try {
@@ -151,5 +150,3 @@ class Apontamento {
     }
 
 }
-
-module.exports = new Apontamento()

@@ -1,8 +1,8 @@
-const knex = require("../database/connection");
-const User = require("./User");
-const { v4: uuidv4 } = require("uuid")
+import knex from "../database/connection.js";
+import User from "./User.js";
+import { v4 as uuidv4 } from 'uuid';
 
-class DeleteToken{
+export class DeleteToken{
     async create(email){
         let user = await User.findByEmail(email);
         if(user != undefined){
@@ -46,5 +46,3 @@ class DeleteToken{
         await knex.update({used: 1}).where({token: token}).table("deletetokens");
     }
 }
-
-module.exports = new DeleteToken();

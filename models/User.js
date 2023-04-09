@@ -1,9 +1,9 @@
-const bcrypt = require("bcrypt")
-const knex = require("../database/connection")
-const PasswordToken = require("./PassWordToken");
-const FileManager = require("./fileManager");
+import bcrypt from "bcrypt";
+import knex from "../database/connection.js";
+import PasswordToken from "./PassWordToken.js";
+import FileManager from "./fileManager.js";
 
-class User {
+export class User {
 
     async findEmail(email){
         try {
@@ -195,5 +195,3 @@ class User {
         await PasswordToken.setUsed(token);
     }
 }
-
-module.exports = new User()

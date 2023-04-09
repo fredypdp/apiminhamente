@@ -1,14 +1,14 @@
-const express = require("express")
+import express from "express";
 const router = express.Router();
-const AssuntoController = require("../controllers/AssuntoController")
-const ApontamentoController = require("../controllers/ApontamentoController")
-const UserController = require("../controllers/UserController")
-const AdminAuth = require("../middleware/AdminAuth")
-const UserAuth = require("../middleware/UserAuth")
+import AssuntoController from "../controllers/AssuntoController.js";
+import ApontamentoController from "../controllers/ApontamentoController.js";
+import UserController from "../controllers/UserController.js";
+import AdminAuth from "../middleware/AdminAuth.js";
+import UserAuth from "../middleware/UserAuth.js";
 
 // FileManager
-const multer = require("multer")
-const path = require("path")
+import multer from "multer";
+import path from "path";
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
@@ -60,4 +60,4 @@ router.get("/apontamentos", ApontamentoController.Apontamentos); // Todos os apo
 router.get("/apontamento/:id", ApontamentoController.apontamentoById); // Apontamento pelo id
 router.get("/results", ApontamentoController.pesquisarApontamento); // Pesquisar apontamento
 
-module.exports = router;
+export default router
