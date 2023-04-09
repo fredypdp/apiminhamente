@@ -42,9 +42,9 @@ class ApontamentoController {
 
         // Criando
         try {
-            let cdn = await FileManager.upload(miniatura) // Upload da imagem para a Cloudinary e retornando a cdn
+            let cdn = await FileManager.upload(miniatura) // Upload da miniatura para a Cloudinary e retornando a cdn
                 
-            await unlinkAsync(miniatura) // Deletando imagem da pasta "temp"
+            await unlinkAsync(miniatura) // Deletando miniatura da pasta "temp"
             await Apontamento.novo(titulo, conteudo, assuntos, cdn.secure_url, cdn.public_id)
 
             res.status(200)
@@ -92,7 +92,7 @@ class ApontamentoController {
         
         // Editando 
         let ResultApontamento = await Apontamento.encontrarId(id)
-        FileManager.delete(ResultApontamento.miniatura_public_id) // Deletando a antiga miniatura
+        FileManager.delete(ResultApontamento.miniatura_public_id) // Deletando a antiga miniatura salva na nuvem
 
         let cdn = await FileManager.upload(miniatura) // Upload da imagem para a Cloudinary e retornando a cdn
         

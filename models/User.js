@@ -131,12 +131,13 @@ class User {
 
             try{
                 await knex.delete().where({id: id}).table("users");
-                await await FileManager.delete(user.avatar_public_id)
+                await FileManager.delete(user.avatar_public_id)
                 // return {status: true}
             }catch(err){
                 console.log(err);
                 // return {status: false,err: err}
             }
+        
         }else{
             return {status: false,err: "O usuário não existe, portanto não pode ser deletado."}
         }
@@ -150,7 +151,7 @@ class User {
 
             try{
                 await knex.delete().where({id: id}).table("users");
-                await await FileManager.delete(user.avatar_public_id)
+                await FileManager.delete(user.avatar_public_id)
                 await PasswordToken.setUsed(token);
                 return {status: true}
             }catch(err){

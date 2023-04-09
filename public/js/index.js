@@ -3,16 +3,16 @@ const right = document.querySelector(".fa-angle-right")
 const setaEsquerda = document.getElementById("setaEsquerda")
 const setaDireita = document.getElementById("setaDireita")
 const assuntosBar = document.querySelector(".assuntos-bar-area")
-const perfil = document.querySelector(".perfil-icon")
+// const perfil = document.querySelector(".perfil-icon")
 const body = document.querySelector("body")
 
-perfil.addEventListener("click", () => {
-    document.querySelector(".nav-container").classList.toggle("perfil-active")
-})
+// perfil.addEventListener("click", () => {
+//     document.querySelector(".nav-container").classList.toggle("perfil-active")
+// })
 
-document.querySelector(".nav-container").addEventListener("click", () => {
-    document.querySelector(".nav-container").classList.remove("perfil-active")
-})
+// document.querySelector(".nav-container").addEventListener("click", () => {
+//     document.querySelector(".nav-container").classList.remove("perfil-active")
+// })
 
 function sumirSeta(){
     const posicao = assuntosBar.scrollLeft
@@ -34,10 +34,10 @@ function sumirSeta(){
 
 sumirSeta()
 
-left.addEventListener("click", () => {
-    assuntosBar.scrollBy(-400, 0)
-    sumirSeta()
-})
+// left.addEventListener("click", () => {
+//     assuntosBar.scrollBy(-400, 0)
+//     sumirSeta()
+// })
 
 right.addEventListener("click", () => {
     assuntosBar.scrollBy(400, 0)

@@ -146,7 +146,7 @@ class UserController {
             
             if(resultado == true){
 
-                let token = jwt.sign({id: user.id, nome: user.nome, email: user.email, avatar: user.avatar, role: user.role}, secret, { expiresIn: 604800});
+                let token = jwt.sign({id: user.id, nome: user.nome, email: user.email, avatar: user.avatar, role: user.role}, secret, { expiresIn: 604800})
 
                 let tokenValido = await User.findBlacklist(token)
 
@@ -249,7 +249,7 @@ class UserController {
             await unlinkAsync(avatar) // Deletando imagem da pasta "temp"
             await User.update(id, cdn.secure_url, cdn.public_id, nome, email); // Editando o usuário
             
-            // Deletando o token antigo
+            // Adicionando o token de login antigo à lista negra
             User.blacklistToken(token)
 
             // Fazendo login depois de ter editado a conta
