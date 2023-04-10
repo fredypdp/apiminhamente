@@ -1,4 +1,4 @@
-import database from "../database/connection.js";
+import AssuntoSchema from "../Schemas/AssuntoSchema.js";
 import slugify from "slugify";
 
 export default class Assunto {

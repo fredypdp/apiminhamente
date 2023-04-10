@@ -1,4 +1,4 @@
-import database from "../database/connection.js";
+import ApontamentoSchema from "../Schemas/ApontamentoSchema.js";
 import slugify from "slugify";
 import FileManager from "./fileManager.js";
 
