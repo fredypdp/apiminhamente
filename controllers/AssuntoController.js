@@ -22,18 +22,18 @@ export default class AssuntoController {
         }
 
         try {
-           let erroExist = await Assunto.novo(nome, icone)
+            let erroExist = await new Assunto().novo(nome, icone)
             if (erroExist.status == 400) {
                 res.status(400)
-                res.json({err: "Erro ao criar assunto"})
-                return
+                res.json({erro: "O nome já está cadastrado"})
             } else {
                 res.status(200)
-                res.send("Assunto criado com sucesso")
-                return
+                res.json({data: erroExist, msg: "Assunto criado com sucesso"})
             }
         } catch (erro) {
-            console.log(erro);
+            console.log(erro)
+            res.status(400)
+            res.json({erro: "Erro ao criar assunto"})
         }
     }
 
@@ -47,38 +47,29 @@ export default class AssuntoController {
             return
         }
 
-        if (nome == undefined) {
+        if (nome == undefined && icone == undefined) {
             res.status(400)
-            res.json({err: "nome inválido"})
+            res.json({erro: "nome e icone inválidos"})
             return
         }
 
-        if (icone == undefined) {
-            res.status(400)
-            res.json({err: "icone inválido"})
-            return
-        }
-
+        // Editando assunto
         try {
-           let erroExist = await Assunto.editar(id, nome, icone)
-            if (erroExist.status == 400) {
-                res.status(400)
-                res.json({err: "Erro ao editar assunto"})
-                return
-            } else {
-                res.status(200)
-                res.send("Assunto editado com sucesso")
-                return
-            }
+           let assunto = await new Assunto().editar(id, nome, icone)
+
+            res.status(200)
+            res.json({data: assunto, msg: "Assunto editado com sucesso"})
         } catch (erro) {
-            console.log(erro);
+            console.log(erro)
+            res.status(400)
+            res.json({erro: "Erro ao editar assunto"})
         }
     }
 
     async deletar(req, res){
         let id = req.params.id;
         
-        let result = await Assunto.deletar(id);
+        let result = await new Assunto().deletar(id);
 
         if(result.status == true){
             res.status(200)
@@ -93,37 +84,45 @@ export default class AssuntoController {
 
     // Requisições
 
-    async assuntoPage(req, res){
-        let assunto = req.params.slug
+    async AssuntoSlug(req, res){
+        let slug = req.params.slug
         try {
-            let apontamentos = await Apontamento.apontamentoDoAssunto(assunto)
+            let assunto = await new Assunto().encontrarPorSlug(slug)
 
             res.status(200)
-            res.json({assunto: assunto, assuntos: assuntos, apontamentos: apontamentos})
-        } catch (error) {
+            res.json({assunto: assunto})
+        } catch (erro) {
+            console.log(erro)
             res.status(404)
-            res.json({err: "Nenhum apontamento encontrado"})
+            res.json({erro: "Nenhum apontamento encontrado"})
         }
     }
 
     async AssuntoById(req, res){
         let id = req.params.id
-        let assunto = await Assunto.encontrarPorId(id)
+        try {
+            let assunto = await new Assunto().encontrarPorId(id)
 
-        res.status(200)
-        res.json({assunto: assunto})
+            res.status(200)
+            res.json({assunto: assunto})
+        } catch (erro) {
+            console.log(erro)
+            res.status(404)
+            res.json({erro: "Nenhum assunto encontrado"})
+        }
+
     }
 
     async Assuntos(req, res){
         try {
-            let assuntos = await Assunto.assuntoAll()
+            let assuntos = await new Assunto().assuntoAll()
 
             res.status(200)
             res.json({assuntos: assuntos})
-        } catch (error) {
+        } catch (erro) {
+            console.log(erro);
             res.status(404)
-            res.json({err: "Nenhum assunto encontrado"})
+            res.json({erro: "Nenhum assunto encontrado"})
         }
     }
-    
 }

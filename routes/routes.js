@@ -22,42 +22,37 @@ const storage = multer.diskStorage({
 const upload = multer({storage})
 
 // User
-router.get('/usuarios', AdminAuth, async (req, res) => await UserController.Usuarios(req, res)) // Todos os usuários
+router.get('/usuarios', new UserController().Usuarios) // Todos os usuários
 
-router.get("/usuario/:id", UserAuth, async (req, res) => await UserController.UsuarioById(req, res)) // Usuário pelo id
-router.post("/user", upload.single("avatar"), async (req, res) => await UserController.criar(req, res)) // Criado usuário
-router.put("/user", UserAuth, upload.single("avatar"), async (req, res) => await UserController.edit(req, res)) // Editando usuário
-router.post("/user/:id/:email", UserAuth, async (req, res) => await UserController.removeEmail(req, res)) // Enviando email de deleção
-router.delete("/deletarconta", UserAuth, async (req, res) => await UserController.remove(req, res)) // Deletando usuário
-router.delete("/user/:id", AdminAuth, async (req, res) => await UserController.AdmRemove(req, res)) // Adm deletando usuário
+router.get("/usuario/:id", new UserController().UsuarioById) // Usuário pelo id
+router.post("/usuario", upload.single("avatar"), new UserController().criar) // Criar usuário
+router.put("/usuario", upload.single("avatar"), new UserController().edit) // Editar usuário
+router.post("/usuario/:id/:email", new UserController().removeEmail) // Enviar email de deleção de conta
+router.delete("/deletarconta", new UserController().remove) // Deletar conta
+router.delete("/usuario/:id", new UserController().AdmRemove) // Adm deletando usuário
 
-router.post("/login",async (req, res) => await UserController.login(req, res)) // Fazendo login
-router.post("/logout", UserAuth, async (req, res) => await UserController.logout(req, res)) // Terminando sessão
+router.post("/recuperarsenha", new UserController().recoverPassword) // Enviar email de recuperação de senha
+router.post("/mudarsenha", new UserController().changePassword) // Mudar senha
 
-
-router.post("/recuperarsenha", UserAuth, async (req, res) => await UserController.recoverPassword(req, res)) // Enviando email de recuperação de senha
-router.post("/mudarsenha", UserAuth, async (req, res) => await UserController.changePassword(req, res)) // Mudando senha
-
-router.get("/login", async (req, res) => await UserController.paginaDeLogin(req, res))
-router.get('/mudarsenha/:token', UserAuth, async (req, res) => await UserController.paginaNovaSenha(req, res))
-router.get('/deletarconta/:token', async (req, res) => await UserController.paginaDeletarConta(req, res))
+router.post("/login", new UserController().login) // Fazer login
+router.post("/logout", new UserController().logout) // Terminar sessão
 
 // Assuntos
-router.get("/assunto/:slug", async (req, res) => await AssuntoController.assuntoPage(req, res)) // Apontamento pelo slug
-router.post("/assunto", AdminAuth, async (req, res) => await AssuntoController.criar(req, res)) // Criando assunto
-router.put("/assunto", AdminAuth, async (req, res) => await AssuntoController.editar(req, res)) // Editando assunto
-router.delete("/assunto/:id", AdminAuth, async (req, res) => await AssuntoController.deletar(req, res)) // Deletando assunto
+router.get("/assuntos", new AssuntoController().Assuntos) // Todos os assuntos
+router.get("/assunto/:slug", new AssuntoController().AssuntoSlug) // Assunto pelo slug
+router.get("/assunto/:id", new AssuntoController().AssuntoById) // Assunto pelo id
+router.post("/assunto", new AssuntoController().criar) // Criar assunto
+router.put("/assunto", new AssuntoController().editar) // Editar assunto
+router.delete("/assunto/:id", new AssuntoController().deletar) // Deletar assunto
 
-router.get("/assunto/:id", async (req, res) => await AssuntoController.AssuntoById(req, res))
-router.get("/assuntos", async (req, res) => await AssuntoController.Assuntos(req, res))
 
 // Apontamento
-router.post("/apontamento", AdminAuth, upload.single("miniatura"), async (req, res) => await ApontamentoController.criar(req, res)) // Criando apontamento
-router.put("/apontamento", AdminAuth, upload.single("miniatura"), async (req, res) => await ApontamentoController.editar(req, res)) // Editando apontamento
-router.delete("/apontamento/:id", AdminAuth, async (req, res) => await ApontamentoController.deletar(req, res)) // Deletando apontamento
+router.get("/apontamentos", new ApontamentoController().Apontamentos) // Todos os apontamentos
+router.get("/apontamento/:id", new ApontamentoController().apontamentoById) // Apontamento pelo id
+router.post("/apontamento", upload.single("miniatura"), new ApontamentoController().criar) // Criar apontamento
+router.put("/apontamento", upload.single("miniatura"), new ApontamentoController().editar) // Editar apontamento
+router.delete("/apontamento/:id", new ApontamentoController().deletar) // Deletar apontamento
 
-router.get("/apontamentos", async (req, res) => await ApontamentoController.Apontamentos(req, res)) // Todos os apontamentos
-router.get("/apontamento/:id", async (req, res) => await ApontamentoController.apontamentoById(req, res)) // Apontamento pelo id
-router.get("/results", async (req, res) => await ApontamentoController.pesquisarApontamento(req, res)) // Pesquisar apontamento
+router.get("/results", new ApontamentoController().pesquisarApontamento) // Pesquisar apontamento
 
 export default router

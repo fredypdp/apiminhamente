@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const ApontamentoSchema = mongoose.Schema({
     titulo: {type: String, required: true},
+    slug: {type: String, required: true},
     conteudo: {type: String, required: true},
     miniatura: {type: String, required: true},
     miniatura_public_id: {type: String, required: true},

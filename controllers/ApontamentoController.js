@@ -127,7 +127,7 @@ export default class ApontamentoController {
     // Requisições
     
     async pesquisarApontamento(req, res){
-        let pesquisa = req.query["search"]
+        let pesquisa = req.query["pesquisa"]
         try {
             let apontamentos = await Apontamento.pesquisa(pesquisa);
 

@@ -4,36 +4,38 @@ import slugify from "slugify";
 export default class Assunto {
 
     async novo(nome, icone){
-        let assunto = await this.encontrarPorNome(nome)
+        let assuntoEncontrado = await this.encontrarPorNome(nome)
         
-        if (assunto != undefined) {
-            let erro = {status: 400, erro: "O nome já está cadastrado"}
-            console.log(erro);
+        if (assuntoEncontrado != undefined) {
+            let erro = {status: 400, msg: "O nome já está cadastrado"}
             return erro
         }
 
         try {
-            await database.insert({nome: nome, icone: icone, slug: slugify(nome)}).into("assuntos")
+            let assunto = await AssuntoSchema.create({nome: nome, slug: slugify(nome), icone: icone})
+            return assunto
         } catch (erro) {
-            console.log(erro);
-            return {status: false, erro: erro}
+            return erro
         }
     }
 
-    async editar(id, nome, icone){
-        let assunto = await this.encontrarPorNome(nome)
+    async editar(id, novoNome, novoIcone){
+        let assuntoEditar = {}
+
+        if (novoNome != undefined) {
+            assuntoEditar.nome = novoNome
+            assuntoEditar.slug = slugify(novoNome)
+        }
         
-        if (assunto != undefined) {
-            let erro = {status: 400, erro: "O nome já está cadastrado"}
-            console.log(erro);
-            return erro
+        if (novoIcone != undefined) {
+            assuntoEditar.icone = novoIcone
         }
 
         try {
-            await database.where({id: id}).update({nome: nome, icone: icone, slug: slugify(nome)}).table("assuntos")
+            let assunto = await AssuntoSchema.findByIdAndUpdate(id, assuntoEditar, {new: true})
+            return assunto           
         } catch (erro) {
-            console.log(erro);
-            return {status: false, erro: erro}
+            return erro
         }
     }
 
@@ -42,10 +44,10 @@ export default class Assunto {
         
         if(assunto != undefined){
             try{
-                await database.delete().table("assuntos").where({id: id})
-                return {status: true}
+                // await 
+                
             }catch(erro){
-                return {status: false,erro: erro}
+                // return {status: false,erro: erro}
             }
         }else{
             return {status: false,erro: "O assunto não existe, portanto não pode ser deletado."}
@@ -54,37 +56,38 @@ export default class Assunto {
 
     async assuntoAll(){
         try{
-            let result = await database.select().table("assuntos").orderBy("nome","asc")
-            return result;
+            let result = await AssuntoSchema.find({}).sort({nome: 1 })
+            return result
         }catch(erro){
-            console.log(erro);
-            return [];
+            console.log(erro)
+            return erro
         }
     }
 
+    async encontrarPorSlug(slug){
+        try {
+            let result = await AssuntoSchema.findOne({slug: slug})
+            return result
+        } catch (erro) {
+            return erro
+        }
+    }
+    
     async encontrarPorNome(nome){
         try {
-            let result = await database.select().table("assuntos").where({nome: nome})
-            return result[0]
+            let result = await AssuntoSchema.findOne({nome: nome})
+            return result
         } catch (erro) {
-            console.log(erro);
-            return []
+            return erro
         }
     }
 
     async encontrarPorId(id){
         try{
-
-            let result = await database.select().where({id: id}).table("assuntos");
-            if(result.length > 0){
-                return result[0];
-            }else{
-                return undefined;
-            }
-
+            let result = await AssuntoSchema.findById(id)
+            return result
         }catch(erro){
-            console.log(erro);
-            return undefined;
+            return erro
         }
     }
 
