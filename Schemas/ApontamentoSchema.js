@@ -9,10 +9,17 @@ const ApontamentoSchema = mongoose.Schema({
     visibilidade: {type: mongoose.Schema.Types.Boolean, default: true},
     assuntos: [
         {
+            required: true,
             type: mongoose.Schema.Types.ObjectId,
             ref: "Assunto"
         }
-    ]
+    ],
+    temas: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Tema"
+        }
+    ],
 })
 
 export default mongoose.model("Apontamento", ApontamentoSchema)

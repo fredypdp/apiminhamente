@@ -40,17 +40,18 @@ export default class Assunto {
     }
 
     async deletar(id){
-        let assunto = await this.encontrarPorId(id);
+        let assuntoEncontrado = await this.encontrarPorId(id);
         
-        if(assunto != undefined){
-            try{
-                // await 
-                
-            }catch(erro){
-                // return {status: false,erro: erro}
-            }
-        }else{
-            return {status: false,erro: "O assunto não existe, portanto não pode ser deletado."}
+        if (assuntoEncontrado == undefined) {
+            let erro = {status: 406, msg: "O assunto não existe, portanto não pode ser deletado"}
+            return erro
+        }
+
+        try{
+           let assunto = await AssuntoSchema.findByIdAndDelete(id)
+           return assunto
+        }catch(erro){
+            return erro
         }
     }
 

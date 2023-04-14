@@ -68,17 +68,20 @@ export default class AssuntoController {
 
     async deletar(req, res){
         let id = req.params.id;
-        
-        let result = await new Assunto().deletar(id);
 
-        if(result.status == true){
-            res.status(200)
-            res.send("Deletado com sucesso")
-            return
-        }else{
-            res.status(406);
-            res.json({err: "Erro ao deletar (talvez o assunto não exista no banco de dados)"})
-            return
+        try {
+            let erroExist = await new Assunto().deletar(id);
+            if (erroExist.status == 406) {
+                res.status(406)
+                res.json({err: "O assunto não existe, portanto não pode ser deletado"})
+            } else {
+                res.status(200)
+                res.send("Assunto Deletado com sucesso")
+            }
+        } catch (erro) {
+            console.log(erro)
+            res.status(400)
+            res.json({err: "Erro ao deletar assunto"})
         }
     }
 
@@ -86,6 +89,7 @@ export default class AssuntoController {
 
     async AssuntoSlug(req, res){
         let slug = req.params.slug
+
         try {
             let assunto = await new Assunto().encontrarPorSlug(slug)
 
@@ -100,6 +104,7 @@ export default class AssuntoController {
 
     async AssuntoById(req, res){
         let id = req.params.id
+        
         try {
             let assunto = await new Assunto().encontrarPorId(id)
 

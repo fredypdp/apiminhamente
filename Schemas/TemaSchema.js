@@ -1,21 +1,20 @@
 import mongoose from "mongoose";
 
-const AssuntoSchema = mongoose.Schema({
-    nome: {type: String, required: true},
+const TemaSchema = mongoose.Schema({
+    titulo: {type: String, required: true},
     slug: {type: String, required: true},
-    icone: {type: String, required: true},
     apontamentos: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Apontamento"
         }
     ],
-    temas: [
+    assuntos: [
         {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Tema"
+            ref: "Assunto"
         }
     ],
 })
 
-export default mongoose.model("Assunto", AssuntoSchema)
+export default mongoose.model("Tema", AssuntoSchema)
