@@ -1,6 +1,5 @@
 import Apontamento from "../models/Apontamento.js";
-import Assunto from "../models/Assunto.js";
-import FileManager from "../models/fileManager.js";
+import FileManager from "../models/FileManager.js";
 
 import fs from "fs";
 import { promisify } from "util";
@@ -11,46 +10,61 @@ export default class ApontamentoController {
     // CRUD
 
     async criar(req, res) {
-        let {titulo, conteudo, assuntos} = req.body
-        let miniatura = req.file.destination+req.file.filename
+        let {titulo, conteudo, assuntos, temas, visibilidade,} = req.body
 
         // Validações
+        if (req.file == undefined) {
+            res.status(400)
+            res.json({erro: "Miniatura inválida"})
+            return
+        }
+        
+        if (req.file.mimetype != "image/png" && "image/jpg" && "image/jpeg") {
+            res.status(400)
+            res.json({erro: "A miniatura deve ser uma imagem"})
+            return
+        }
+
+        let miniatura = req.file.destination+req.file.filename
+        
         if (titulo == undefined) {
             res.status(400)
-            res.json({err: "email inválido"})
+            res.json({erro: "Título inválido"})
             return
         }
 
         if (conteudo == undefined) {
             res.status(400)
-            res.json({err: "email inválido"})
+            res.json({erro: "Conteúdo inválido"})
             return
         }
         
         if (assuntos == undefined) {
             res.status(400)
-            res.json({err: "email inválido"})
+            res.json({erro: "Assuntos inválidos"})
             return
         }
 
-        if (miniatura == undefined) {
+
+        try {
+            var cdn = await new FileManager().upload(miniatura) // Upload da miniatura para a Cloudinary e retornando a cdn
+        } catch (erro) {
             res.status(400)
-            res.json({err: "email inválido"})
-            return
+            res.json({erro: "Erro ao upload da imagem"})
         }
+        
+        await unlinkAsync(miniatura) // Deletando miniatura da pasta "temp"
 
         // Criando
         try {
-            let cdn = await FileManager.upload(miniatura) // Upload da miniatura para a Cloudinary e retornando a cdn
-                
-            await unlinkAsync(miniatura) // Deletando miniatura da pasta "temp"
-            await Apontamento.novo(titulo, conteudo, assuntos, cdn.secure_url, cdn.public_id)
+            let apontamento = await new Apontamento().novo(titulo, conteudo, assuntos, temas, visibilidade)
 
             res.status(200)
-            res.send("Apontamento criado com sucesso")
-        } catch (error) {
+            res.json({apontamento: apontamento,msg: "Apontamento criado com sucesso"})
+        } catch (erro) {
+            console.log(erro)
             res.status(400)
-            res.json({err: "Erro ao criar"})
+            res.json({erro: "Erro ao criar apontamento"})
         }
     }
 
@@ -90,14 +104,14 @@ export default class ApontamentoController {
         }
         
         // Editando 
-        let ResultApontamento = await Apontamento.encontrarId(id)
-        FileManager.delete(ResultApontamento.miniatura_public_id) // Deletando a antiga miniatura salva na nuvem
+        let ResultApontamento = await new Apontamento().encontrarId(id)
+        new FileManager().delete(ResultApontamento.miniatura_public_id) // Deletando a antiga miniatura salva na nuvem
 
-        let cdn = await FileManager.upload(miniatura) // Upload da imagem para a Cloudinary e retornando a cdn
+        let cdn = await new FileManager().upload(miniatura) // Upload da imagem para a Cloudinary e retornando a cdn
         
         try {
             await unlinkAsync(miniatura) // Deletando imagem da pasta "temp"
-            await Apontamento.editar(id, titulo, conteudo, assuntos, cdn.secure_url, cdn.public_id)
+            await new Apontamento().editar(id, titulo, conteudo, assuntos, cdn.secure_url, cdn.public_id)
 
             res.status(200)
             res.send("Apontamento editado com sucesso")
@@ -110,7 +124,7 @@ export default class ApontamentoController {
     async deletar(req, res){
         let id = req.params.id;
         
-        let result = await Apontamento.deletar(id);
+        let result = await new Apontamento().deletar(id);
 
         if(result.status){
             res.status(200)
@@ -125,28 +139,17 @@ export default class ApontamentoController {
     }
 
     // Requisições
-    
-    async pesquisarApontamento(req, res){
-        let pesquisa = req.query["pesquisa"]
-        try {
-            let apontamentos = await Apontamento.pesquisa(pesquisa);
-
-            res.status(200)
-            res.json({apontamentos: apontamentos})
-        } catch (error) {
-            res.status(404)
-            res.json({err: "Nenhum apontamento encontrado"})
-        }
-    }
 
     async Apontamentos(req, res){
         try {
-            let apontamentos = await Apontamento.apontamentoAll()
+            let apontamentos = await new Apontamento().apontamentoAll()
+
             res.status(200)
             res.json({apontamentos: apontamentos})
-        } catch (error) {
+        } catch (erro) {
+            console.log(erro)
             res.status(404)
-            res.json({err: "Nenhum apontamento encontrado"})
+            res.json({erro: "Erro ao encontrar apontamento"})
         }
     }
 
@@ -156,11 +159,12 @@ export default class ApontamentoController {
         if (id != undefined) {
 
             try {                
-                let apontamento = await Apontamento.encontrarId(id)
+                let apontamento = await new Apontamento().encontrarPorId(id)
                 
                 res.status(200)
                 res.json({apontamento: apontamento})
-            } catch (error) {
+            } catch (erro) {
+                console.log(erro)
                 res.status(404)
                 res.json({err: "Nenhum apontamento encontrado"})
             }
@@ -170,132 +174,18 @@ export default class ApontamentoController {
         }
     }
 
-    async apontamentoPage(req, res){
-        let id = req.params.id
-        let assuntos = await Assunto.assuntoAll()
-        let apontamento = await Apontamento.encontrarId(id)
-        
-        // Definindo as datas de criação e edição
-        let fuso = -3
+    async pesquisarApontamento(req, res){
+        let pesquisa = req.query["pesquisa"]
 
-        // Data de criação
-        let dCriacao = apontamento.criadoEm
-        let utcCriacao = dCriacao.getTime()+(dCriacao.getTimezoneOffset() * 60000)
-        let dataCriacao = new Date(utcCriacao + ( 3600000 * fuso))
-        let anoCriacao = dataCriacao.getFullYear()
-        let mesCriacao = dataCriacao.getMonth()
-        let diaCriacao = dataCriacao.getDate()
-        let horasCriacao = dataCriacao.getHours()
-        let minutosCriacao = dataCriacao.getMinutes()
-        let segundosCriacao = dataCriacao.getSeconds()
+        try {
+            let apontamentos = await new Apontamento().pesquisa(pesquisa);
 
-        switch (mesCriacao) {
-            case 0:
-                mesCriacao = "Janeiro"
-                break;
-            case 1:
-                mesCriacao = "Fevereiro"
-                break;
-            case 2:
-                mesCriacao = "Março"
-                break;
-            case 3:
-                mesCriacao = "Abril"
-                break;
-            case 4:
-                mesCriacao = "Maio"
-                break;
-            case 5:
-                mesCriacao = "Junho"
-                break;
-            case 6:
-                mesCriacao = "Julho"
-                break;
-            case 7:
-                mesCriacao = "Agosto"
-                break;
-            case 8:
-                mesCriacao = "Setembro"
-                break;
-            case 9:
-                mesCriacao = "Outubro"
-                break;
-            case 10:
-                mesCriacao = "Novembro"
-                break;
-            case 11:
-                mesCriacao = "Dezembro"
-                break;
-            default:
-                break;
-        }
-
-        // Data de edição
-        let dEdicao = apontamento.editadoEm
-        let utcEdicao = dEdicao.getTime()+(dEdicao.getTimezoneOffset() * 60000)
-        let dataEdicao = new Date(utcEdicao + ( 3600000 * fuso))
-        let anoEdicao = dataEdicao.getFullYear()
-        let mesEdicao = dataEdicao.getMonth()
-        let diaEdicao = dataEdicao.getDate()
-        let horasEdicao = dataEdicao.getHours()
-        let minutosEdicao = dataEdicao.getMinutes()
-        let segundosEdicao = dataEdicao.getSeconds()
-
-        switch (mesEdicao) {
-            case 0:
-                mesEdicao = "Janeiro"
-                break;
-            case 1:
-                mesEdicao = "Fevereiro"
-                break;
-            case 2:
-                mesEdicao = "Março"
-                break;
-            case 3:
-                mesEdicao = "Abril"
-                break;
-            case 4:
-                mesEdicao = "Maio"
-                break;
-            case 5:
-                mesEdicao = "Junho"
-                break;
-            case 6:
-                mesEdicao = "Julho"
-                break;
-            case 7:
-                mesEdicao = "Agosto"
-                break;
-            case 8:
-                mesEdicao = "Setembro"
-                break;
-            case 9:
-                mesEdicao = "Outubro"
-                break;
-            case 10:
-                mesEdicao = "Novembro"
-                break;
-            case 11:
-                mesEdicao = "Dezembro"
-                break;
-            default:
-                break;
-        }
-
-        const dataDeCriacao = `${diaCriacao} de ${mesCriacao} de ${anoCriacao} - ${horasCriacao}:${minutosCriacao}:${segundosCriacao}`
-
-        const dataDeEdicao = `${diaEdicao} de ${mesCriacao} de ${anoEdicao} - ${horasEdicao}:${minutosEdicao}:${segundosEdicao}`
-
-        if (apontamento != undefined) {
-            let user = req.session.user
-            
             res.status(200)
-            res.json({user: user, assuntos: assuntos, apontamento: apontamento, dataCriacao: dataDeCriacao, dataEdicao: dataDeEdicao})
-            return
-        } else {
+            res.json({apontamentos: apontamentos})
+        } catch (erro) {
+            console.log(erro)
             res.status(404)
-            res.send("Apontamento não foi encontrado")
-            return
+            res.json({err: "Nenhum apontamento encontrado"})
         }
     }
 }

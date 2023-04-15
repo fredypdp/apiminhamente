@@ -87,19 +87,6 @@ export default class AssuntoController {
 
     // Requisições
 
-    async Assuntos(req, res){
-        try {
-            let assuntos = await new Assunto().assuntoAll()
-
-            res.status(200)
-            res.json({assuntos: assuntos})
-        } catch (erro) {
-            console.log(erro);
-            res.status(404)
-            res.json({erro: "Erro ao encontrar assunto"})
-        }
-    }
-
     async AssuntoSlug(req, res){
         let slug = req.params.slug
 
@@ -129,5 +116,18 @@ export default class AssuntoController {
             res.json({erro: "Nenhum assunto encontrado"})
         }
 
+    }
+
+    async Assuntos(req, res){
+        try {
+            let assuntos = await new Assunto().assuntoAll()
+
+            res.status(200)
+            res.json({assuntos: assuntos})
+        } catch (erro) {
+            console.log(erro);
+            res.status(404)
+            res.json({erro: "Nenhum assunto encontrado"})
+        }
     }
 }

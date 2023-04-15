@@ -9,12 +9,12 @@ const TemaSchema = mongoose.Schema({
             ref: "Apontamento"
         }
     ],
-    assuntos: [
+    assunto:
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Assunto"
         }
-    ],
+    ,
 })
 
-export default mongoose.model("Tema", AssuntoSchema)
+export default mongoose.model("Tema", TemaSchema)

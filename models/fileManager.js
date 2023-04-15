@@ -6,8 +6,9 @@ export default class Image {
         try {
            let result = await cloudinary.uploader.upload(imagem, { folder: process.env.CLOUDINARY_FOLDER })
            return result
-        } catch (error) {
-            console.log(error);
+        } catch (erro) {
+            console.log(erro);
+            return erro
         }
     }
 
@@ -15,8 +16,9 @@ export default class Image {
         try {
            let result = await cloudinary.uploader.destroy(imagem)
            return result
-        } catch (error) {
-            console.log(error);
+        } catch (erro) {
+            console.log(erro);
+            return erro
         }
     }
 }

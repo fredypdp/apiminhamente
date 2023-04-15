@@ -1,56 +1,29 @@
-import ApontamentoSchema from "../Schemas/ApontamentoSchema.js";
 import slugify from "slugify";
-import FileManager from "./fileManager.js";
+import FileManager from "./FileManager.js";
+import TemaSchema from "../Schemas/TemaSchema.js";
+import AssuntoSchema from "../Schemas/AssuntoSchema.js";
+import ApontamentoSchema from "../Schemas/ApontamentoSchema.js";
 
 export default class Apontamento {
 
-    async novo(titulo, conteudo, assuntos, miniatura, miniatura_public_id){
+    async novo(titulo, conteudo, assuntos, temas, visibilidade, miniatura, miniatura_public_id){
+        let buff = Buffer.from(titulo)
+        let idbase64 = buff.toString("base64")
+        let idUsar = idbase64.slice(0, 11)
+        
         try {
-            const data = new Date()
-            const apontamento = await database.insert({titulo: titulo, slug: slugify(titulo), conteudo: conteudo, miniatura: miniatura, miniatura_public_id: miniatura_public_id, criadoEm: data}).into("apontamentos")
+            let ApontamentoCriado = await ApontamentoSchema.create({id: idUsar, titulo: titulo, slug: slugify(titulo), conteudo: conteudo, miniatura: miniatura, miniatura_public_id: miniatura_public_id, visibilidade: visibilidade, assuntos: assuntos, temas: temas, created_at: new Date})
+            assuntos.forEach( async assunto => {
+                let assuntoEncontrado = await AssuntoSchema.findById(assunto)
+                assuntoEncontrado.apontamentos.push(ApontamentoCriado._id)
+                assuntoEncontrado.save()
+            })
             
-            if (Array.isArray(assuntos)) {
-                assuntos.forEach(assunto => {
-                    database.insert({assunto_id: assunto, apontamento_id: apontamento}).into("assuntos_apontamentos").then( data => {
-    
-                    }).catch( err => {
-                        console.log(err);
-                    })
-                });
-            } else {
-               await database.insert({assunto_id: assuntos, apontamento_id: apontamento}).into("assuntos_apontamentos").then( data => {
-    
-                }).catch( err => {
-                    console.log(err);
-                })
-            }
-            
-        } catch (error) {
-            console.log(error);
-            return [];
-        }
-    }
-    
-    async novoRelacionamento(id, assuntos){
-        try {
-
-            if (assuntos.length > 1) {
-                assuntos.forEach(assunto => {
-                    
-                    database.insert({assunto_id: assunto, apontamento_id: id}).into("assuntos_apontamentos").then( data =>{
-                        console.log(data);
-                    }).catch(erro =>{
-                        console.log(erro);
-                    })
-
-                });
-            } else {
-               await database.insert({assunto_id: assuntos[0], apontamento_id: id}).into("assuntos_apontamentos");
-            }
-            
+            console.log(assuntoCriado)
+            return assuntoCriado
         } catch (erro) {
-            console.log(erro);
-            return erro;
+            return erro
+            await FileManager.delete(apontamento.miniatura_public_id)
         }
     }
 
@@ -75,9 +48,8 @@ export default class Apontamento {
             try{
                 await database.delete().table("apontamentos").where({id: id})
                 await FileManager.delete(apontamento.miniatura_public_id)
-                return {status: true}
-            }catch(err){
-                return {status: false,err: err}
+            }catch(erro){
+                return erro
             }
         
         }else{
@@ -85,68 +57,30 @@ export default class Apontamento {
         }
     }
 
-    async deletarRelacionamento(id){
-        let apontamento = await this.encontrarId(id);
-
-        if(apontamento != undefined){
-
-            try{
-                await database.delete().table("assuntos_apontamentos").where({apontamento_id: id})
-                return {status: true}
-            }catch(err){
-                return {status: false,err: err}
-            }
-        
-        }else{
-            return {status: false,err: "O apontamento não foi encontrado"}
-        }
-    }
-
     async apontamentoAll(){
         try{
-            let result = await database.select().table("apontamentos").orderBy("criadoEm","desc")
+            let result = await ApontamentoSchema.find({}).sort({titulo: 1 })
             return result;
-        }catch(error){
-            console.log(error);
-            return [];
+        }catch(erro){
+            return erro
         }
     }
 
-    async encontrarId(id){
-        try {
-            let apontamentos = await database.select().table("apontamentos").where({id: id})
-            let apontamento = apontamentos[0]
+    async encontrarPorId(id){
+        try{
+            let apontamento = await ApontamentoSchema.findById(id)
             return apontamento
-        } catch (error) {
-            console.log(error);
-            return []
-        }
-    }
-
-    async apontamentoDoAssunto(assunto){
-        try {
-            let apontamentos = await database.select()
-            .table("assuntos_apontamentos")
-            .innerJoin("assuntos","assuntos.id","assuntos_apontamentos.assunto_id")
-            .innerJoin("apontamentos","apontamentos.id","assuntos_apontamentos.apontamento_id")
-            .where("assuntos.slug", assunto)
-            .orderBy("criadoEm","desc")
-
-            return apontamentos
-        } catch (error) {
-            console.log(error);
-            return []
+        }catch(erro){
+            return erro
         }
     }
 
     async pesquisa(pesquisa){
         try {
-            let result = await database.select().table("apontamentos").orderBy("criadoEm","desc").whereRaw(`titulo like '%${pesquisa}%'`)
-            return result;
-        } catch (error) {
-            console.log(error);
-            return []
+            let result = await ApontamentoSchema.find({ titulo: { $regex: `/${pesquisa}/`} })
+            return result
+        } catch (erro) {
+            return erro
         }
     }
-
 }

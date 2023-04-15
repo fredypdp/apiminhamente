@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
 const ApontamentoSchema = mongoose.Schema({
+    id: {type: String, required: true},
     titulo: {type: String, required: true},
     slug: {type: String, required: true},
     conteudo: {type: String, required: true},
@@ -20,6 +21,8 @@ const ApontamentoSchema = mongoose.Schema({
             ref: "Tema"
         }
     ],
+    created_at: {type: mongoose.Schema.Types.Date, required: true},
+    edited_at: {type: mongoose.Schema.Types.Date},
 })
 
 export default mongoose.model("Apontamento", ApontamentoSchema)

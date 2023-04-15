@@ -1,5 +1,6 @@
-import AssuntoSchema from "../Schemas/AssuntoSchema.js";
 import TemaSchema from "../Schemas/TemaSchema.js";
+import AssuntoSchema from "../Schemas/AssuntoSchema.js";
+import ApontamentoSchema from "../Schemas/ApontamentoSchema.js";
 import slugify from "slugify";
 
 export default class Assunto {
@@ -58,7 +59,7 @@ export default class Assunto {
 
     async assuntoAll(){
         try{
-            let result = await AssuntoSchema.find({}).populate("apontamentos").populate("temas").sort({nome: 1 })
+            let result = await AssuntoSchema.find({}).sort({nome: 1 })
             return result
         }catch(erro){
             console.log(erro)
@@ -68,7 +69,7 @@ export default class Assunto {
 
     async encontrarPorSlug(slug){
         try {
-            let result = await AssuntoSchema.findOne({slug: slug}).populate("apontamentos").populate("temas")
+            let result = await AssuntoSchema.findOne({slug: slug})
             return result
         } catch (erro) {
             return erro
@@ -77,7 +78,7 @@ export default class Assunto {
     
     async encontrarPorNome(nome){
         try {
-            let result = await AssuntoSchema.findOne({nome: nome}).populate("apontamentos").populate("temas")
+            let result = await AssuntoSchema.findOne({nome: nome})
             return result
         } catch (erro) {
             return erro
@@ -86,7 +87,7 @@ export default class Assunto {
 
     async encontrarPorId(id){
         try{
-            let result = await AssuntoSchema.findById(id).populate("apontamentos").populate("temas")
+            let result = await AssuntoSchema.findById(id)
             return result
         }catch(erro){
             return erro
