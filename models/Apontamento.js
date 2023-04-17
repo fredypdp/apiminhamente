@@ -9,51 +9,197 @@ export default class Apontamento {
     async novo(titulo, conteudo, assuntos, temas, visibilidade, miniatura, miniatura_public_id){
         let buff = Buffer.from(titulo)
         let idbase64 = buff.toString("base64")
-        let idUsar = idbase64.slice(0, 11)
+        let idUsar = idbase64.splice(0, 11)
         
         try {
             let ApontamentoCriado = await ApontamentoSchema.create({id: idUsar, titulo: titulo, slug: slugify(titulo), conteudo: conteudo, miniatura: miniatura, miniatura_public_id: miniatura_public_id, visibilidade: visibilidade, assuntos: assuntos, temas: temas, created_at: new Date})
+            
             assuntos.forEach( async assunto => {
                 let assuntoEncontrado = await AssuntoSchema.findById(assunto)
                 assuntoEncontrado.apontamentos.push(ApontamentoCriado._id)
                 assuntoEncontrado.save()
             })
             
-            console.log(assuntoCriado)
-            return assuntoCriado
+            if (temas != undefined || temas.length > 0) {
+                temas.forEach( async tema => {
+                    let temaEncontrado = await TemaSchema.findById(tema)
+                    temaEncontrado.apontamentos.push(ApontamentoCriado._id)
+                    temaEncontrado.save()
+                })
+            }
+            
+            return ApontamentoCriado
         } catch (erro) {
+            await new FileManager().delete(apontamento.miniatura_public_id)
             return erro
-            await FileManager.delete(apontamento.miniatura_public_id)
         }
     }
+    
+    async editar(_id, titulo, conteudo, assuntos, temas, visibilidade, miniatura, miniatura_public_id){
+        let apontamento = {}
 
-    async editar(id, titulo, conteudo, assuntos, miniatura, miniatura_public_id){
+        if (titulo != undefined) {
+            apontamento.titulo = titulo
+            apontamento.slug = slugify(titulo)
+        }
+        
+        if (conteudo != undefined) {
+            apontamento.conteudo = conteudo
+        }
+        
+        if (assuntos != undefined) {
+            apontamento.assuntos = assuntos
+        }
+        
+        if (temas != undefined) {
+            apontamento.temas = temas
+        }
+        
+        if (visibilidade != undefined) {
+            apontamento.visibilidade = visibilidade
+        }
+        
+        if (miniatura != undefined) {
+            apontamento.miniatura = miniatura
+        }
+        
+        if (miniatura_public_id != undefined) {
+            apontamento.miniatura_public_id = miniatura_public_id
+        }
+
+        apontamento.edited_at = new Date
         try {
-            const data = new Date()
-            await database.update({titulo: titulo, slug: slugify(titulo), conteudo: conteudo, miniatura: miniatura, miniatura_public_id: miniatura_public_id, editadoEm: data}).where({id: id}).table("apontamentos")
+
+            // Deletando a miniatura antiga no Cloudinary
+            if (miniatura != undefined) {
+                let apont = await ApontamentoSchema.findById(_id)
+                
+                await new FileManager().delete(apont.miniatura_public_id)
+            }
+
+            // Removendo o apontamento de todos os assuntos que ele pertence
+            if (assuntos != undefined) {
+                let assuntos = await AssuntoSchema.find({})
+
+                assuntos.forEach( assunto => {
+                    let remover = assunto.apontamentos.indexOf(_id)
+                    
+                    if (remover != -1) {
+                        assunto.apontamentos.splice(remover, 1)
+                        assunto.save()
+                    }
+                })
+            }
             
-            await this.deletarRelacionamento(id)
-            await this.novoRelacionamento(id, assuntos)
+            // Removendo o apontamento de todos os temas que ele pertence
+            if (temas != undefined) {
+                let temas = await TemaSchema.find({})
+
+                temas.forEach( tema => {
+                    let remover = tema.apontamentos.indexOf(_id)
+                            
+                    if (remover != -1) {
+                        tema.apontamentos.splice(remover, 1)
+                        tema.save()
+                    }
+                })
+            }
+
+            let ApontamentoEditado = await ApontamentoSchema.findByIdAndUpdate(_id, apontamento, {new: true})
+            
+            // Adicionando temas e assuntos
+            if (ApontamentoEditado != null) {
+                
+                // Adicionar apontamento ao assunto
+                if (assuntos != undefined && assuntos.length > 0) {
+                    assuntos.forEach( async assunto => {
+                        let assuntoEncontrado = await AssuntoSchema.findById(assunto)
+                        if (assuntoEncontrado != null && assuntoEncontrado != undefined) {
+                            let editar = assuntoEncontrado.apontamentos.indexOf(ApontamentoEditado._id)
+                            
+                            if (editar != -1) {
+                                assuntoEncontrado.apontamentos.splice(editar, 1)
+                                assuntoEncontrado.apontamentos.push(ApontamentoEditado._id)
+                                assuntoEncontrado.save()
+                                return
+                            }
+                            assuntoEncontrado.apontamentos.push(ApontamentoEditado._id)
+                            assuntoEncontrado.save()
+                        }
+                    })
+                }
+
+                // Adicionar apontamento ao tema
+                if (temas != undefined && temas.length > 0) {
+                    temas.forEach( async tema => {
+                        let temaEncontrado = await TemaSchema.findById(tema)
+                        
+                        if (temaEncontrado != null && assuntoEncontrado != undefined) {
+                            let editar = temaEncontrado.apontamentos.indexOf(ApontamentoEditado._id)
+                            
+                            if (editar != -1) {
+                                temaEncontrado.apontamentos.splice(editar, 1)
+                                temaEncontrado.apontamentos.push(ApontamentoEditado._id)
+                                temaEncontrado.save()
+                                return
+                            }
+        
+                            temaEncontrado.apontamentos.push(ApontamentoEditado._id)
+                            temaEncontrado.save()
+                        }
+                    })
+                }
+            }
+            
+            return ApontamentoEditado
         } catch (erro) {
-            console.log(erro);
-            return erro;
+            console.log("erro")
+            await new FileManager().delete(miniatura_public_id)
+            return erro
         }
     }
 
     async deletar(id){
-        let apontamento = await this.encontrarId(id);
-
-        if(apontamento != undefined){
-
-            try{
-                await database.delete().table("apontamentos").where({id: id})
-                await FileManager.delete(apontamento.miniatura_public_id)
-            }catch(erro){
-                return erro
-            }
+        let apontamentoEncontrado = await this.encontrarPorId(id);
         
-        }else{
-            return {status: false,err: "O apontamento não existe, portanto não pode ser deletado."}
+        if (apontamentoEncontrado == undefined) {
+            let erro = {status: 406, msg: "O apontamento não existe, portanto não pode ser deletado"}
+            return erro
+        }
+
+        try{
+            let apontamento = await ApontamentoSchema.findByIdAndDelete(id);
+            
+            // Deletar a miniatura do apontamento no Cloudinary
+            await FileManager.delete(apontamento.miniatura_public_id)
+            
+            // Remover o apontamento de todos os assuntos que ele pertence
+            apontamento.assuntos.forEach( async assunto => {
+                let assuntoEncontrado = await AssuntoSchema.findById(assunto)
+
+                if (assuntoEncontrado != null && assuntoEncontrado != undefined) {
+                    let assuntoRemover = assuntoEncontrado.apontamentos.indexOf(apontamento._id)
+
+                    assuntoEncontrado.apontamentos.splice(assuntoRemover, 1)
+                    assuntoEncontrado.save()
+                }
+            })
+
+            // Remover o apontamento de todos os temas que ele pertence
+            apontamento.temas.forEach( async tema => {
+                let temaEncontrado = await TemaSchema.findById(tema)
+
+                if (temaEncontrado != null && temaEncontrado != undefined) {
+                    let temaRemover = temaEncontrado.apontamentos.indexOf(apontamento._id)
+
+                    temaEncontrado.apontamentos.splice(temaRemover, 1)
+                    temaEncontrado.save()
+                }
+            })
+            
+            return apontamento
+        }catch(erro){
+            return erro
         }
     }
 
@@ -77,7 +223,7 @@ export default class Apontamento {
 
     async pesquisa(pesquisa){
         try {
-            let result = await ApontamentoSchema.find({ titulo: { $regex: `/${pesquisa}/`} })
+            let result = await ApontamentoSchema.find({ titulo: { $regex: `${pesquisa}`} })
             return result
         } catch (erro) {
             return erro

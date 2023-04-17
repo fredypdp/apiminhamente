@@ -51,6 +51,21 @@ export default class Assunto {
 
         try{
            let assunto = await AssuntoSchema.findByIdAndDelete(id)
+
+            assunto.apontamentos.forEach( async apontamento => {
+                let apontamentoEncontrado = await AssuntoSchema.findById(apontamento)
+                let apontamentoRemover = apontamentoEncontrado.assuntos.indexOf(apontamento)
+                apontamentoEncontrado.assuntos.splice(apontamentoRemover, 1)
+                apontamentoEncontrado.save()
+            })
+            
+            assunto.temas.forEach( async tema => {
+                let temaEncontrado = await TemaSchema.findById(tema)
+                let temaRemover = temaEncontrado.assuntos.indexOf(tema)
+                temaEncontrado.assuntos.splice(temaRemover, 1)
+                temaEncontrado.save()
+            })
+            
            return assunto
         }catch(erro){
             return erro
@@ -59,7 +74,7 @@ export default class Assunto {
 
     async assuntoAll(){
         try{
-            let result = await AssuntoSchema.find({}).sort({nome: 1 })
+            let result = await AssuntoSchema.find({}).populate("apontamentos").populate("temas").sort({nome: 1 })
             return result
         }catch(erro){
             console.log(erro)
@@ -69,7 +84,7 @@ export default class Assunto {
 
     async encontrarPorSlug(slug){
         try {
-            let result = await AssuntoSchema.findOne({slug: slug})
+            let result = await AssuntoSchema.findOne({slug: slug}).populate("apontamentos").populate("temas")
             return result
         } catch (erro) {
             return erro
@@ -78,7 +93,7 @@ export default class Assunto {
     
     async encontrarPorNome(nome){
         try {
-            let result = await AssuntoSchema.findOne({nome: nome})
+            let result = await AssuntoSchema.findOne({nome: nome}).populate("apontamentos").populate("temas")
             return result
         } catch (erro) {
             return erro
@@ -87,11 +102,10 @@ export default class Assunto {
 
     async encontrarPorId(id){
         try{
-            let result = await AssuntoSchema.findById(id)
+            let result = await AssuntoSchema.findById(id).populate("apontamentos").populate("temas")
             return result
         }catch(erro){
             return erro
         }
     }
-
 }

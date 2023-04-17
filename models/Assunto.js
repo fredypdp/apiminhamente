@@ -1,9 +1,10 @@
+import ApontamentoSchema from "../Schemas/ApontamentoSchema.js";
 import AssuntoSchema from "../Schemas/AssuntoSchema.js";
 import TemaSchema from "../Schemas/TemaSchema.js";
 import slugify from "slugify";
 
 export default class Assunto {
-
+    
     async novo(nome, icone){
         let assuntoEncontrado = await this.encontrarPorNome(nome)
         
@@ -50,6 +51,31 @@ export default class Assunto {
 
         try{
            let assunto = await AssuntoSchema.findByIdAndDelete(id)
+           
+            // Remover o assunto de todos os apontamentos que ele pertence
+            assunto.apontamentos.forEach( async apontamento => {
+                let apontamentoEncontrado = await ApontamentoSchema.findById(apontamento)
+                
+                if (apontamentoEncontrado != null && apontamentoEncontrado != undefined) {
+                    let apontamentoRemover = apontamentoEncontrado.assuntos.indexOf(assunto._id)
+                
+                    apontamentoEncontrado.assuntos.splice(apontamentoRemover, 1)
+                    apontamentoEncontrado.save()
+                }
+            })
+            
+            // Remover o assunto de todos os temas que ele pertence
+            assunto.temas.forEach( async tema => {
+                let temaEncontrado = await TemaSchema.findById(tema)
+
+                if (temaEncontrado != null && temaEncontrado != undefined) {
+                    let temaRemover = temaEncontrado.assuntos.indexOf(assunto._id)
+
+                    temaEncontrado.assuntos.splice(temaRemover, 1)
+                    temaEncontrado.save()
+                }
+            })
+            
            return assunto
         }catch(erro){
             return erro
@@ -92,5 +118,4 @@ export default class Assunto {
             return erro
         }
     }
-
 }

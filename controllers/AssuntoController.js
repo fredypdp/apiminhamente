@@ -11,28 +11,28 @@ export default class AssuntoController {
         // Validações
         if (nome == undefined) {
             res.status(400)
-            res.json({err: "nome inválido"})
+            res.json({erro: "nome inválido"})
             return
         }
 
         if (icone == undefined) {
             res.status(400)
-            res.json({err: "ícone inválido"})
+            res.json({erro: "ícone inválido"})
             return
         }
 
         try {
             let erroExist = await new Assunto().novo(nome, icone)
             if (erroExist.status == 400) {
-                res.status(400)
-                res.json({erro: "O nome já está cadastrado"})
+                res.status(406)
+                res.json({erro: "Já existe um assunto com esse nome"})
             } else {
                 res.status(200)
                 res.json({data: erroExist, msg: "Assunto criado com sucesso"})
             }
         } catch (erro) {
             console.log(erro)
-            res.status(400)
+            res.status(406)
             res.json({erro: "Erro ao criar assunto"})
         }
     }
@@ -43,7 +43,7 @@ export default class AssuntoController {
         // Validações
         if (id == undefined) {
             res.status(400)
-            res.json({err: "id inválido"})
+            res.json({erro: "id inválido"})
             return
         }
 
@@ -61,7 +61,7 @@ export default class AssuntoController {
             res.json({data: assunto, msg: "Assunto editado com sucesso"})
         } catch (erro) {
             console.log(erro)
-            res.status(400)
+            res.status(406)
             res.json({erro: "Erro ao editar assunto"})
         }
     }
@@ -71,17 +71,18 @@ export default class AssuntoController {
 
         try {
             let erroExist = await new Assunto().deletar(id);
+            
             if (erroExist.status == 406) {
-                res.status(406)
-                res.json({err: "O assunto não existe, portanto não pode ser deletado"})
+                res.status(404)
+                res.json({erro: "O assunto não existe, portanto não pode ser deletado"})
             } else {
                 res.status(200)
-                res.send("Assunto Deletado com sucesso")
+                res.json({data: erroExist, msg: "Assunto Deletado com sucesso"})
             }
         } catch (erro) {
             console.log(erro)
-            res.status(400)
-            res.json({err: "Erro ao deletar assunto"})
+            res.status(406)
+            res.json({erro: "Erro ao deletar assunto"})
         }
     }
 
@@ -96,12 +97,18 @@ export default class AssuntoController {
         } catch (erro) {
             console.log(erro);
             res.status(404)
-            res.json({erro: "Erro ao encontrar assunto"})
+            res.json({erro: "Erro ao encontrar assuntos"})
         }
     }
 
     async AssuntoSlug(req, res){
         let slug = req.params.slug
+
+        if (slug == undefined) {
+            res.status(400)
+            res.json({erro: "Slug inválido"})
+            return
+        }
 
         try {
             let assunto = await new Assunto().encontrarPorSlug(slug)
@@ -111,13 +118,19 @@ export default class AssuntoController {
         } catch (erro) {
             console.log(erro)
             res.status(404)
-            res.json({erro: "Nenhum apontamento encontrado"})
+            res.json({erro: "Erro ao encontrar apontamento"})
         }
     }
 
     async AssuntoById(req, res){
         let id = req.params.id
         
+        if (id == undefined) {
+            res.status(400)
+            res.json({erro: "id inválido"})
+            return
+        }
+
         try {
             let assunto = await new Assunto().encontrarPorId(id)
 
@@ -126,7 +139,7 @@ export default class AssuntoController {
         } catch (erro) {
             console.log(erro)
             res.status(404)
-            res.json({erro: "Nenhum assunto encontrado"})
+            res.json({erro: "Erro ao encontrar assunto"})
         }
 
     }

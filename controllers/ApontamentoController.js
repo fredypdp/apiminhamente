@@ -1,3 +1,4 @@
+import { log } from "console";
 import Apontamento from "../models/Apontamento.js";
 import FileManager from "../models/FileManager.js";
 
@@ -19,122 +20,205 @@ export default class ApontamentoController {
             return
         }
         
-        if (req.file.mimetype != "image/png" && "image/jpg" && "image/jpeg") {
-            res.status(400)
-            res.json({erro: "A miniatura deve ser uma imagem"})
-            return
+        let miniatura
+        if (req.file != undefined) {
+            if (req.file.mimetype != "image/png" && "image/jpg" && "image/jpeg") {
+                await unlinkAsync(req.file.destination+req.file.filename)
+                res.status(400)
+                res.json({erro: "A miniatura deve ser uma imagem"})
+                return
+            }
+            
+            miniatura = req.file.destination+req.file.filename
         }
-
-        let miniatura = req.file.destination+req.file.filename
         
         if (titulo == undefined) {
+            if (req.file != undefined) {
+                await unlinkAsync(req.file.destination+req.file.filename)
+            }
+
             res.status(400)
             res.json({erro: "Título inválido"})
             return
         }
 
         if (conteudo == undefined) {
+            if (req.file != undefined) {
+                await unlinkAsync(req.file.destination+req.file.filename)
+            }
+
             res.status(400)
             res.json({erro: "Conteúdo inválido"})
             return
         }
         
         if (assuntos == undefined) {
+            if (req.file != undefined) {
+                await unlinkAsync(req.file.destination+req.file.filename)
+            }
+
             res.status(400)
             res.json({erro: "Assuntos inválidos"})
             return
         }
 
+        if (assuntos != undefined) {
+            if (req.file != undefined) {
+                await unlinkAsync(req.file.destination+req.file.filename)
+            }
 
-        try {
-            var cdn = await new FileManager().upload(miniatura) // Upload da miniatura para a Cloudinary e retornando a cdn
-        } catch (erro) {
-            res.status(400)
-            res.json({erro: "Erro ao upload da imagem"})
+            assuntos.forEach( assunto => {
+                if(assunto.length <= 0){
+                    res.status(400)
+                    res.json({erro: "Assunto inválido"})
+                }
+            })
+            return
         }
         
-        await unlinkAsync(miniatura) // Deletando miniatura da pasta "temp"
+        if (temas != undefined) {
+            if (req.file != undefined) {
+                await unlinkAsync(req.file.destination+req.file.filename)
+            }
 
+            temas.forEach( tema => {
+                if(tema.length <= 0){
+                    res.status(400)
+                    res.json({erro: "Tema inválido"})
+                }
+            })
+            return
+        }
+        
         // Criando
         try {
-            let apontamento = await new Apontamento().novo(titulo, conteudo, assuntos, temas, visibilidade)
+            let cdn = await new FileManager().upload(miniatura) // Upload da miniatura para a Cloudinary e retornando a cdn
+            await unlinkAsync(miniatura) // Deletando miniatura da pasta "temp"
+
+            let apontamento = await new Apontamento().novo(titulo, conteudo, assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
 
             res.status(200)
             res.json({apontamento: apontamento,msg: "Apontamento criado com sucesso"})
         } catch (erro) {
             console.log(erro)
-            res.status(400)
+            res.status(406)
             res.json({erro: "Erro ao criar apontamento"})
         }
     }
-
+    
     async editar(req, res) {
-        let {id, titulo, conteudo, assuntos} = req.body
-        let miniatura = req.file.destination+req.file.filename
-
+        let {_id, titulo, conteudo, assuntos, temas, visibilidade} = req.body
+        
         // Validações
-        if (id == undefined) {
+        if (_id == undefined) {
+            if (req.file != undefined) {
+                await unlinkAsync(req.file.destination+req.file.filename)
+            }
+
             res.status(400)
-            res.json({err: "id inválido"})
+            res.json({erro: "_id inválido"})
             return
         }
 
-        if (titulo == undefined) {
-            res.status(400)
-            res.json({err: "titulo inválido"})
-            return
-        }
+        if (assuntos != undefined) {
+            if (req.file != undefined) {
+                await unlinkAsync(req.file.destination+req.file.filename)
+            }
 
-        if (conteudo == undefined) {
+            assuntos.forEach( assunto => {
+                if(assunto.length <= 0){
+                    res.status(400)
+                    res.json({erro: "Assunto inválido"})
+                    return
+                }
+            })
+        }
+        
+        if (temas != undefined) {
+            if (req.file != undefined) {
+                await unlinkAsync(req.file.destination+req.file.filename)
+            }
+
+            temas.forEach( tema => {
+                if(tema.length <= 0){
+                    res.status(400)
+                    res.json({erro: "Tema inválido"})
+                    return
+                }
+            })
+        }
+        
+        if (req.file == undefined && titulo == undefined && conteudo == undefined && assuntos == undefined && temas == undefined && visibilidade == undefined) {
             res.status(400)
-            res.json({err: "conteudo inválido"})
+            res.json({erro: "Preencha os campos"})
             return
         }
         
-        if (assuntos == undefined) {
-            res.status(400)
-            res.json({err: "assunto inválido"})
-            return
-        }
+        // if (rtitulo == undefined && conteudo == undefined && assuntos == undefined && temas == undefined && visibilidade == undefined) {
+        //     if (req.file != undefined) {
+        //         await unlinkAsync(req.file.destination+req.file.filename)
+        //     }
 
-        if (miniatura == undefined) {
-            res.status(400)
-            res.json({err: "miniatura inválido"})
-            return
+        //     res.status(400)
+        //     res.json({erro: "Preencha os campos"})
+        //     return
+        // }
+        
+        let miniatura
+
+        if (req.file != undefined) {
+            if (req.file.mimetype != "image/png" && req.file.mimetype != "image/jpg" && req.file.mimetype != "image/jpeg") {
+                await unlinkAsync(req.file.destination+req.file.filename)
+                res.status(400)
+                res.json({erro: "A miniatura deve ser uma imagem"})
+                return
+            }
+            
+            miniatura = req.file.destination+req.file.filename
         }
         
-        // Editando 
-        let ResultApontamento = await new Apontamento().encontrarId(id)
-        new FileManager().delete(ResultApontamento.miniatura_public_id) // Deletando a antiga miniatura salva na nuvem
 
-        let cdn = await new FileManager().upload(miniatura) // Upload da imagem para a Cloudinary e retornando a cdn
-        
+        // Editando
         try {
-            await unlinkAsync(miniatura) // Deletando imagem da pasta "temp"
-            await new Apontamento().editar(id, titulo, conteudo, assuntos, cdn.secure_url, cdn.public_id)
-
+            let cdn
+            if (miniatura != undefined) {
+                cdn = await new FileManager().upload(miniatura) // Upload da miniatura para a Cloudinary e retornando a cdn
+                await unlinkAsync(miniatura) // Deletando miniatura da pasta "temp"
+                let apontamento = await new Apontamento().editar(_id, titulo, conteudo, assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
+                
+                res.status(200)
+                res.json({apontamento: apontamento,msg: "Apontamento editado com sucesso"})
+                return
+            }
+            
+            let apontamento = await new Apontamento().editar(_id, titulo, conteudo, assuntos, temas, visibilidade)
+            
             res.status(200)
-            res.send("Apontamento editado com sucesso")
-        } catch (error) {
-            res.status(400)
-            res.json({err: "Erro ao editar"})
+            res.json({apontamento: apontamento,msg: "Apontamento editado com sucesso"})
+        } catch (erro) {
+            console.log(erro)
+            res.status(406)
+            res.json({erro: "Erro ao editar apontamento"})
         }
     }
 
     async deletar(req, res){
         let id = req.params.id;
-        
-        let result = await new Apontamento().deletar(id);
 
-        if(result.status){
-            res.status(200)
-            res.send("Apontamento deletado com sucesso")
-            return
-        }else{
-            res.status(406);
-            res.json({err: "Erro ao deletar o apontamento"})
-            console.log(result.err);
-            return
+        try {
+            let erroExist = await new Apontamento().deletar(id)
+            
+            if (erroExist.status == 406) {
+                res.status(404)
+                res.json({erro: "O apontamento não existe, portanto não pode ser deletado"})
+            } else {
+                res.status(200)
+                res.json({data: erroExist, msg: "Apontamento deletado com sucesso"})
+            }
+        } catch (erro) {
+            console.log(erro)
+            res.status(406)
+            res.json({erro: "Erro ao deletar o apontamento"})
         }
     }
 
@@ -149,28 +233,28 @@ export default class ApontamentoController {
         } catch (erro) {
             console.log(erro)
             res.status(404)
-            res.json({erro: "Erro ao encontrar apontamento"})
+            res.json({erro: "Erro ao encontrar apontamentos"})
         }
     }
 
     async apontamentoById(req, res){
         let id = req.params.id
 
-        if (id != undefined) {
-
-            try {                
-                let apontamento = await new Apontamento().encontrarPorId(id)
-                
-                res.status(200)
-                res.json({apontamento: apontamento})
-            } catch (erro) {
-                console.log(erro)
-                res.status(404)
-                res.json({err: "Nenhum apontamento encontrado"})
-            }
-        } else {
+        if (id == undefined) {
+            res.status(400)
+            res.json({erro: "id inválido"})
+            return
+        }
+        
+        try {                
+            let apontamento = await new Apontamento().encontrarPorId(id)
+            
+            res.status(200)
+            res.json({apontamento: apontamento})
+        } catch (erro) {
+            console.log(erro)
             res.status(404)
-            res.send("ID inválido")
+            res.json({erro: "Erro ao encontrar apontamento"})
         }
     }
 
@@ -185,7 +269,7 @@ export default class ApontamentoController {
         } catch (erro) {
             console.log(erro)
             res.status(404)
-            res.json({err: "Nenhum apontamento encontrado"})
+            res.json({erro: "Erro ao encontrar apontamento"})
         }
     }
 }
