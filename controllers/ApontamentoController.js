@@ -120,8 +120,26 @@ export default class ApontamentoController {
 
             let apontamento = await new Apontamento().novo(titulo, conteudo, assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
 
+            let HATEOAS = [
+                {
+                    href: process.env.URL_API+"/apontamento/"+apontamento.id,
+                    method: "get",
+                    rel: "apontamento_pelo_id",
+                },
+                {
+                    href: process.env.URL_API+"/apontamento",
+                    method: "put",
+                    rel: "editar_apontamento",
+                },
+                {
+                    href: process.env.URL_API+"/apontamento/"+apontamento.id,
+                    method: "delete",
+                    rel: "deletar_apontamento",
+                },
+            ]
+
             res.status(200)
-            res.json({apontamento: apontamento,msg: "Apontamento criado com sucesso"})
+            res.json({apontamento: apontamento, _links: HATEOAS, msg: "Apontamento criado com sucesso"})
         } catch (erro) {
             console.log(erro)
             res.status(406)
@@ -206,16 +224,52 @@ export default class ApontamentoController {
                 cdn = await new FileManager().upload(miniatura) // Upload da miniatura para a Cloudinary e retornando a cdn
                 await unlinkAsync(miniatura) // Deletando miniatura da pasta "temp"
                 let apontamento = await new Apontamento().editar(_id, titulo, conteudo, assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
+
+                let HATEOAS = [
+                    {
+                        href: process.env.URL_API+"/apontamento/"+apontamento.id,
+                        method: "get",
+                        rel: "apontamento_pelo_id",
+                    },
+                    {
+                        href: process.env.URL_API+"/apontamento",
+                        method: "put",
+                        rel: "editar_apontamento",
+                    },
+                    {
+                        href: process.env.URL_API+"/apontamento/"+apontamento.id,
+                        method: "delete",
+                        rel: "deletar_apontamento",
+                    },
+                ]
                 
                 res.status(200)
-                res.json({apontamento: apontamento, msg: "Apontamento editado com sucesso"})
+                res.json({apontamento: apontamento, _links: HATEOAS, msg: "Apontamento editado com sucesso"})
                 return
             }
             
             let apontamento = await new Apontamento().editar(_id, titulo, conteudo, assuntos, temas, visibilidade)
             
+            let HATEOAS = [
+                {
+                    href: process.env.URL_API+"/apontamento/"+apontamento.id,
+                    method: "get",
+                    rel: "apontamento_pelo_id",
+                },
+                {
+                    href: process.env.URL_API+"/apontamento",
+                    method: "put",
+                    rel: "editar_apontamento",
+                },
+                {
+                    href: process.env.URL_API+"/apontamento/"+apontamento.id,
+                    method: "delete",
+                    rel: "deletar_apontamento",
+                },
+            ]
+
             res.status(200)
-            res.json({apontamento: apontamento,msg: "Apontamento editado com sucesso"})
+            res.json({apontamento: apontamento, _links: HATEOAS, msg: "Apontamento editado com sucesso"})
         } catch (erro) {
             console.log(erro)
             res.status(406)
@@ -294,8 +348,26 @@ export default class ApontamentoController {
         try {                
             let apontamento = await new Apontamento().encontrarPorId(_id)
             
+            let HATEOAS = [
+                {
+                    href: process.env.URL_API+"/apontamento/"+apontamento.id,
+                    method: "get",
+                    rel: "apontamento_pelo_id",
+                },
+                {
+                    href: process.env.URL_API+"/apontamento",
+                    method: "put",
+                    rel: "editar_apontamento",
+                },
+                {
+                    href: process.env.URL_API+"/apontamento/"+apontamento.id,
+                    method: "delete",
+                    rel: "deletar_apontamento",
+                },
+            ]
+
             res.status(200)
-            res.json({apontamento: apontamento})
+            res.json({apontamento: apontamento, _links: HATEOAS})
         } catch (erro) {
             console.log(erro)
             res.status(404)

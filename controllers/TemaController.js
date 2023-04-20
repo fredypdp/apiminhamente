@@ -42,8 +42,32 @@ export default class AssuntoController {
                 res.status(406)
                 res.json({erro: "Já existe um tema com esse nome"})
             } else {
+
+                let HATEOAS = [
+                    {
+                        href: process.env.URL_API+"/tema/"+erroExist._id,
+                        method: "get",
+                        rel: "tema_pelo_id",
+                    },
+                    {
+                        href: process.env.URL_API+"/tema/slug/"+erroExist.slug,
+                        method: "get",
+                        rel: "tema_pelo_slug",
+                    },
+                    {
+                        href: process.env.URL_API+"/tema",
+                        method: "put",
+                        rel: "editar_tema",
+                    },
+                    {
+                        href: process.env.URL_API+"/tema/"+erroExist._id,
+                        method: "delete",
+                        rel: "deletar_tema",
+                    },
+                ]
+
                 res.status(200)
-                res.json({data: erroExist, msg: "Tema criado com sucesso"})
+                res.json({data: erroExist, _links: HATEOAS, msg: "Tema criado com sucesso"})
             }
         } catch (erro) {
             console.log(erro)
@@ -87,8 +111,31 @@ export default class AssuntoController {
         try {
            let tema = await new Tema().editar(id, titulo)
 
+           let HATEOAS = [
+                {
+                    href: process.env.URL_API+"/tema/"+erroExist._id,
+                    method: "get",
+                    rel: "tema_pelo_id",
+                },
+                {
+                    href: process.env.URL_API+"/tema/slug/"+erroExist.slug,
+                    method: "get",
+                    rel: "tema_pelo_slug",
+                },
+                {
+                    href: process.env.URL_API+"/tema",
+                    method: "put",
+                    rel: "editar_tema",
+                },
+                {
+                    href: process.env.URL_API+"/tema/"+erroExist._id,
+                    method: "delete",
+                    rel: "deletar_tema",
+                },
+            ]
+
             res.status(200)
-            res.json({data: tema, msg: "Tema editado com sucesso"})
+            res.json({data: tema, _links: HATEOAS, msg: "Tema editado com sucesso"})
         } catch (erro) {
             console.log(erro)
             res.status(406)
@@ -167,8 +214,31 @@ export default class AssuntoController {
         try {
             let tema = await new Tema().encontrarPorSlug(slug)
 
+            let HATEOAS = [
+                {
+                    href: process.env.URL_API+"/tema/"+tema._id,
+                    method: "get",
+                    rel: "tema_pelo_id",
+                },
+                {
+                    href: process.env.URL_API+"/tema/slug/"+tema.slug,
+                    method: "get",
+                    rel: "tema_pelo_slug",
+                },
+                {
+                    href: process.env.URL_API+"/tema",
+                    method: "put",
+                    rel: "editar_tema",
+                },
+                {
+                    href: process.env.URL_API+"/tema/"+tema._id,
+                    method: "delete",
+                    rel: "deletar_tema",
+                },
+            ]
+
             res.status(200)
-            res.json({tema: tema})
+            res.json({tema: tema, _links: HATEOAS})
         } catch (erro) {
             console.log(erro)
             res.status(404)
@@ -196,8 +266,31 @@ export default class AssuntoController {
         try {
             let tema = await new Tema().encontrarPorId(id)
 
+            let HATEOAS = [
+                {
+                    href: process.env.URL_API+"/tema/"+tema._id,
+                    method: "get",
+                    rel: "tema_pelo_id",
+                },
+                {
+                    href: process.env.URL_API+"/tema/slug/"+tema.slug,
+                    method: "get",
+                    rel: "tema_pelo_slug",
+                },
+                {
+                    href: process.env.URL_API+"/tema",
+                    method: "put",
+                    rel: "editar_tema",
+                },
+                {
+                    href: process.env.URL_API+"/tema/"+tema._id,
+                    method: "delete",
+                    rel: "deletar_tema",
+                },
+            ]
+
             res.status(200)
-            res.json({tema: tema})
+            res.json({tema: tema, _links: HATEOAS})
         } catch (erro) {
             console.log(erro)
             res.status(404)

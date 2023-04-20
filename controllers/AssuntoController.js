@@ -42,8 +42,32 @@ export default class AssuntoController {
                 res.status(406)
                 res.json({erro: "Já existe um assunto com esse nome"})
             } else {
+
+                let HATEOAS = [
+                    {
+                        href: process.env.URL_API+"/assunto/"+erroExist._id,
+                        method: "get",
+                        rel: "assunto_pelo_id",
+                    },
+                    {
+                        href: process.env.URL_API+"/assunto/slug/"+erroExist.slug,
+                        method: "get",
+                        rel: "assunto_pelo_slug",
+                    },
+                    {
+                        href: process.env.URL_API+"/assunto",
+                        method: "put",
+                        rel: "editar_assunto",
+                    },
+                    {
+                        href: process.env.URL_API+"/assunto/"+erroExist._id,
+                        method: "delete",
+                        rel: "deletar_assunto",
+                    },
+                ]
+
                 res.status(200)
-                res.json({data: erroExist, msg: "Assunto criado com sucesso"})
+                res.json({data: erroExist, _links: HATEOAS, msg: "Assunto criado com sucesso"})
             }
         } catch (erro) {
             console.log(erro)
@@ -99,8 +123,32 @@ export default class AssuntoController {
                 res.status(406)
                 res.json({erro: "Já existe um assunto com esse nome"})
             } else {
+
+                let HATEOAS = [
+                    {
+                        href: process.env.URL_API+"/assunto/"+erroExist._id,
+                        method: "get",
+                        rel: "assunto_pelo_id",
+                    },
+                    {
+                        href: process.env.URL_API+"/assunto/slug/"+erroExist.slug,
+                        method: "get",
+                        rel: "assunto_pelo_slug",
+                    },
+                    {
+                        href: process.env.URL_API+"/assunto",
+                        method: "put",
+                        rel: "editar_assunto",
+                    },
+                    {
+                        href: process.env.URL_API+"/assunto/"+erroExist._id,
+                        method: "delete",
+                        rel: "deletar_assunto",
+                    },
+                ]
+
                 res.status(200)
-                res.json({data: erroExist, msg: "Assunto editado com sucesso"})
+                res.json({data: erroExist, _links: HATEOAS, msg: "Assunto editado com sucesso"})
             }
         } catch (erro) {
             console.log(erro)
@@ -180,8 +228,31 @@ export default class AssuntoController {
         try {
             let assunto = await new Assunto().encontrarPorSlug(slug)
 
+            let HATEOAS = [
+                {
+                    href: process.env.URL_API+"/assunto/"+assunto._id,
+                    method: "get",
+                    rel: "assunto_pelo_id",
+                },
+                {
+                    href: process.env.URL_API+"/assunto/slug/"+assunto.slug,
+                    method: "get",
+                    rel: "assunto_pelo_slug",
+                },
+                {
+                    href: process.env.URL_API+"/assunto",
+                    method: "put",
+                    rel: "editar_assunto",
+                },
+                {
+                    href: process.env.URL_API+"/assunto/"+assunto._id,
+                    method: "delete",
+                    rel: "deletar_assunto",
+                },
+            ]
+
             res.status(200)
-            res.json({assunto: assunto})
+            res.json({assunto: assunto, _links: HATEOAS})
         } catch (erro) {
             console.log(erro)
             res.status(404)
@@ -210,8 +281,31 @@ export default class AssuntoController {
         try {
             let assunto = await new Assunto().encontrarPorId(id)
             
+            let HATEOAS = [
+                {
+                    href: process.env.URL_API+"/assunto/"+assunto._id,
+                    method: "get",
+                    rel: "assunto_pelo_id",
+                },
+                {
+                    href: process.env.URL_API+"/assunto/slug/"+assunto.slug,
+                    method: "get",
+                    rel: "assunto_pelo_slug",
+                },
+                {
+                    href: process.env.URL_API+"/assunto",
+                    method: "put",
+                    rel: "editar_assunto",
+                },
+                {
+                    href: process.env.URL_API+"/assunto/"+assunto._id,
+                    method: "delete",
+                    rel: "deletar_assunto",
+                },
+            ]
+            
             res.status(200)
-            res.json({assunto: assunto})
+            res.json({assunto: assunto, _links: HATEOAS})
         } catch (erro) {
             console.log(erro)
             res.status(404)
