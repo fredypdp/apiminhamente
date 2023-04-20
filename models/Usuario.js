@@ -118,7 +118,7 @@ export default class User {
             let usuario = await UsuarioSchema.findOneAndDelete({id: id});
             
             // Deletar o avatar do usuário no Cloudinary
-            await new FileManager().deletar(UsuarioDeletado.avatar_public_id)
+            await new FileManager().deletar(usuario.avatar_public_id)
 
             // Definindo o token como usado
             await new SenhaToken().DefinirUsado(token);
@@ -142,7 +142,7 @@ export default class User {
             let usuario = await UsuarioSchema.findOneAndDelete({id: id});
             
             // Deletar o avatar do usuário no Cloudinary
-            await new FileManager().deletar(UsuarioDeletado.avatar_public_id)
+            await new FileManager().deletar(usuario.avatar_public_id)
 
             return usuario
         }catch(erro){

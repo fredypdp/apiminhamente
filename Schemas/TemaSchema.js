@@ -12,7 +12,7 @@ const TemaSchema = mongoose.Schema({
     ,
     apontamentos: [
         {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: "Apontamento"
         }
     ],

@@ -7,7 +7,7 @@ export default class Tema {
 
     async novo(titulo, assunto){
         let temaEncontrado = await this.encontrarPorTitulo(titulo)
-        console.log("ds");
+        
         if (temaEncontrado != undefined) {
             let erro = {status: 400, msg: "O titulo já está cadastrado"}
             return erro
@@ -76,7 +76,7 @@ export default class Tema {
 
             // Remover o tema de todos os apontamentos que ele pertence
             tema.apontamentos.forEach( async apontamento => {
-                let apontamentoEncontrado = await ApontamentoSchema.findById(apontamento)
+                let apontamentoEncontrado = await ApontamentoSchema.findOne({id: apontamento})
 
                 if (apontamentoEncontrado != null && apontamentoEncontrado != undefined) {
                     let temaRemover = apontamentoEncontrado.temas.indexOf(tema._id)
@@ -112,7 +112,7 @@ export default class Tema {
     
     async encontrarPorTitulo(titulo){
         try {
-            let result = await TemaSchema.findOne({titulo: titulo}).populate("apontamentos").populate("assuntos")
+            let result = await TemaSchema.findOne({titulo: titulo}).populate("apontamentos")
             return result
         } catch (erro) {
             return erro

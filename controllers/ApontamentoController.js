@@ -15,7 +15,7 @@ export default class ApontamentoController {
         // Validações
         if (req.file == undefined) {
             res.status(400)
-            res.json({erro: "Miniatura inválida"})
+            res.json({erro: "Miniatura inválida, o campo está vazio"})
             return
         }
         
@@ -37,7 +37,7 @@ export default class ApontamentoController {
             }
 
             res.status(400)
-            res.json({erro: "Título inválido"})
+            res.json({erro: "Título inválido, o campo está vazio"})
             return
         }
 
@@ -47,7 +47,7 @@ export default class ApontamentoController {
             }
 
             res.status(400)
-            res.json({erro: "Conteúdo inválido"})
+            res.json({erro: "Conteúdo inválido, o campo está vazio"})
             return
         }
         
@@ -57,7 +57,7 @@ export default class ApontamentoController {
             }
 
             res.status(400)
-            res.json({erro: "Assuntos inválidos"})
+            res.json({erro: "Assuntos inválidos, o campo está vazio"})
             return
         }
 
@@ -69,7 +69,7 @@ export default class ApontamentoController {
             assuntos.forEach( assunto => {
                 if(assunto.trim().length === 0){
                     res.status(400)
-                    res.json({erro: "Assunto inválido"})
+                    res.json({erro: "Assunto inválido, o campo está vazio"})
                 }
             })
             return
@@ -83,7 +83,7 @@ export default class ApontamentoController {
             temas.forEach( tema => {
                 if(tema.trim().length === 0){
                     res.status(400)
-                    res.json({erro: "Tema inválido"})
+                    res.json({erro: "Tema inválido, o campo está vazio"})
                 }
             })
             return
@@ -96,7 +96,7 @@ export default class ApontamentoController {
                 }
     
                 res.status(400)
-                res.json({erro: "Título inválido"})
+                res.json({erro: "Título inválido, o campo está vazio"})
                 return
             }
         }
@@ -108,7 +108,7 @@ export default class ApontamentoController {
                 }
     
                 res.status(400)
-                res.json({erro: "Conteúdo inválido"})
+                res.json({erro: "Conteúdo inválido, o campo está vazio"})
                 return
             }
         }
@@ -139,14 +139,14 @@ export default class ApontamentoController {
             }
 
             res.status(400)
-            res.json({erro: "_id inválido"})
+            res.json({erro: "_id inválido, o campo está vazio"})
             return
         }
 
         if (_id != undefined) {
             if (_id.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "_id inválido"})
+                res.json({erro: "_id inválido, o campo está vazio"})
                 return
             }
         }
@@ -159,7 +159,7 @@ export default class ApontamentoController {
                     }
 
                     res.status(400)
-                    res.json({erro: "Assunto inválido"})
+                    res.json({erro: "Assunto inválido, o campo está vazio"})
                     return
                 }
             })
@@ -173,7 +173,7 @@ export default class ApontamentoController {
                     }
 
                     res.status(400)
-                    res.json({erro: "Tema inválido"})
+                    res.json({erro: "Tema inválido, o campo está vazio"})
                     return
                 }
             })
@@ -229,14 +229,14 @@ export default class ApontamentoController {
         // Validações
         if (id == undefined) {
             res.status(400)
-            res.json({erro: "id inválido"})
+            res.json({erro: "id inválido, o campo está vazio"})
             return
         }
 
         if (id != undefined) {
             if (id.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "id inválido"})
+                res.json({erro: "id inválido, o campo está vazio"})
                 return
             }
         }
@@ -279,14 +279,14 @@ export default class ApontamentoController {
         // Validações
         if (_id == undefined) {
             res.status(400)
-            res.json({erro: "_id inválido"})
+            res.json({erro: "_id inválido, o campo está vazio"})
             return
         }
 
         if (_id != undefined) {
             if (_id.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "_id inválido"})
+                res.json({erro: "_id inválido, o campo está vazio"})
                 return
             }
         }
@@ -309,14 +309,14 @@ export default class ApontamentoController {
         // Validações
         if (pesquisa == undefined) {
             res.status(400)
-            res.json({erro: "Pesquisa inválida"})
+            res.json({erro: "Pesquisa inválida, o campo está vazio"})
             return
         }
 
         if (pesquisa != undefined) {
             if (pesquisa.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "Pesquisa inválido"})
+                res.json({erro: "Pesquisa inválida, o campo está vazio"})
                 return
             }
         }

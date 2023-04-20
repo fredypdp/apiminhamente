@@ -10,20 +10,20 @@ export default class AssuntoController {
         // Validações
         if (nome == undefined) {
             res.status(400)
-            res.json({erro: "nome inválido"})
+            res.json({erro: "nome inválido, o campo está vazio"})
             return
         }
 
         if (icone == undefined) {
             res.status(400)
-            res.json({erro: "ícone inválido"})
+            res.json({erro: "ícone inválido, o campo está vazio"})
             return
         }
 
         if (nome != undefined) {
             if (nome.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "nome inválido"})
+                res.json({erro: "nome inválido, o campo está vazio"})
                 return
             }
         }
@@ -31,7 +31,7 @@ export default class AssuntoController {
         if (icone != undefined) {
             if (icone.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "icone inválido"})
+                res.json({erro: "icone inválido, o campo está vazio"})
                 return
             }
         }
@@ -58,28 +58,28 @@ export default class AssuntoController {
         // Validações
         if (id == undefined) {
             res.status(400)
-            res.json({erro: "id inválido"})
+            res.json({erro: "id inválido, o campo está vazio"})
             return
         }
 
         if (id != undefined) {
             if (id.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "id inválido"})
+                res.json({erro: "id inválido, o campo está vazio"})
                 return
             }
         }
 
         if (nome == undefined && icone == undefined) {
             res.status(400)
-            res.json({erro: "nome e icone inválidos"})
+            res.json({erro: "nome e icone inválidos, os campos estão vazios"})
             return
         }
         
         if (nome != undefined) {
             if (nome.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "nome inválido"})
+                res.json({erro: "nome inválido, o campo está vazio"})
                 return
             }
         }
@@ -87,7 +87,7 @@ export default class AssuntoController {
         if (icone != undefined) {
             if (icone.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "icone inválidos"})
+                res.json({erro: "icone inválido, o campo está vazio"})
                 return
             }
         }
@@ -115,14 +115,14 @@ export default class AssuntoController {
         // Validações
         if (id == undefined) {
             res.status(400)
-            res.json({erro: "id inválido"})
+            res.json({erro: "id inválido, o campo está vazio"})
             return
         }
         
         if (id != undefined) {
             if (id.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "id inválido"})
+                res.json({erro: "id inválido, o campo está vazio"})
                 return
             }
         }
@@ -165,14 +165,14 @@ export default class AssuntoController {
         // Validações
         if (slug == undefined) {
             res.status(400)
-            res.json({erro: "Slug inválido"})
+            res.json({erro: "Slug inválido, o campo está vazio"})
             return
         }
         
         if (slug != undefined) {
             if (slug.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "Slug inválido"})
+                res.json({erro: "Slug inválido, o campo está vazio"})
                 return
             }
         }
@@ -195,14 +195,14 @@ export default class AssuntoController {
         // Validações
         if (id == undefined || id.trim().length === 0) {
             res.status(400)
-            res.json({erro: "id inválido"})
+            res.json({erro: "id inválido, o campo está vazio"})
             return
         }
 
         if (id != undefined) {
             if (id.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "id inválido"})
+                res.json({erro: "id inválido, o campo está vazio"})
                 return
             }
         }

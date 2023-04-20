@@ -10,20 +10,20 @@ export default class AssuntoController {
         // Validações
         if (titulo == undefined) {
             res.status(400)
-            res.json({erro: "Título inválido"})
+            res.json({erro: "Título inválido, o campo está vazio"})
             return
         }
         
         if (assunto == undefined) {
             res.status(400)
-            res.json({erro: "Assunto inválido"})
+            res.json({erro: "Assunto inválido, o campo está vazio"})
             return
         }
 
         if (titulo != undefined) {
             if (titulo.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "titulo inválido"})
+                res.json({erro: "titulo inválido, o campo está vazio"})
                 return
             }
         }
@@ -31,7 +31,7 @@ export default class AssuntoController {
         if (assunto != undefined) {
             if (assunto.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "assunto inválido"})
+                res.json({erro: "assunto inválido, o campo está vazio"})
                 return
             }
         }
@@ -58,20 +58,20 @@ export default class AssuntoController {
         // Validações
         if (id == undefined) {
             res.status(400)
-            res.json({erro: "id inválido"})
+            res.json({erro: "id inválido, o campo está vazio"})
             return
         }
 
         if (titulo == undefined) {
             res.status(400)
-            res.json({erro: "titulo inválido"})
+            res.json({erro: "titulo inválido, o campo está vazio"})
             return
         }
 
         if (id != undefined) {
             if (id.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "id inválido"})
+                res.json({erro: "id inválido, o campo está vazio"})
                 return
             }
         }
@@ -79,7 +79,7 @@ export default class AssuntoController {
         if (titulo != undefined) {
             if (titulo.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "titulo inválido"})
+                res.json({erro: "titulo inválido, o campo está vazio"})
                 return
             }
         }
@@ -102,14 +102,14 @@ export default class AssuntoController {
         // Validações
         if (id == undefined) {
             res.status(400)
-            res.json({erro: "id inválido"})
+            res.json({erro: "id inválido, o campo está vazio"})
             return
         }
 
         if (id != undefined) {
             if (id.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "id inválido"})
+                res.json({erro: "id inválido, o campo está vazio"})
                 return
             }
         }
@@ -152,14 +152,14 @@ export default class AssuntoController {
         // Validações
         if (slug == undefined) {
             res.status(400)
-            res.json({erro: "Slug inválido"})
+            res.json({erro: "Slug inválido, o campo está vazio"})
             return
         }
 
         if (slug != undefined) {
             if (slug.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "slug inválido"})
+                res.json({erro: "Slug inválido, o campo está vazio"})
                 return
             }
         }
@@ -181,14 +181,14 @@ export default class AssuntoController {
         
         if (id == undefined) {
             res.status(400)
-            res.json({erro: "id inválido"})
+            res.json({erro: "id inválido, o campo está vazio"})
             return
         }
 
         if (id != undefined) {
             if (id.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "id inválido"})
+                res.json({erro: "id inválido, o campo está vazio"})
                 return
             }
         }

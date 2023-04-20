@@ -6,7 +6,7 @@ const AssuntoSchema = mongoose.Schema({
     icone: {type: String, required: true},
     apontamentos: [
         {
-            type: mongoose.Schema.Types.ObjectId,
+            type: String,
             ref: "Apontamento"
         }
     ],

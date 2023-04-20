@@ -61,7 +61,7 @@ router.delete("/tema/:id", AdminAuth, new TemaController().deletar) // Deletar t
 
 // Apontamento
 router.get("/apontamentos", new ApontamentoController().Apontamentos) // Todos os apontamentos
-router.get("/apontamento/:_id", new ApontamentoController().apontamentoById) // Apontamento pelo id
+router.get("/apontamento/:id", new ApontamentoController().apontamentoById) // Apontamento pelo id
 router.post("/apontamento", AdminAuth, upload.single("miniatura"), new ApontamentoController().criar) // Criar apontamento
 router.put("/apontamento", AdminAuth, upload.single("miniatura"), new ApontamentoController().editar) // Editar apontamento
 router.delete("/apontamento/:id", AdminAuth, new ApontamentoController().deletar) // Deletar apontamento
