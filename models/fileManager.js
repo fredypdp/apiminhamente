@@ -12,7 +12,7 @@ export default class Image {
         }
     }
 
-    async delete(imagem){
+    async deletar(imagem){
         try {
             let result = await cloudinary.uploader.destroy(imagem)
             return result

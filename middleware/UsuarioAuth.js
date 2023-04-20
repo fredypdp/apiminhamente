@@ -16,12 +16,7 @@ export default async function(req, res, next){
                     res.status(401);
                     res.json({erro: "Token inválido"});
                 } else {
-                    if(decoded.usuario.role == 0){
-                        next();
-                    }else{
-                        res.status(403);
-                        res.json({erro: "Você não tem permissão para acessar essa rota!"});
-                    }
+                    next();
                 }
             });
         } else {

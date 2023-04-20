@@ -1,4 +1,3 @@
-import { log } from "console";
 import Apontamento from "../models/Apontamento.js";
 import FileManager from "../models/FileManager.js";
 
@@ -22,7 +21,7 @@ export default class ApontamentoController {
         
         let miniatura
         if (req.file != undefined) {
-            if (req.file.mimetype != "image/png" && "image/jpg" && "image/jpeg") {
+            if (req.file.mimetype != "image/png" && req.file.mimetype != "image/jpg" && req.file.mimetype != "image/jpeg") {
                 await unlinkAsync(req.file.destination+req.file.filename)
                 res.status(400)
                 res.json({erro: "A miniatura deve ser uma imagem"})
@@ -68,7 +67,7 @@ export default class ApontamentoController {
             }
 
             assuntos.forEach( assunto => {
-                if(assunto.length <= 0){
+                if(assunto.trim().length === 0){
                     res.status(400)
                     res.json({erro: "Assunto inválido"})
                 }
@@ -82,12 +81,36 @@ export default class ApontamentoController {
             }
 
             temas.forEach( tema => {
-                if(tema.length <= 0){
+                if(tema.trim().length === 0){
                     res.status(400)
                     res.json({erro: "Tema inválido"})
                 }
             })
             return
+        }
+
+        if (titulo != undefined) {
+            if (titulo.trim().length === 0) {
+                if (req.file != undefined) {
+                    await unlinkAsync(req.file.destination+req.file.filename)
+                }
+    
+                res.status(400)
+                res.json({erro: "Título inválido"})
+                return
+            }
+        }
+
+        if (conteudo != undefined) {
+            if (conteudo.trim().length === 0) {
+                if (req.file != undefined) {
+                    await unlinkAsync(req.file.destination+req.file.filename)
+                }
+    
+                res.status(400)
+                res.json({erro: "Conteúdo inválido"})
+                return
+            }
         }
         
         // Criando
@@ -120,13 +143,21 @@ export default class ApontamentoController {
             return
         }
 
-        if (assuntos != undefined) {
-            if (req.file != undefined) {
-                await unlinkAsync(req.file.destination+req.file.filename)
+        if (_id != undefined) {
+            if (_id.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "_id inválido"})
+                return
             }
+        }
 
-            assuntos.forEach( assunto => {
-                if(assunto.length <= 0){
+        if (assuntos != undefined) {
+            assuntos.forEach(async assunto => {
+                if(assunto.trim().length === 0){
+                    if (req.file != undefined) {
+                        await unlinkAsync(req.file.destination+req.file.filename)
+                    }
+
                     res.status(400)
                     res.json({erro: "Assunto inválido"})
                     return
@@ -135,12 +166,12 @@ export default class ApontamentoController {
         }
         
         if (temas != undefined) {
-            if (req.file != undefined) {
-                await unlinkAsync(req.file.destination+req.file.filename)
-            }
+            temas.forEach(async tema => {
+                if(tema.trim().length === 0){
+                    if (req.file != undefined) {
+                        await unlinkAsync(req.file.destination+req.file.filename)
+                    }
 
-            temas.forEach( tema => {
-                if(tema.length <= 0){
                     res.status(400)
                     res.json({erro: "Tema inválido"})
                     return
@@ -153,16 +184,6 @@ export default class ApontamentoController {
             res.json({erro: "Preencha os campos"})
             return
         }
-        
-        // if (rtitulo == undefined && conteudo == undefined && assuntos == undefined && temas == undefined && visibilidade == undefined) {
-        //     if (req.file != undefined) {
-        //         await unlinkAsync(req.file.destination+req.file.filename)
-        //     }
-
-        //     res.status(400)
-        //     res.json({erro: "Preencha os campos"})
-        //     return
-        // }
         
         let miniatura
 
@@ -187,7 +208,7 @@ export default class ApontamentoController {
                 let apontamento = await new Apontamento().editar(_id, titulo, conteudo, assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
                 
                 res.status(200)
-                res.json({apontamento: apontamento,msg: "Apontamento editado com sucesso"})
+                res.json({apontamento: apontamento, msg: "Apontamento editado com sucesso"})
                 return
             }
             
@@ -204,6 +225,21 @@ export default class ApontamentoController {
 
     async deletar(req, res){
         let id = req.params.id;
+
+        // Validações
+        if (id == undefined) {
+            res.status(400)
+            res.json({erro: "id inválido"})
+            return
+        }
+
+        if (id != undefined) {
+            if (id.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "id inválido"})
+                return
+            }
+        }
 
         try {
             let erroExist = await new Apontamento().deletar(id)
@@ -238,16 +274,25 @@ export default class ApontamentoController {
     }
 
     async apontamentoById(req, res){
-        let id = req.params.id
+        let _id = req.params._id
 
-        if (id == undefined) {
+        // Validações
+        if (_id == undefined) {
             res.status(400)
-            res.json({erro: "id inválido"})
+            res.json({erro: "_id inválido"})
             return
+        }
+
+        if (_id != undefined) {
+            if (_id.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "_id inválido"})
+                return
+            }
         }
         
         try {                
-            let apontamento = await new Apontamento().encontrarPorId(id)
+            let apontamento = await new Apontamento().encontrarPorId(_id)
             
             res.status(200)
             res.json({apontamento: apontamento})
@@ -260,6 +305,21 @@ export default class ApontamentoController {
 
     async pesquisarApontamento(req, res){
         let pesquisa = req.query["pesquisa"]
+            
+        // Validações
+        if (pesquisa == undefined) {
+            res.status(400)
+            res.json({erro: "Pesquisa inválida"})
+            return
+        }
+
+        if (pesquisa != undefined) {
+            if (pesquisa.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "Pesquisa inválido"})
+                return
+            }
+        }
 
         try {
             let apontamentos = await new Apontamento().pesquisa(pesquisa);

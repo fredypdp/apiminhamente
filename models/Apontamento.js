@@ -7,9 +7,9 @@ import ApontamentoSchema from "../Schemas/ApontamentoSchema.js";
 export default class Apontamento {
 
     async novo(titulo, conteudo, assuntos, temas, visibilidade, miniatura, miniatura_public_id){
-        let buff = Buffer.from(titulo)
-        let idbase64 = buff.toString("base64")
-        let idUsar = idbase64.splice(0, 11)
+        const buffer = crypto.randomBytes(64)
+        let idbase64 = buffer.toString('hex')
+        let idUsar = idbase64.slice(0, 11)
         
         try {
             let ApontamentoCriado = await ApontamentoSchema.create({id: idUsar, titulo: titulo, slug: slugify(titulo), conteudo: conteudo, miniatura: miniatura, miniatura_public_id: miniatura_public_id, visibilidade: visibilidade, assuntos: assuntos, temas: temas, created_at: new Date})
@@ -30,7 +30,7 @@ export default class Apontamento {
             
             return ApontamentoCriado
         } catch (erro) {
-            await new FileManager().delete(apontamento.miniatura_public_id)
+            await new FileManager().deletar(miniatura_public_id)
             return erro
         }
     }
@@ -70,11 +70,11 @@ export default class Apontamento {
         apontamento.edited_at = new Date
         try {
 
-            // Deletando a miniatura antiga no Cloudinary
+            // Deletando a miniatura antiga do Cloudinary
             if (miniatura != undefined) {
                 let apont = await ApontamentoSchema.findById(_id)
                 
-                await new FileManager().delete(apont.miniatura_public_id)
+                await new FileManager().deletar(apont.miniatura_public_id)
             }
 
             // Removendo o apontamento de todos os assuntos que ele pertence
@@ -153,8 +153,7 @@ export default class Apontamento {
             
             return ApontamentoEditado
         } catch (erro) {
-            console.log("erro")
-            await new FileManager().delete(miniatura_public_id)
+            await new FileManager().deletar(miniatura_public_id)
             return erro
         }
     }
@@ -171,16 +170,16 @@ export default class Apontamento {
             let apontamento = await ApontamentoSchema.findByIdAndDelete(id);
             
             // Deletar a miniatura do apontamento no Cloudinary
-            await FileManager.delete(apontamento.miniatura_public_id)
+            await new FileManager().delete(apontamento.miniatura_public_id)
             
             // Remover o apontamento de todos os assuntos que ele pertence
             apontamento.assuntos.forEach( async assunto => {
                 let assuntoEncontrado = await AssuntoSchema.findById(assunto)
 
                 if (assuntoEncontrado != null && assuntoEncontrado != undefined) {
-                    let assuntoRemover = assuntoEncontrado.apontamentos.indexOf(apontamento._id)
+                    let apontamentoRemover = assuntoEncontrado.apontamentos.indexOf(apontamento._id)
 
-                    assuntoEncontrado.apontamentos.splice(assuntoRemover, 1)
+                    assuntoEncontrado.apontamentos.splice(apontamentoRemover, 1)
                     assuntoEncontrado.save()
                 }
             })
@@ -190,9 +189,9 @@ export default class Apontamento {
                 let temaEncontrado = await TemaSchema.findById(tema)
 
                 if (temaEncontrado != null && temaEncontrado != undefined) {
-                    let temaRemover = temaEncontrado.apontamentos.indexOf(apontamento._id)
+                    let apontamentoRemover = temaEncontrado.apontamentos.indexOf(apontamento._id)
 
-                    temaEncontrado.apontamentos.splice(temaRemover, 1)
+                    temaEncontrado.apontamentos.splice(apontamentoRemover, 1)
                     temaEncontrado.save()
                 }
             })
@@ -212,9 +211,9 @@ export default class Apontamento {
         }
     }
 
-    async encontrarPorId(id){
+    async encontrarPorId(_id){
         try{
-            let apontamento = await ApontamentoSchema.findById(id)
+            let apontamento = await ApontamentoSchema.findById(_id)
             return apontamento
         }catch(erro){
             return erro

@@ -1,4 +1,3 @@
-import Apontamento from "../models/Apontamento.js";
 import Assunto from "../models/Assunto.js";
 
 export default class AssuntoController {
@@ -19,6 +18,22 @@ export default class AssuntoController {
             res.status(400)
             res.json({erro: "ícone inválido"})
             return
+        }
+
+        if (nome != undefined) {
+            if (nome.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "nome inválido"})
+                return
+            }
+        }
+
+        if (icone != undefined) {
+            if (icone.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "icone inválido"})
+                return
+            }
         }
 
         try {
@@ -47,18 +62,46 @@ export default class AssuntoController {
             return
         }
 
+        if (id != undefined) {
+            if (id.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "id inválido"})
+                return
+            }
+        }
+
         if (nome == undefined && icone == undefined) {
             res.status(400)
             res.json({erro: "nome e icone inválidos"})
             return
         }
+        
+        if (nome != undefined) {
+            if (nome.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "nome inválido"})
+                return
+            }
+        }
+        
+        if (icone != undefined) {
+            if (icone.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "icone inválidos"})
+                return
+            }
+        }
 
         // Editando assunto
         try {
-           let assunto = await new Assunto().editar(id, nome, icone)
-
-            res.status(200)
-            res.json({data: assunto, msg: "Assunto editado com sucesso"})
+            let erroExist = await new Assunto().editar(id, nome, icone)
+            if (erroExist.status == 400) {
+                res.status(406)
+                res.json({erro: "Já existe um assunto com esse nome"})
+            } else {
+                res.status(200)
+                res.json({data: erroExist, msg: "Assunto editado com sucesso"})
+            }
         } catch (erro) {
             console.log(erro)
             res.status(406)
@@ -68,6 +111,21 @@ export default class AssuntoController {
 
     async deletar(req, res){
         let id = req.params.id;
+
+        // Validações
+        if (id == undefined) {
+            res.status(400)
+            res.json({erro: "id inválido"})
+            return
+        }
+        
+        if (id != undefined) {
+            if (id.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "id inválido"})
+                return
+            }
+        }
 
         try {
             let erroExist = await new Assunto().deletar(id);
@@ -104,10 +162,19 @@ export default class AssuntoController {
     async AssuntoSlug(req, res){
         let slug = req.params.slug
 
+        // Validações
         if (slug == undefined) {
             res.status(400)
             res.json({erro: "Slug inválido"})
             return
+        }
+        
+        if (slug != undefined) {
+            if (slug.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "Slug inválido"})
+                return
+            }
         }
 
         try {
@@ -118,22 +185,31 @@ export default class AssuntoController {
         } catch (erro) {
             console.log(erro)
             res.status(404)
-            res.json({erro: "Erro ao encontrar apontamento"})
+            res.json({erro: "Erro ao encontrar assunto"})
         }
     }
 
     async AssuntoById(req, res){
         let id = req.params.id
         
-        if (id == undefined) {
+        // Validações
+        if (id == undefined || id.trim().length === 0) {
             res.status(400)
             res.json({erro: "id inválido"})
             return
         }
 
+        if (id != undefined) {
+            if (id.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "id inválido"})
+                return
+            }
+        }
+
         try {
             let assunto = await new Assunto().encontrarPorId(id)
-
+            
             res.status(200)
             res.json({assunto: assunto})
         } catch (erro) {
@@ -141,6 +217,5 @@ export default class AssuntoController {
             res.status(404)
             res.json({erro: "Erro ao encontrar assunto"})
         }
-
     }
 }

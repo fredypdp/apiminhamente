@@ -1,133 +1,207 @@
-import Apontamento from "../models/Apontamento.js";
-import Assunto from "../models/Assunto.js";
+import Tema from "../models/Tema.js";
 
 export default class AssuntoController {
 
     // CRUD
 
     async criar(req, res){
-        let {nome, icone} = req.body
-          
+        let { titulo, assunto } = req.body
+        
         // Validações
-        if (nome == undefined) {
+        if (titulo == undefined) {
             res.status(400)
-            res.json({err: "nome inválido"})
+            res.json({erro: "Título inválido"})
+            return
+        }
+        
+        if (assunto == undefined) {
+            res.status(400)
+            res.json({erro: "Assunto inválido"})
             return
         }
 
-        if (icone == undefined) {
-            res.status(400)
-            res.json({err: "ícone inválido"})
-            return
+        if (titulo != undefined) {
+            if (titulo.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "titulo inválido"})
+                return
+            }
+        }
+        
+        if (assunto != undefined) {
+            if (assunto.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "assunto inválido"})
+                return
+            }
         }
 
         try {
-            let erroExist = await new Assunto().novo(nome, icone)
+            let erroExist = await new Tema().novo(titulo, assunto)
             if (erroExist.status == 400) {
-                res.status(400)
-                res.json({erro: "O nome já está cadastrado"})
+                res.status(406)
+                res.json({erro: "Já existe um tema com esse nome"})
             } else {
                 res.status(200)
-                res.json({data: erroExist, msg: "Assunto criado com sucesso"})
+                res.json({data: erroExist, msg: "Tema criado com sucesso"})
             }
         } catch (erro) {
             console.log(erro)
-            res.status(400)
-            res.json({erro: "Erro ao criar assunto"})
+            res.status(406)
+            res.json({erro: "Erro ao criar tema"})
         }
     }
 
     async editar(req, res){
-        let {id, nome, icone} = req.body
+        let {id, titulo} = req.body
           
         // Validações
         if (id == undefined) {
             res.status(400)
-            res.json({err: "id inválido"})
+            res.json({erro: "id inválido"})
             return
         }
 
-        if (nome == undefined && icone == undefined) {
+        if (titulo == undefined) {
             res.status(400)
-            res.json({erro: "nome e icone inválidos"})
+            res.json({erro: "titulo inválido"})
             return
         }
 
-        // Editando assunto
+        if (id != undefined) {
+            if (id.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "id inválido"})
+                return
+            }
+        }
+        
+        if (titulo != undefined) {
+            if (titulo.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "titulo inválido"})
+                return
+            }
+        }
+
         try {
-           let assunto = await new Assunto().editar(id, nome, icone)
+           let tema = await new Tema().editar(id, titulo)
 
             res.status(200)
-            res.json({data: assunto, msg: "Assunto editado com sucesso"})
+            res.json({data: tema, msg: "Tema editado com sucesso"})
         } catch (erro) {
             console.log(erro)
-            res.status(400)
-            res.json({erro: "Erro ao editar assunto"})
+            res.status(406)
+            res.json({erro: "Erro ao editar tema"})
         }
     }
 
     async deletar(req, res){
         let id = req.params.id;
 
+        // Validações
+        if (id == undefined) {
+            res.status(400)
+            res.json({erro: "id inválido"})
+            return
+        }
+
+        if (id != undefined) {
+            if (id.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "id inválido"})
+                return
+            }
+        }
+
         try {
-            let erroExist = await new Assunto().deletar(id);
+            let erroExist = await new Tema().deletar(id);
+            
             if (erroExist.status == 406) {
-                res.status(406)
-                res.json({err: "O assunto não existe, portanto não pode ser deletado"})
+                res.status(404)
+                res.json({erro: "O tema não existe, portanto não pode ser deletado"})
             } else {
                 res.status(200)
-                res.send("Assunto Deletado com sucesso")
+                res.json({data: erroExist, msg: "Tema Deletado com sucesso"})
             }
         } catch (erro) {
             console.log(erro)
-            res.status(400)
-            res.json({err: "Erro ao deletar assunto"})
+            res.status(406)
+            res.json({erro: "Erro ao deletar tema"})
         }
     }
 
     // Requisições
 
-    async AssuntoSlug(req, res){
-        let slug = req.params.slug
-
+    async Temas(req, res){
         try {
-            let assunto = await new Assunto().encontrarPorSlug(slug)
+            let temas = await new Tema().temaAll()
 
             res.status(200)
-            res.json({assunto: assunto})
-        } catch (erro) {
-            console.log(erro)
-            res.status(404)
-            res.json({erro: "Nenhum apontamento encontrado"})
-        }
-    }
-
-    async AssuntoById(req, res){
-        let id = req.params.id
-        
-        try {
-            let assunto = await new Assunto().encontrarPorId(id)
-
-            res.status(200)
-            res.json({assunto: assunto})
-        } catch (erro) {
-            console.log(erro)
-            res.status(404)
-            res.json({erro: "Nenhum assunto encontrado"})
-        }
-
-    }
-
-    async Assuntos(req, res){
-        try {
-            let assuntos = await new Assunto().assuntoAll()
-
-            res.status(200)
-            res.json({assuntos: assuntos})
+            res.json({temas: temas})
         } catch (erro) {
             console.log(erro);
             res.status(404)
-            res.json({erro: "Nenhum assunto encontrado"})
+            res.json({erro: "Erro ao encontrar temas"})
+        }
+    }
+
+    async TemaSlug(req, res){
+        let slug = req.params.slug
+
+        // Validações
+        if (slug == undefined) {
+            res.status(400)
+            res.json({erro: "Slug inválido"})
+            return
+        }
+
+        if (slug != undefined) {
+            if (slug.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "slug inválido"})
+                return
+            }
+        }
+
+        try {
+            let tema = await new Tema().encontrarPorSlug(slug)
+
+            res.status(200)
+            res.json({tema: tema})
+        } catch (erro) {
+            console.log(erro)
+            res.status(404)
+            res.json({erro: "Erro ao encontrar tema"})
+        }
+    }
+
+    async TemaById(req, res){
+        let id = req.params.id
+        
+        if (id == undefined) {
+            res.status(400)
+            res.json({erro: "id inválido"})
+            return
+        }
+
+        if (id != undefined) {
+            if (id.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "id inválido"})
+                return
+            }
+        }
+
+        try {
+            let tema = await new Tema().encontrarPorId(id)
+
+            res.status(200)
+            res.json({tema: tema})
+        } catch (erro) {
+            console.log(erro)
+            res.status(404)
+            res.json({erro: "Erro ao encontrar tema"})
         }
     }
 }

@@ -24,6 +24,13 @@ export default class Assunto {
     async editar(id, novoNome, novoIcone){
         let assuntoEditar = {}
 
+        let assuntoEncontrado = await this.encontrarPorNome(nome)
+        
+        if (assuntoEncontrado != undefined) {
+            let erro = {status: 400, msg: "O nome já está cadastrado"}
+            return erro
+        }
+
         if (novoNome != undefined) {
             assuntoEditar.nome = novoNome
             assuntoEditar.slug = slugify(novoNome)
@@ -57,23 +64,27 @@ export default class Assunto {
                 let apontamentoEncontrado = await ApontamentoSchema.findById(apontamento)
                 
                 if (apontamentoEncontrado != null && apontamentoEncontrado != undefined) {
-                    let apontamentoRemover = apontamentoEncontrado.assuntos.indexOf(assunto._id)
+                    let assuntoRemover = apontamentoEncontrado.assuntos.indexOf(assunto._id)
                 
-                    apontamentoEncontrado.assuntos.splice(apontamentoRemover, 1)
+                    apontamentoEncontrado.assuntos.splice(assuntoRemover, 1)
                     apontamentoEncontrado.save()
                 }
             })
             
-            // Remover o assunto de todos os temas que ele pertence
+            // Deletando todos os temas que fazem parte do assunto e apontamentos
             assunto.temas.forEach( async tema => {
-                let temaEncontrado = await TemaSchema.findById(tema)
+                await TemaSchema.findByIdAndDelete(tema)
 
-                if (temaEncontrado != null && temaEncontrado != undefined) {
-                    let temaRemover = temaEncontrado.assuntos.indexOf(assunto._id)
+                let apontamentos = await ApontamentoSchema.find({})
 
-                    temaEncontrado.assuntos.splice(temaRemover, 1)
-                    temaEncontrado.save()
-                }
+                apontamentos.forEach( apontamento => {
+                    let remover = apontamento.temas.indexOf(tema)
+                            
+                    if (remover != -1) {
+                        tema.apontamentos.splice(remover, 1)
+                        tema.save()
+                    }
+                })
             })
             
            return assunto
@@ -87,7 +98,6 @@ export default class Assunto {
             let result = await AssuntoSchema.find({}).populate("apontamentos").populate("temas").sort({nome: 1 })
             return result
         }catch(erro){
-            console.log(erro)
             return erro
         }
     }
@@ -113,6 +123,7 @@ export default class Assunto {
     async encontrarPorId(id){
         try{
             let result = await AssuntoSchema.findById(id).populate("apontamentos").populate("temas")
+            
             return result
         }catch(erro){
             return erro

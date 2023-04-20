@@ -18,36 +18,31 @@ const urlSenha = process.env.URL_PAGINA_MUDAR_SENHA
 const urlDelete = process.env.URL_PAGINA_DELETAR_CONTA
 
 export default class Email{
-
     enviarNovaSenhaLink(email, token){
-
         transporter.sendMail({
             from: `MinhaMente ${siteEmail}`,
             to: email,
             subject: "Mudar a senha",
-            text: `Mude a sua senha clicando aqui: ${urlSenha}${token}`,
-            html: `Mude a sua senha clicando <a href='${urlSenha}${token}'>${urlSenha}${token}</a>`
+            text: `Mude a sua senha clicando aqui: ${urlSenha}/${token}`,
+            html: `Mude a sua senha clicando <a href='${urlSenha}/${token}'>aqui</a>`
         }).then( message => {
             console.log(message);
-        }).catch( err => {
-            console.log(err);
+        }).catch( erro => {
+            console.log(erro);
         })
-
     }
 
-    enviarDeleteLink(email, token){
-
+    enviarDelecaoLink(email, token){
         transporter.sendMail({
             from: `MinhaMente ${siteEmail}`,
             to: email,
             subject: "Deletar conta",
-            text: `Delete a sua conta clicando aqui: ${urlDelete}${token}`,
-            html: `Delete a sua senha clicando <a href='${urlDelete}${token}'>${urlDelete}${token}</a>`
+            text: `Delete a sua conta clicando aqui: ${urlDelete}/${token}`,
+            html: `Delete a sua senha clicando <a href='${urlDelete}/${token}'>aqui</a>`
         }).then( message => {
             console.log(message);
         }).catch( err => {
             console.log(err);
         })
-
     }
 }
