@@ -1,3 +1,48 @@
+# Rotas
+
+## Apontamento
+
+### Pegar todos os apontamentos
+
+### Requisição
+```
+var axios = require('axios');
+
+var config = {
+  method: 'get',
+  url: 'https://apiminhamente.vercel.app/apontamentos'
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+```
+
+### Exemplo de resposta de sucesso
+```
+[
+ {
+    "_id": ObjectId("616d6efb46c45b7f064526e3"),
+    id: {type: String, required: true},
+    titulo: {type: String, required: true},
+    slug: {type: String, required: true},
+    conteudo: {type: String, required: true},
+    miniatura: {type: String, required: true},
+    miniatura_public_id: {type: String, required: true},
+    visibilidade: {type: mongoose.Schema.Types.Boolean, default: true},
+    assuntos: [],
+    temas: [],
+    created_at: {type: mongoose.Schema.Types.Date, required: true},
+    edited_at: {type: mongoose.Schema.Types.Date},
+ }
+ ...
+]
+```
+
 # Funcionamento
 
 ## Apontamento
