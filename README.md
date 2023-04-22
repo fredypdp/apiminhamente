@@ -65,6 +65,7 @@
 # Como iniciar o projeto
 
 ## Instale todas as dependências
+
 ```
 npm intall
 ```
@@ -72,7 +73,8 @@ npm intall
 ## Crie um arquivo .env (pode ser uma cópia do .env.example)
 
 ## Inicie o projeto
-````
+
+```
 node index
 ```
 
@@ -92,36 +94,47 @@ node index
 # Rotas protegidas
 
 ## Rotas administrativas
+
 ```
 router.get("/usuarios") // Todos os usuários
 ```
+
 ```
 router.delete("/usuario/:id") // Adm deletar usuário
 ```
+
 ```
 router.post("/assunto") // Criar assunto
 ```
+
 ```
 router.put("/assunto") // Editar assunto
 ```
+
 ```
 router.delete("/assunto/:id") // Deletar assunto
 ```
+
 ```
 router.post("/tema") // Criar tema
 ```
+
 ```
 router.put("/tema") // Editar tema
 ```
+
 ```
 router.delete("/tema/:id") // Deletar tema
 ```
+
 ```
 router.post("/apontamento") // Criar apontamento
 ```
+
 ```
 router.put("/apontamento") // Editar apontamento
 ```
+
 ```
 router.delete("/apontamento/:id") // Deletar apontamento
 ```
@@ -159,7 +172,7 @@ router.post("/logout", UsuarioAuth, new UsuarioController().logout) // Terminar 
 
 ### Pegar todos os apontamentos
 
-````
+```
 https://apiminhamente.vercel.app/apontamentos
 ```
 
@@ -218,7 +231,7 @@ axios(config)
 
 ### Pegar o apontamento pelo id
 
-````
+```
 https://apiminhamente.vercel.app/apontamento/:id
 ```
 
@@ -278,7 +291,7 @@ axios(config)
 
 ### Criar apontamento
 
-````
+```
 https://apiminhamente.vercel.app/apontamento
 ```
 
@@ -357,7 +370,7 @@ axios(config, data)
 
 ### Editar apontamento
 
-````
+```
 https://apiminhamente.vercel.app/apontamento
 ```
 
@@ -427,7 +440,7 @@ axios(config, data)
 
 ### Deletar apontamento
 
-````
+```
 https://apiminhamente.vercel.app/apontamento/:id
 ```
 
@@ -492,7 +505,7 @@ axios(config)
 
 ### Pesquisar apontamentos
 
-````
+```
 https://apiminhamente.vercel.app/results
 ```
 
@@ -560,7 +573,7 @@ axios(config)
 
 ### Pegar todos os assuntos
 
-````
+```
 https://apiminhamente.vercel.app/assuntos
 ```
 
@@ -619,7 +632,7 @@ axios(config)
 
 ### Pegar o assunto pelo id
 
-````
+```
 https://apiminhamente.vercel.app/assunto/:id
 ```
 
@@ -679,7 +692,7 @@ axios(config)
 
 ### Pegar o assunto pelo slug
 
-````
+```
 https://apiminhamente.vercel.app/apontamento/assunto/slug/:slug
 ```
 
@@ -741,7 +754,7 @@ axios(config)
 
 ### Criar assunto
 
-````
+```
 https://apiminhamente.vercel.app/assunto
 ```
 
@@ -812,7 +825,7 @@ axios(config, data)
 
 ### Editar assunto
 
-````
+```
 https://apiminhamente.vercel.app/assunto
 ```
 
@@ -881,7 +894,7 @@ axios(config, data)
 
 ### Deletar assunto
 
-````
+```
 https://apiminhamente.vercel.app/assunto/:id
 ```
 
@@ -948,7 +961,7 @@ axios(config)
 
 ### Pegar todos os temas
 
-````
+```
 https://apiminhamente.vercel.app/temas
 ```
 
@@ -999,7 +1012,7 @@ axios(config)
 
 ### Pegar o tema pelo id
 
-````
+```
 https://apiminhamente.vercel.app/tema/:id
 ```
 
@@ -1054,7 +1067,7 @@ axios(config)
 
 ### Pegar o tema pelo slug
 
-````
+```
 https://apiminhamente.vercel.app/tema/slug/:slug
 ```
 
@@ -1109,7 +1122,7 @@ axios(config)
 
 ### Criar tema
 
-````
+```
 https://apiminhamente.vercel.app/tema
 ```
 
@@ -1171,7 +1184,7 @@ axios(config, data)
 
 ### Editar tema
 
-````
+```
 https://apiminhamente.vercel.app/tema
 ```
 
@@ -1237,7 +1250,7 @@ axios(config, data)
 
 ### Deletar tema
 
-````
+```
 https://apiminhamente.vercel.app/tema/:id
 ```
 
@@ -1299,7 +1312,7 @@ axios(config)
 
 ### Pegar todos os usuários
 
-````
+```
 https://apiminhamente.vercel.app/usuarios
 ```
 
@@ -1353,7 +1366,7 @@ axios(config)
 
 ### Pegar o usuário pelo id
 
-````
+```
 https://apiminhamente.vercel.app/usuario/:id
 ```
 
@@ -1408,7 +1421,7 @@ axios(config)
 
 ### Pegar o usuário pelo email
 
-````
+```
 https://apiminhamente.vercel.app/usuario/email/:email
 ```
 
@@ -1463,7 +1476,7 @@ axios(config)
 
 ### Login
 
-````
+```
 https://apiminhamente.vercel.app/login
 ```
 #### Elementos
@@ -1536,7 +1549,7 @@ axios(config, data)
 
 ### Logout
 
-````
+```
 https://apiminhamente.vercel.app/logout
 ```
 #### Segurança
@@ -1580,7 +1593,7 @@ axios(config)
 
 ### Criar conta
 
-````
+```
 https://apiminhamente.vercel.app/usuario
 ```
 
@@ -1652,7 +1665,7 @@ axios(config, data)
 
 ### Editar conta
 
-````
+```
 https://apiminhamente.vercel.app/usuario
 ```
 
@@ -1721,7 +1734,7 @@ axios(config, data)
 
 ### Enviar email de recuperação de senha
 
-````
+```
 https://apiminhamente.vercel.app/recuperarsenha/:email
 ```
 #### Parâmetros
@@ -1769,7 +1782,7 @@ axios(config)
 
 ### Mudar senha
 
-````
+```
 https://apiminhamente.vercel.app/mudarsenha/:token
 ```
 
@@ -1835,7 +1848,7 @@ axios(config, data)
 
 ### Enviar email de deleção de conta
 
-````
+```
 https://apiminhamente.vercel.app/usuario/:id/:email
 ```
 
@@ -1879,7 +1892,7 @@ axios(config)
 
 ### Deletar minha conta
 
-````
+```
 https://apiminhamente.vercel.app/deletarconta/:token
 ```
 
@@ -1937,7 +1950,7 @@ axios(config)
 
 ### Adm deletar usuário
 
-````
+```
 https://apiminhamente.vercel.app/usuario/:id
 ```
 
