@@ -64,15 +64,15 @@
 
 # Como iniciar o projeto
 
-## Instale todas as dependências
+### Instale todas as dependências
 
 ```
 npm intall
 ```
 
-## Crie um arquivo .env (pode ser uma cópia do .env.example)
+### Crie um arquivo .env (pode ser uma cópia do .env.example)
 
-## Inicie o projeto
+### Inicie o projeto
 
 ```
 node index
@@ -144,24 +144,31 @@ router.delete("/apontamento/:id") // Deletar apontamento
 ```
 router.get("/usuario/:id") // Usuário pelo id
 ```
+
 ```
 router.get("/usuario/email/:email") // Usuário pelo email
 ```
+
 ```
 router.put("/usuario") // Editar usuário
 ```
+
 ```
 router.post("/recuperarsenha/:email") // Enviar email de recuperação de senha
 ```
+
 ```
 router.post("/mudarsenha/:token") // Mudar senha
 ```
+
 ```
 router.post("/usuario/:id/:email") // Enviar email de deleção de conta
 ```
+
 ```
 router.delete("/deletarconta/:token") // Deletar minha conta
 ```
+
 ```
 router.post("/logout", UsuarioAuth, new UsuarioController().logout) // Terminar sessão
 ```
