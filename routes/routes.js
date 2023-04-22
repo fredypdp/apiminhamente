@@ -29,14 +29,14 @@ const upload = multer({storage})
 router.get('/usuarios', AdminAuth, new UsuarioController().Usuarios) // Todos os usuários
 
 router.get("/usuario/:id", UsuarioAuth, new UsuarioController().UsuarioById) // Usuário pelo id
-router.get("/usuario/email/:email", new UsuarioController().UsuarioByEmail) // Usuário pelo email
+router.get("/usuario/email/:email", UsuarioAuth, new UsuarioController().UsuarioByEmail) // Usuário pelo email
 router.post("/usuario", upload.single("avatar"), new UsuarioController().criar) // Criar usuário
 router.put("/usuario", UsuarioAuth, upload.single("avatar"), new UsuarioController().editar) // Editar usuário
-router.post("/recuperarsenha", UsuarioAuth, new UsuarioController().recuperarSenha) // Enviar email de recuperação de senha
-router.post("/mudarsenha", UsuarioAuth, new UsuarioController().mudarSenha) // Mudar senha
+router.post("/recuperarsenha/:email", UsuarioAuth, new UsuarioController().recuperarSenha) // Enviar email de recuperação de senha
+router.post("/mudarsenha/:token", UsuarioAuth, new UsuarioController().mudarSenha) // Mudar senha
 router.post("/usuario/:id/:email", UsuarioAuth, new UsuarioController().DeletarMinhaContaEmail) // Enviar email de deleção de conta
-router.delete("/deletarconta", UsuarioAuth, new UsuarioController().DeletarMinhaConta) // Deletar minha conta
-router.delete("/usuario/:id", AdminAuth, new UsuarioController().AdmDeletarUsuario) // Adm deletando usuário
+router.delete("/deletarconta/:token", UsuarioAuth, new UsuarioController().DeletarMinhaConta) // Deletar minha conta
+router.delete("/usuario/:id", AdminAuth, new UsuarioController().AdmDeletarUsuario) // Adm deletar usuário
 
 
 router.post("/login", new UsuarioController().login) // Fazer login
@@ -62,9 +62,9 @@ router.delete("/tema/:id", AdminAuth, new TemaController().deletar) // Deletar t
 // Apontamento
 router.get("/apontamentos", new ApontamentoController().Apontamentos) // Todos os apontamentos
 router.get("/apontamento/:id", new ApontamentoController().apontamentoById) // Apontamento pelo id
+router.get("/results", new ApontamentoController().pesquisarApontamento) // Pesquisar apontamento
 router.post("/apontamento", AdminAuth, upload.single("miniatura"), new ApontamentoController().criar) // Criar apontamento
 router.put("/apontamento", AdminAuth, upload.single("miniatura"), new ApontamentoController().editar) // Editar apontamento
 router.delete("/apontamento/:id", AdminAuth, new ApontamentoController().deletar) // Deletar apontamento
-router.get("/results", new ApontamentoController().pesquisarApontamento) // Pesquisar apontamento
 
 export default router

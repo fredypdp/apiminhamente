@@ -183,7 +183,7 @@ export default class AssuntoController {
                 res.json({erro: "O assunto não existe, portanto não pode ser deletado"})
             } else {
                 res.status(200)
-                res.json({data: erroExist, msg: "Assunto Deletado com sucesso"})
+                res.json({data: erroExist, msg: "Assunto deletado com sucesso"})
             }
         } catch (erro) {
             console.log(erro)

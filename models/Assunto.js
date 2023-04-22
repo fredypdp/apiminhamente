@@ -14,7 +14,7 @@ export default class Assunto {
         }
 
         try {
-            let assunto = await AssuntoSchema.create({nome: nome, slug: slugify(nome), icone: icone})
+            let assunto = await AssuntoSchema.create({nome: nome, slug: slugify(nome), icone: icone, created_at: new Date})
             return assunto
         } catch (erro) {
             return erro
@@ -39,6 +39,8 @@ export default class Assunto {
         if (novoIcone != undefined) {
             assuntoEditar.icone = novoIcone
         }
+
+        assuntoEditar.edited_at = new Date
 
         try {
             let assunto = await AssuntoSchema.findByIdAndUpdate(id, assuntoEditar, {new: true})

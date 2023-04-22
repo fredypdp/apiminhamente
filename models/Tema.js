@@ -14,7 +14,7 @@ export default class Tema {
         }
 
         try {
-            let tema = await TemaSchema.create({titulo: titulo, slug: slugify(titulo), assunto: assunto})
+            let tema = await TemaSchema.create({titulo: titulo, slug: slugify(titulo), assunto: assunto, created_at: new Date})
             
             let assuntoEncontrado = await AssuntoSchema.findById(tema.assunto)
 
@@ -42,6 +42,8 @@ export default class Tema {
 
         temaEditar.titulo = novoTitulo
         temaEditar.slug = slugify(novoTitulo)
+
+        temaEditar.edited_at = new Date
 
         try {
             let tema = await TemaSchema.findByIdAndUpdate(id, temaEditar, {new: true})

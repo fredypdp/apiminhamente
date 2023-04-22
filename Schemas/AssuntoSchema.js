@@ -16,6 +16,8 @@ const AssuntoSchema = mongoose.Schema({
             ref: "Tema"
         }
     ],
+    created_at: {type: mongoose.Schema.Types.Date, required: true},
+    edited_at: {type: mongoose.Schema.Types.Date},
 })
 
 export default mongoose.model("Assunto", AssuntoSchema)

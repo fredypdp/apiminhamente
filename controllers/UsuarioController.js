@@ -66,14 +66,9 @@ export default class UserController {
                     rel: "editar_usuario"
                 },
                 {
-                    href: process.env.URL_API+"/recuperarsenha",
+                    href: process.env.URL_API+"/recuperarsenha"+"/"+usuario.email,
                     method: "post",
                     rel: "enviar_email_de_recuperação_de_senha"
-                },
-                {
-                    href: process.env.URL_API+"/mudarsenha",
-                    method: "post",
-                    rel: "mudar_senha"
                 },
                 {
                     href: process.env.URL_API+"/usuario/"+usuario.id+"/"+usuario.email,
@@ -81,19 +76,9 @@ export default class UserController {
                     rel: "enviar_email_de_deleção_de_conta"
                 },
                 {
-                    href: process.env.URL_API+"/deletarconta",
-                    method: "delete",
-                    rel: "deletar_minha_conta"
-                },
-                {
                     href: process.env.URL_API+"/usuario/"+usuario.id,
                     method: "delete",
                     rel: "adm_deletar_usuário"
-                },
-                {
-                    href: process.env.URL_API+"/logout",
-                    method: "post",
-                    rel: "terminar_sessão"
                 }
             ]
 
@@ -144,14 +129,9 @@ export default class UserController {
                     rel: "editar_usuario"
                 },
                 {
-                    href: process.env.URL_API+"/recuperarsenha",
+                    href: process.env.URL_API+"/recuperarsenha"+"/"+usuario.email,
                     method: "post",
                     rel: "enviar_email_de_recuperação_de_senha"
-                },
-                {
-                    href: process.env.URL_API+"/mudarsenha",
-                    method: "post",
-                    rel: "mudar_senha"
                 },
                 {
                     href: process.env.URL_API+"/usuario/"+usuario.id+"/"+usuario.email,
@@ -159,19 +139,9 @@ export default class UserController {
                     rel: "enviar_email_de_deleção_de_conta"
                 },
                 {
-                    href: process.env.URL_API+"/deletarconta",
-                    method: "delete",
-                    rel: "deletar_minha_conta"
-                },
-                {
                     href: process.env.URL_API+"/usuario/"+usuario.id,
                     method: "delete",
                     rel: "adm_deletar_usuário"
-                },
-                {
-                    href: process.env.URL_API+"/logout",
-                    method: "post",
-                    rel: "terminar_sessão"
                 }
             ]
 
@@ -309,12 +279,12 @@ export default class UserController {
 
                 let HATEOAS = [
                     {
-                        href: process.env.URL_API+"/usuario/"+erroExist.id,
+                        href: process.env.URL_API+"/usuario/"+usuario.id,
                         method: "get",
                         rel: "usuário_pelo_id",
                     },
                     {
-                        href: process.env.URL_API+"/usuario/email/"+erroExist.email,
+                        href: process.env.URL_API+"/usuario/email/"+usuario.email,
                         method: "get",
                         rel: "usuário_pelo_email"
                     },
@@ -324,34 +294,19 @@ export default class UserController {
                         rel: "editar_usuario"
                     },
                     {
-                        href: process.env.URL_API+"/recuperarsenha",
+                        href: process.env.URL_API+"/recuperarsenha"+"/"+usuario.email,
                         method: "post",
                         rel: "enviar_email_de_recuperação_de_senha"
                     },
                     {
-                        href: process.env.URL_API+"/mudarsenha",
-                        method: "post",
-                        rel: "mudar_senha"
-                    },
-                    {
-                        href: process.env.URL_API+"/usuario/"+erroExist.id+"/"+erroExist.email,
+                        href: process.env.URL_API+"/usuario/"+usuario.id+"/"+usuario.email,
                         method: "post",
                         rel: "enviar_email_de_deleção_de_conta"
                     },
                     {
-                        href: process.env.URL_API+"/deletarconta",
-                        method: "delete",
-                        rel: "deletar_minha_conta"
-                    },
-                    {
-                        href: process.env.URL_API+"/usuario/"+erroExist.id,
+                        href: process.env.URL_API+"/usuario/"+usuario.id,
                         method: "delete",
                         rel: "adm_deletar_usuário"
-                    },
-                    {
-                        href: process.env.URL_API+"/logout",
-                        method: "post",
-                        rel: "terminar_sessão"
                     }
                 ]
 
@@ -513,12 +468,12 @@ export default class UserController {
 
                     let HATEOAS = [
                         {
-                            href: process.env.URL_API+"/usuario/"+erroExist.id,
+                            href: process.env.URL_API+"/usuario/"+usuario.id,
                             method: "get",
                             rel: "usuário_pelo_id",
                         },
                         {
-                            href: process.env.URL_API+"/usuario/email/"+erroExist.email,
+                            href: process.env.URL_API+"/usuario/email/"+usuario.email,
                             method: "get",
                             rel: "usuário_pelo_email"
                         },
@@ -528,34 +483,19 @@ export default class UserController {
                             rel: "editar_usuario"
                         },
                         {
-                            href: process.env.URL_API+"/recuperarsenha",
+                            href: process.env.URL_API+"/recuperarsenha"+"/"+usuario.email,
                             method: "post",
                             rel: "enviar_email_de_recuperação_de_senha"
                         },
                         {
-                            href: process.env.URL_API+"/mudarsenha",
-                            method: "post",
-                            rel: "mudar_senha"
-                        },
-                        {
-                            href: process.env.URL_API+"/usuario/"+erroExist.id+"/"+erroExist.email,
+                            href: process.env.URL_API+"/usuario/"+usuario.id+"/"+usuario.email,
                             method: "post",
                             rel: "enviar_email_de_deleção_de_conta"
                         },
                         {
-                            href: process.env.URL_API+"/deletarconta",
-                            method: "delete",
-                            rel: "deletar_minha_conta"
-                        },
-                        {
-                            href: process.env.URL_API+"/usuario/"+erroExist.id,
+                            href: process.env.URL_API+"/usuario/"+usuario.id,
                             method: "delete",
                             rel: "adm_deletar_usuário"
-                        },
-                        {
-                            href: process.env.URL_API+"/logout",
-                            method: "post",
-                            rel: "terminar_sessão"
                         }
                     ]
 
@@ -576,12 +516,12 @@ export default class UserController {
 
                 let HATEOAS = [
                     {
-                        href: process.env.URL_API+"/usuario/"+erroExist.id,
+                        href: process.env.URL_API+"/usuario/"+usuario.id,
                         method: "get",
                         rel: "usuário_pelo_id",
                     },
                     {
-                        href: process.env.URL_API+"/usuario/email/"+erroExist.email,
+                        href: process.env.URL_API+"/usuario/email/"+usuario.email,
                         method: "get",
                         rel: "usuário_pelo_email"
                     },
@@ -591,34 +531,19 @@ export default class UserController {
                         rel: "editar_usuario"
                     },
                     {
-                        href: process.env.URL_API+"/recuperarsenha",
+                        href: process.env.URL_API+"/recuperarsenha"+"/"+usuario.email,
                         method: "post",
                         rel: "enviar_email_de_recuperação_de_senha"
                     },
                     {
-                        href: process.env.URL_API+"/mudarsenha",
-                        method: "post",
-                        rel: "mudar_senha"
-                    },
-                    {
-                        href: process.env.URL_API+"/usuario/"+erroExist.id+"/"+erroExist.email,
+                        href: process.env.URL_API+"/usuario/"+usuario.id+"/"+usuario.email,
                         method: "post",
                         rel: "enviar_email_de_deleção_de_conta"
                     },
                     {
-                        href: process.env.URL_API+"/deletarconta",
-                        method: "delete",
-                        rel: "deletar_minha_conta"
-                    },
-                    {
-                        href: process.env.URL_API+"/usuario/"+erroExist.id,
+                        href: process.env.URL_API+"/usuario/"+usuario.id,
                         method: "delete",
                         rel: "adm_deletar_usuário"
-                    },
-                    {
-                        href: process.env.URL_API+"/logout",
-                        method: "post",
-                        rel: "terminar_sessão"
                     }
                 ]
 
@@ -633,7 +558,7 @@ export default class UserController {
     }
 
     async DeletarMinhaConta(req, res){
-        let token = req.body.token;
+        let token = req.params.token;
         let tokenBearer = req.headers["authorization"]
         const bearer = tokenBearer.split(" ")
         let tokenLogin = bearer[1]
@@ -700,6 +625,7 @@ export default class UserController {
             }
         } catch (erro) {
             console.log(erro);
+
             res.status(400);
             res.json({erro: "Erro ao deletar a conta"});
         }
@@ -795,12 +721,12 @@ export default class UserController {
 
                                 let HATEOAS = [
                                     {
-                                        href: process.env.URL_API+"/usuario/"+decoded.usuario.id,
+                                        href: process.env.URL_API+"/usuario/"+usuario.id,
                                         method: "get",
                                         rel: "usuário_pelo_id",
                                     },
                                     {
-                                        href: process.env.URL_API+"/usuario/email/"+decoded.usuario.email,
+                                        href: process.env.URL_API+"/usuario/email/"+usuario.email,
                                         method: "get",
                                         rel: "usuário_pelo_email"
                                     },
@@ -810,34 +736,19 @@ export default class UserController {
                                         rel: "editar_usuario"
                                     },
                                     {
-                                        href: process.env.URL_API+"/recuperarsenha",
+                                        href: process.env.URL_API+"/recuperarsenha"+"/"+usuario.email,
                                         method: "post",
                                         rel: "enviar_email_de_recuperação_de_senha"
                                     },
                                     {
-                                        href: process.env.URL_API+"/mudarsenha",
-                                        method: "post",
-                                        rel: "mudar_senha"
-                                    },
-                                    {
-                                        href: process.env.URL_API+"/usuario/"+decoded.usuario.id+"/"+decoded.usuario.email,
+                                        href: process.env.URL_API+"/usuario/"+usuario.id+"/"+usuario.email,
                                         method: "post",
                                         rel: "enviar_email_de_deleção_de_conta"
                                     },
                                     {
-                                        href: process.env.URL_API+"/deletarconta",
-                                        method: "delete",
-                                        rel: "deletar_minha_conta"
-                                    },
-                                    {
-                                        href: process.env.URL_API+"/usuario/"+decoded.usuario.id,
+                                        href: process.env.URL_API+"/usuario/"+usuario.id,
                                         method: "delete",
                                         rel: "adm_deletar_usuário"
-                                    },
-                                    {
-                                        href: process.env.URL_API+"/logout",
-                                        method: "post",
-                                        rel: "terminar_sessão"
                                     }
                                 ]
 
@@ -915,10 +826,17 @@ export default class UserController {
         let result = await new DelecaoToken().criar(email);
 
         if(result.status == true){
-            new EnviarEmail().enviarDelecaoLink(email, result.token)
+            try {
+                new EnviarEmail().enviarDelecaoLink(email, result.token)
+                
+                res.status(200);
+                res.json({msg: "Email de deleção enviado com sucesso"})
+            } catch (erro) {
+                console.log(erro);
 
-            res.status(200);
-            res.json({msg: "Email de deleção enviado com sucesso"})
+                res.status(400)
+                res.json({erro: "Erro ao enviar email"})
+            }
         }else{
             res.status(406)
             res.json({erro: "Erro, talvez o email usado não exista"})
@@ -926,7 +844,7 @@ export default class UserController {
     }
 
     async recuperarSenha(req, res){
-        let { email } = req.body;
+        let email = req.params.email;
 
         // Validações
         if (email == undefined) {
@@ -963,7 +881,7 @@ export default class UserController {
     }
     
     async mudarSenha(req, res){
-        let token = req.body.token;
+        let token = req.params.token;
         let senha = req.body.senha;
         let tokenBearer = req.headers["authorization"]
         const bearer = tokenBearer.split(" ")
@@ -1056,14 +974,9 @@ export default class UserController {
                     rel: "editar_usuario"
                 },
                 {
-                    href: process.env.URL_API+"/recuperarsenha",
+                    href: process.env.URL_API+"/recuperarsenha"+"/"+usuario.email,
                     method: "post",
                     rel: "enviar_email_de_recuperação_de_senha"
-                },
-                {
-                    href: process.env.URL_API+"/mudarsenha",
-                    method: "post",
-                    rel: "mudar_senha"
                 },
                 {
                     href: process.env.URL_API+"/usuario/"+usuario.id+"/"+usuario.email,
@@ -1071,24 +984,14 @@ export default class UserController {
                     rel: "enviar_email_de_deleção_de_conta"
                 },
                 {
-                    href: process.env.URL_API+"/deletarconta",
-                    method: "delete",
-                    rel: "deletar_minha_conta"
-                },
-                {
                     href: process.env.URL_API+"/usuario/"+usuario.id,
                     method: "delete",
                     rel: "adm_deletar_usuário"
-                },
-                {
-                    href: process.env.URL_API+"/logout",
-                    method: "post",
-                    rel: "terminar_sessão"
                 }
             ]
 
             res.status(200);
-            res.json({usuario: usuario, _links: HATEOAS,msg: "Senha alterada"});
+            res.json({usuario: usuario, _links: HATEOAS,msg: "Senha alterada com sucesso"});
         } catch (erro) {
             console.log(erro);
             res.status(400);

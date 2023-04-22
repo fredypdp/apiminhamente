@@ -16,6 +16,8 @@ const TemaSchema = mongoose.Schema({
             ref: "Apontamento"
         }
     ],
+    created_at: {type: mongoose.Schema.Types.Date, required: true},
+    edited_at: {type: mongoose.Schema.Types.Date},
 })
 
 export default mongoose.model("Tema", TemaSchema)

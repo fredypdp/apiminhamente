@@ -9,7 +9,7 @@ export default class PasswordToken{
             try{
                 let token = uuidv4();
                 
-                await SenhaTokensSchema.create({usuario: usuario.id, usado: false, token: token})
+                await SenhaTokensSchema.create({usuario: usuario.id, usado: false, token: token, created_at: new Date})
                 return {status: true, token: token}
             }catch(erro){
                 return {status: false, erro: erro}
@@ -38,7 +38,7 @@ export default class PasswordToken{
     }
 
     async DefinirUsado(token){
-        let tokenEditado = await SenhaTokensSchema.findOneAndUpdate({token: token}, {usado: true} , {new: true})
+        let tokenEditado = await SenhaTokensSchema.findOneAndUpdate({token: token}, {usado: true, edited_at: new Date} , {new: true})
         return tokenEditado
     }
 }

@@ -152,7 +152,7 @@ export default class User {
 
     async blacklistToken(token){
         try {
-            let blacklistToken= await BlackListTokenSchema.create({token: token})
+            let blacklistToken= await BlackListTokenSchema.create({token: token, created_at: new Date})
             
             return blacklistToken
         } catch (erro) {

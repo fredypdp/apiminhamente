@@ -148,10 +148,10 @@ export default class ApontamentoController {
     }
     
     async editar(req, res) {
-        let {_id, titulo, conteudo, assuntos, temas, visibilidade} = req.body
+        let {id, titulo, conteudo, assuntos, temas, visibilidade} = req.body
         
         // Validações
-        if (_id == undefined) {
+        if (id == undefined) {
             if (req.file != undefined) {
                 await unlinkAsync(req.file.destination+req.file.filename)
             }
@@ -161,7 +161,7 @@ export default class ApontamentoController {
             return
         }
 
-        if (_id != undefined) {
+        if (id != undefined) {
             if (_id.trim().length === 0) {
                 res.status(400)
                 res.json({erro: "_id inválido, o campo está vazio"})
@@ -223,7 +223,7 @@ export default class ApontamentoController {
             if (miniatura != undefined) {
                 cdn = await new FileManager().upload(miniatura) // Upload da miniatura para a Cloudinary e retornando a cdn
                 await unlinkAsync(miniatura) // Deletando miniatura da pasta "temp"
-                let apontamento = await new Apontamento().editar(_id, titulo, conteudo, assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
+                let apontamento = await new Apontamento().editar(id, titulo, conteudo, assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
 
                 let HATEOAS = [
                     {
@@ -248,7 +248,7 @@ export default class ApontamentoController {
                 return
             }
             
-            let apontamento = await new Apontamento().editar(_id, titulo, conteudo, assuntos, temas, visibilidade)
+            let apontamento = await new Apontamento().editar(id, titulo, conteudo, assuntos, temas, visibilidade)
             
             let HATEOAS = [
                 {

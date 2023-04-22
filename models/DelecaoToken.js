@@ -9,7 +9,7 @@ export default class DelecaoToken{
         if(usuario != undefined){
             try{
                 let token = uuidv4();
-                await DeleteTokensSchema.create({usuario: usuario.id, usado: false, token: token})
+                await DeleteTokensSchema.create({usuario: usuario.id, usado: false, token: token, created_at: new Date})
 
                 return {status: true,token: token}
             }catch(erro){
@@ -39,7 +39,7 @@ export default class DelecaoToken{
     }
 
     async DefinirUsado(token){
-       let tokenEditado = await DeleteTokensSchema.findOneAndUpdate({token: token}, {usado: true} , {new: true})
+       let tokenEditado = await DeleteTokensSchema.findOneAndUpdate({token: token}, {usado: true, edited_at: new Date} , {new: true})
        return tokenEditado
     }
 }
