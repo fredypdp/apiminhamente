@@ -1,7 +1,7 @@
 # índice
 
 * [Como iniciar o projeto](#Como-iniciar-o-projeto)
-+ [Tecnologias usadas:](#Tecnologias-usadas:)
+* [Tecnologias usadas](#Tecnologias-usadas)
 * [Rotas protegidas](#Rotas-protegidas)
   * [Rotas administrativas](#Rotas-administrativas)
   * [Rotas de usuários comuns](#Rotas-de-usuários-comuns)
@@ -78,7 +78,7 @@ npm intall
 node index
 ```
 
-# Tecnologias usadas:
+# Tecnologias usadas
 
 <table>
   <tr>
