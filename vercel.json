@@ -1,15 +1,16 @@
 {
     "version": 2,
     "public": true,
-    "build":
+    "builds": [
         {
             "source": "index.js",
             "destination": "@vercel/node"
-        },
+        }
+    ],
     "routes":[
         {
-            "source": "(.*)",
-            "destination": "index.js"
+            "src": "(.*)",
+            "dest": "index.js"
         }
     ]
 }
