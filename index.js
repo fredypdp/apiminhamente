@@ -16,7 +16,7 @@ app.use("/",router);
 
 // Server
 const port = process.env.SERVER_PORT
-app.listen(app.get("port"), () => {
+app.listen(4000, () => {
     console.log("Servidor rodando")
 })
 
