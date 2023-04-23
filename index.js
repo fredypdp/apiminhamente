@@ -15,8 +15,8 @@ app.use(bodyParser.json())
 app.use("/",router);
 
 // Server
-const port = process.env.SERVER_PORT
-app.listen(4000, () => {
+const port = process.env.SERVER_PORT || 3000
+app.listen(port, () => {
     console.log("Servidor rodando")
 })
 
