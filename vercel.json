@@ -3,8 +3,8 @@
     "public": true,
     "builds": [
         {
-            "source": "index.js",
-            "destination": "@vercel/node"
+            "src": "index.js",
+            "use": "@vercel/node"
         }
     ],
     "routes":[
