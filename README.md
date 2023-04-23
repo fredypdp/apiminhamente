@@ -180,7 +180,7 @@ router.post("/logout", UsuarioAuth, new UsuarioController().logout) // Terminar 
 ### Pegar todos os apontamentos
 
 ```
-https://apiminhamente.vercel.app/apontamentos
+https://apiminhamente.onrender.com/apontamentos
 ```
 
 ### Requisição
@@ -189,7 +189,7 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'https://apiminhamente.vercel.app/apontamentos'
+  url: 'https://apiminhamente.onrender.com/apontamentos'
 };
 
 axios(config)
@@ -239,7 +239,7 @@ axios(config)
 ### Pegar o apontamento pelo id
 
 ```
-https://apiminhamente.vercel.app/apontamento/:id
+https://apiminhamente.onrender.com/apontamento/:id
 ```
 
 #### Parâmetros
@@ -252,7 +252,7 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'https://apiminhamente.vercel.app/apontamento/:id'
+  url: 'https://apiminhamente.onrender.com/apontamento/:id'
 };
 
 axios(config)
@@ -299,7 +299,7 @@ axios(config)
 ### Criar apontamento
 
 ```
-https://apiminhamente.vercel.app/apontamento
+https://apiminhamente.onrender.com/apontamento
 ```
 
 #### Segurança
@@ -323,7 +323,7 @@ var axios = require('axios');
 
 var config = {
   method: 'post',
-  url: 'https://apiminhamente.vercel.app/apontamento',
+  url: 'https://apiminhamente.onrender.com/apontamento',
   headers: {
     'authorization': 'token de login'
   }
@@ -378,7 +378,7 @@ axios(config, data)
 ### Editar apontamento
 
 ```
-https://apiminhamente.vercel.app/apontamento
+https://apiminhamente.onrender.com/apontamento
 ```
 
 #### Segurança
@@ -397,7 +397,7 @@ var axios = require('axios');
 
 var config = {
   method: 'put',
-  url: 'https://apiminhamente.vercel.app/apontamento',
+  url: 'https://apiminhamente.onrender.com/apontamento',
   headers: {
     'authorization': 'token de login'
   }
@@ -448,7 +448,7 @@ axios(config, data)
 ### Deletar apontamento
 
 ```
-https://apiminhamente.vercel.app/apontamento/:id
+https://apiminhamente.onrender.com/apontamento/:id
 ```
 
 #### Segurança
@@ -467,7 +467,7 @@ var axios = require('axios');
 
 var config = {
   method: 'delete',
-  url: 'https://apiminhamente.vercel.app/apontamento/:id',
+  url: 'https://apiminhamente.onrender.com/apontamento/:id',
   headers: {
     'authorization': 'token de login'
   }
@@ -513,7 +513,7 @@ axios(config)
 ### Pesquisar apontamentos
 
 ```
-https://apiminhamente.vercel.app/results
+https://apiminhamente.onrender.com/results
 ```
 
 ### Parâmetros (query param)
@@ -526,7 +526,7 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'https://apiminhamente.vercel.app/results',
+  url: 'https://apiminhamente.onrender.com/results',
   params: {
     pesquisa: "Título"
   }
@@ -581,7 +581,7 @@ axios(config)
 ### Pegar todos os assuntos
 
 ```
-https://apiminhamente.vercel.app/assuntos
+https://apiminhamente.onrender.com/assuntos
 ```
 
 ### Requisição
@@ -590,7 +590,7 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'https://apiminhamente.vercel.app/assuntos'
+  url: 'https://apiminhamente.onrender.com/assuntos'
 };
 
 axios(config)
@@ -640,7 +640,7 @@ axios(config)
 ### Pegar o assunto pelo id
 
 ```
-https://apiminhamente.vercel.app/assunto/:id
+https://apiminhamente.onrender.com/assunto/:id
 ```
 
 #### Parâmetros
@@ -653,7 +653,7 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'https://apiminhamente.vercel.app/assunto/:id'
+  url: 'https://apiminhamente.onrender.com/assunto/:id'
 };
 
 axios(config)
@@ -700,7 +700,7 @@ axios(config)
 ### Pegar o assunto pelo slug
 
 ```
-https://apiminhamente.vercel.app/apontamento/assunto/slug/:slug
+https://apiminhamente.onrender.com/apontamento/assunto/slug/:slug
 ```
 
 #### Parâmetros
@@ -713,7 +713,7 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'https://apiminhamente.vercel.app/assunto/slug/:slug'
+  url: 'https://apiminhamente.onrender.com/assunto/slug/:slug'
 };
 
 axios(config)
@@ -762,7 +762,7 @@ axios(config)
 ### Criar assunto
 
 ```
-https://apiminhamente.vercel.app/assunto
+https://apiminhamente.onrender.com/assunto
 ```
 
 #### Segurança
@@ -782,7 +782,7 @@ var axios = require('axios');
 
 var config = {
   method: 'post',
-  url: 'https://apiminhamente.vercel.app/assunto',
+  url: 'https://apiminhamente.onrender.com/assunto',
   headers: {
     'authorization': 'token de login'
   }
@@ -833,7 +833,7 @@ axios(config, data)
 ### Editar assunto
 
 ```
-https://apiminhamente.vercel.app/assunto
+https://apiminhamente.onrender.com/assunto
 ```
 
 #### Segurança
@@ -852,7 +852,7 @@ var axios = require('axios');
 
 var config = {
   method: 'post',
-  url: 'https://apiminhamente.vercel.app/assunto',
+  url: 'https://apiminhamente.onrender.com/assunto',
   headers: {
     'authorization': 'token de login'
   }
@@ -902,7 +902,7 @@ axios(config, data)
 ### Deletar assunto
 
 ```
-https://apiminhamente.vercel.app/assunto/:id
+https://apiminhamente.onrender.com/assunto/:id
 ```
 
 #### Segurança
@@ -921,7 +921,7 @@ var axios = require('axios');
 
 var config = {
   method: 'post',
-  url: 'https://apiminhamente.vercel.app/assunto/:id',
+  url: 'https://apiminhamente.onrender.com/assunto/:id',
   headers: {
     'authorization': 'token de login'
   }
@@ -969,7 +969,7 @@ axios(config)
 ### Pegar todos os temas
 
 ```
-https://apiminhamente.vercel.app/temas
+https://apiminhamente.onrender.com/temas
 ```
 
 ### Requisição
@@ -978,7 +978,7 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'https://apiminhamente.vercel.app/temas'
+  url: 'https://apiminhamente.onrender.com/temas'
 };
 
 axios(config)
@@ -1020,7 +1020,7 @@ axios(config)
 ### Pegar o tema pelo id
 
 ```
-https://apiminhamente.vercel.app/tema/:id
+https://apiminhamente.onrender.com/tema/:id
 ```
 
 #### Parâmetros
@@ -1033,7 +1033,7 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'https://apiminhamente.vercel.app/tema/:id'
+  url: 'https://apiminhamente.onrender.com/tema/:id'
 };
 
 axios(config)
@@ -1075,7 +1075,7 @@ axios(config)
 ### Pegar o tema pelo slug
 
 ```
-https://apiminhamente.vercel.app/tema/slug/:slug
+https://apiminhamente.onrender.com/tema/slug/:slug
 ```
 
 #### Parâmetros
@@ -1088,7 +1088,7 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'https://apiminhamente.vercel.app/tema/slug/:slug'
+  url: 'https://apiminhamente.onrender.com/tema/slug/:slug'
 };
 
 axios(config)
@@ -1130,7 +1130,7 @@ axios(config)
 ### Criar tema
 
 ```
-https://apiminhamente.vercel.app/tema
+https://apiminhamente.onrender.com/tema
 ```
 
 #### Segurança
@@ -1150,7 +1150,7 @@ var axios = require('axios');
 
 var config = {
   method: 'post',
-  url: 'https://apiminhamente.vercel.app/tema',
+  url: 'https://apiminhamente.onrender.com/tema',
   headers: {
     'authorization': 'token de login'
   }
@@ -1192,7 +1192,7 @@ axios(config, data)
 ### Editar tema
 
 ```
-https://apiminhamente.vercel.app/tema
+https://apiminhamente.onrender.com/tema
 ```
 
 #### Segurança
@@ -1212,7 +1212,7 @@ var axios = require('axios');
 
 var config = {
   method: 'put',
-  url: 'https://apiminhamente.vercel.app/tema',
+  url: 'https://apiminhamente.onrender.com/tema',
   headers: {
     'authorization': 'token de login'
   }
@@ -1258,7 +1258,7 @@ axios(config, data)
 ### Deletar tema
 
 ```
-https://apiminhamente.vercel.app/tema/:id
+https://apiminhamente.onrender.com/tema/:id
 ```
 
 #### Segurança
@@ -1277,7 +1277,7 @@ var axios = require('axios');
 
 var config = {
   method: 'post',
-  url: 'https://apiminhamente.vercel.app/tema/:id',
+  url: 'https://apiminhamente.onrender.com/tema/:id',
   headers: {
     'authorization': 'token de login'
   }
@@ -1320,7 +1320,7 @@ axios(config)
 ### Pegar todos os usuários
 
 ```
-https://apiminhamente.vercel.app/usuarios
+https://apiminhamente.onrender.com/usuarios
 ```
 
 ### Requisição
@@ -1329,7 +1329,7 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'https://apiminhamente.vercel.app/usuarios',
+  url: 'https://apiminhamente.onrender.com/usuarios',
   headers: {
     'authorization': 'token de login'
   }
@@ -1374,7 +1374,7 @@ axios(config)
 ### Pegar o usuário pelo id
 
 ```
-https://apiminhamente.vercel.app/usuario/:id
+https://apiminhamente.onrender.com/usuario/:id
 ```
 
 #### Parâmetros
@@ -1387,7 +1387,7 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'https://apiminhamente.vercel.app/usuario/:id',
+  url: 'https://apiminhamente.onrender.com/usuario/:id',
   headers: {
     'authorization': 'token de login'
   }
@@ -1429,7 +1429,7 @@ axios(config)
 ### Pegar o usuário pelo email
 
 ```
-https://apiminhamente.vercel.app/usuario/email/:email
+https://apiminhamente.onrender.com/usuario/email/:email
 ```
 
 #### Parâmetros
@@ -1442,7 +1442,7 @@ var axios = require('axios');
 
 var config = {
   method: 'get',
-  url: 'https://apiminhamente.vercel.app/usuario/email/:email',
+  url: 'https://apiminhamente.onrender.com/usuario/email/:email',
   headers: {
     'authorization': 'token de login'
   }
@@ -1484,7 +1484,7 @@ axios(config)
 ### Login
 
 ```
-https://apiminhamente.vercel.app/login
+https://apiminhamente.onrender.com/login
 ```
 #### Elementos
 
@@ -1497,7 +1497,7 @@ var axios = require('axios');
 
 var config = {
   method: 'post',
-  url: 'https://apiminhamente.vercel.app/login'
+  url: 'https://apiminhamente.onrender.com/login'
 };
 
 var data = {
@@ -1557,7 +1557,7 @@ axios(config, data)
 ### Logout
 
 ```
-https://apiminhamente.vercel.app/logout
+https://apiminhamente.onrender.com/logout
 ```
 #### Segurança
 Esta API usa Bearer Token como um método de autenticação.
@@ -1571,7 +1571,7 @@ var axios = require('axios');
 
 var config = {
   method: 'post',
-  url: 'https://apiminhamente.vercel.app/logout',
+  url: 'https://apiminhamente.onrender.com/logout',
   headers: {
     'authorization': 'token de login'
   }
@@ -1601,7 +1601,7 @@ axios(config)
 ### Criar conta
 
 ```
-https://apiminhamente.vercel.app/usuario
+https://apiminhamente.onrender.com/usuario
 ```
 
 #### Elementos
@@ -1618,7 +1618,7 @@ var axios = require('axios');
 
 var config = {
   method: 'post',
-  url: 'https://apiminhamente.vercel.app/usuario',
+  url: 'https://apiminhamente.onrender.com/usuario',
 };
 
 var data = {
@@ -1673,7 +1673,7 @@ axios(config, data)
 ### Editar conta
 
 ```
-https://apiminhamente.vercel.app/usuario
+https://apiminhamente.onrender.com/usuario
 ```
 
 #### Elementos
@@ -1688,7 +1688,7 @@ var axios = require('axios');
 
 var config = {
   method: 'put',
-  url: 'https://apiminhamente.vercel.app/usuario',
+  url: 'https://apiminhamente.onrender.com/usuario',
 };
 
 var data = {
@@ -1742,7 +1742,7 @@ axios(config, data)
 ### Enviar email de recuperação de senha
 
 ```
-https://apiminhamente.vercel.app/recuperarsenha/:email
+https://apiminhamente.onrender.com/recuperarsenha/:email
 ```
 #### Parâmetros
 
@@ -1754,7 +1754,7 @@ var axios = require('axios');
 
 var config = {
   method: 'post',
-  url: 'https://apiminhamente.vercel.app/recuperarsenha/:email',
+  url: 'https://apiminhamente.onrender.com/recuperarsenha/:email',
   headers: {
     'authorization': 'token de login'
   }
@@ -1790,7 +1790,7 @@ axios(config)
 ### Mudar senha
 
 ```
-https://apiminhamente.vercel.app/mudarsenha/:token
+https://apiminhamente.onrender.com/mudarsenha/:token
 ```
 
 #### Parâmetros
@@ -1807,7 +1807,7 @@ var axios = require('axios');
 
 var config = {
   method: 'post',
-  url: 'https://apiminhamente.vercel.app/mudarsenha/:token',
+  url: 'https://apiminhamente.onrender.com/mudarsenha/:token',
   headers: {
     'authorization': 'token de login'
   }
@@ -1856,7 +1856,7 @@ axios(config, data)
 ### Enviar email de deleção de conta
 
 ```
-https://apiminhamente.vercel.app/usuario/:id/:email
+https://apiminhamente.onrender.com/usuario/:id/:email
 ```
 
 #### Parâmetros
@@ -1870,7 +1870,7 @@ var axios = require('axios');
 
 var config = {
   method: 'post',
-  url: 'https://apiminhamente.vercel.app/usuario/:id/:email',
+  url: 'https://apiminhamente.onrender.com/usuario/:id/:email',
   headers: {
     'authorization': 'token de login'
   }
@@ -1900,7 +1900,7 @@ axios(config)
 ### Deletar minha conta
 
 ```
-https://apiminhamente.vercel.app/deletarconta/:token
+https://apiminhamente.onrender.com/deletarconta/:token
 ```
 
 #### Parâmetros
@@ -1913,7 +1913,7 @@ var axios = require('axios');
 
 var config = {
   method: 'delete',
-  url: 'https://apiminhamente.vercel.app/deletarconta/:token',
+  url: 'https://apiminhamente.onrender.com/deletarconta/:token',
   headers: {
     'authorization': 'token de login'
   }
@@ -1958,7 +1958,7 @@ axios(config)
 ### Adm deletar usuário
 
 ```
-https://apiminhamente.vercel.app/usuario/:id
+https://apiminhamente.onrender.com/usuario/:id
 ```
 
 #### Parâmetros
@@ -1971,7 +1971,7 @@ var axios = require('axios');
 
 var config = {
   method: 'delete',
-  url: 'https://apiminhamente.vercel.app/usuario/:id',
+  url: 'https://apiminhamente.onrender.com/usuario/:id',
   headers: {
     'authorization': 'token de login'
   }
