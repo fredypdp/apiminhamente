@@ -5,6 +5,9 @@ import bodyParser from "body-parser";
 import session from "express-session";
 import router from "./routes/routes.js";
 import "./database/connection.js";
+import cors from "cors";
+
+app.use(cors())
 
 app.use(session({secret: process.env.SECRET, cookie: {maxAge: 604800000}}))
 
