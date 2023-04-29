@@ -311,7 +311,7 @@ export default class UserController {
                 ]
 
                 res.status(200)
-                res.json({data: erroExist, _links: HATEOAS, msg: "Conta criada com sucesso"})
+                res.json({usuario: erroExist, _links: HATEOAS, msg: "Conta criada com sucesso"})
             }
         } catch (erro) {
             console.log(erro);
@@ -500,7 +500,7 @@ export default class UserController {
                     ]
 
                     res.status(200)
-                    res.json({data: erroExist, _links: HATEOAS, msg: "Conta editada com sucesso"})
+                    res.json({usuario: erroExist, _links: HATEOAS, msg: "Conta editada com sucesso"})
                 }
                 return
             }
@@ -548,7 +548,7 @@ export default class UserController {
                 ]
 
                 res.status(200)
-                res.json({data: erroExist, _links: HATEOAS, msg: "Conta editada com sucesso"})
+                res.json({usuario: erroExist, _links: HATEOAS, msg: "Conta editada com sucesso"})
             }
         } catch (erro) {
             console.log(erro);
@@ -621,7 +621,7 @@ export default class UserController {
                 await new Usuario().blacklistToken(token)
 
                 res.status(200);
-                res.json({data: erroExist, msg: "Conta deletada com sucesso"});
+                res.json({usuario: erroExist, msg: "Conta deletada com sucesso"});
             }
         } catch (erro) {
             console.log(erro);
@@ -654,7 +654,7 @@ export default class UserController {
                 res.json({erro: "O usuario não existe, portanto não pode ser deletado"})
             } else {
                 res.status(200);
-                res.json({data: erroExist, msg: "Conta deletada com sucesso"});
+                res.json({usuario: erroExist, msg: "Conta deletada com sucesso"});
             }
         } catch (erro) {
             console.log(erro);
@@ -830,7 +830,7 @@ export default class UserController {
                 new EnviarEmail().enviarDelecaoLink(email, result.token)
                 
                 res.status(200);
-                res.json({msg: "Email de deleção enviado com sucesso"})
+                res.send("Email de deleção enviado com sucesso")
             } catch (erro) {
                 console.log(erro);
 
@@ -866,7 +866,7 @@ export default class UserController {
                 new EnviarEmail().enviarNovaSenhaLink(email, result.token)
     
                 res.status(200);
-                res.json({msg: "Link enviado ao seu email com sucesso"})
+                res.send("Link enviado ao seu email com sucesso")
                 return
             } catch (erro) {
                 console.log(erro);

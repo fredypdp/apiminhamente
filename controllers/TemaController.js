@@ -67,7 +67,7 @@ export default class AssuntoController {
                 ]
 
                 res.status(200)
-                res.json({data: erroExist, _links: HATEOAS, msg: "Tema criado com sucesso"})
+                res.json({tema: erroExist, _links: HATEOAS, msg: "Tema criado com sucesso"})
             }
         } catch (erro) {
             console.log(erro)
@@ -135,7 +135,7 @@ export default class AssuntoController {
             ]
 
             res.status(200)
-            res.json({data: tema, _links: HATEOAS, msg: "Tema editado com sucesso"})
+            res.json({tema: tema, _links: HATEOAS, msg: "Tema editado com sucesso"})
         } catch (erro) {
             console.log(erro)
             res.status(406)
@@ -169,7 +169,7 @@ export default class AssuntoController {
                 res.json({erro: "O tema não existe, portanto não pode ser deletado"})
             } else {
                 res.status(200)
-                res.json({data: erroExist, msg: "Tema Deletado com sucesso"})
+                res.json({tema: erroExist, msg: "Tema Deletado com sucesso"})
             }
         } catch (erro) {
             console.log(erro)

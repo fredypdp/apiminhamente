@@ -303,7 +303,7 @@ export default class ApontamentoController {
                 res.json({erro: "O apontamento não existe, portanto não pode ser deletado"})
             } else {
                 res.status(200)
-                res.json({data: erroExist, msg: "Apontamento deletado com sucesso"})
+                res.json({apontamento: erroExist, msg: "Apontamento deletado com sucesso"})
             }
         } catch (erro) {
             console.log(erro)
