@@ -185,9 +185,9 @@ https://apiminhamente.vercel.app/apontamentos
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'get',
   url: 'https://apiminhamente.vercel.app/apontamentos'
 };
@@ -248,9 +248,9 @@ https://apiminhamente.vercel.app/apontamento/:id
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'get',
   url: 'https://apiminhamente.vercel.app/apontamento/:id'
 };
@@ -319,9 +319,9 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'post',
   url: 'https://apiminhamente.vercel.app/apontamento',
   headers: {
@@ -329,7 +329,7 @@ var config = {
   }
 };
 
-var data = {
+let data = {
   titulo: "Título do apontamento",
   conteudo: "Conteúdo do apontamento",
   assuntos: ["616d6efb46c45b7f064526e3"],
@@ -393,9 +393,9 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'put',
   url: 'https://apiminhamente.vercel.app/apontamento',
   headers: {
@@ -403,7 +403,7 @@ var config = {
   }
 };
 
-var data = {
+let data = {
   id: n5jSDHH7dsf,
   conteudo: "Novo conteúdo",
 }
@@ -463,9 +463,9 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'delete',
   url: 'https://apiminhamente.vercel.app/apontamento/:id',
   headers: {
@@ -522,9 +522,9 @@ https://apiminhamente.vercel.app/results
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'get',
   url: 'https://apiminhamente.vercel.app/results',
   params: {
@@ -586,9 +586,9 @@ https://apiminhamente.vercel.app/assuntos
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'get',
   url: 'https://apiminhamente.vercel.app/assuntos'
 };
@@ -649,9 +649,9 @@ https://apiminhamente.vercel.app/assunto/:id
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'get',
   url: 'https://apiminhamente.vercel.app/assunto/:id'
 };
@@ -709,9 +709,9 @@ https://apiminhamente.vercel.app/apontamento/assunto/slug/:slug
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'get',
   url: 'https://apiminhamente.vercel.app/assunto/slug/:slug'
 };
@@ -778,9 +778,9 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'post',
   url: 'https://apiminhamente.vercel.app/assunto',
   headers: {
@@ -788,7 +788,7 @@ var config = {
   }
 };
 
-var data = {
+let data = {
   nome: "Nome do assunto",
   icone: "<i class='icon solid-icon'></i>",
 }
@@ -848,9 +848,9 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'post',
   url: 'https://apiminhamente.vercel.app/assunto',
   headers: {
@@ -858,7 +858,7 @@ var config = {
   }
 };
 
-var data = {
+let data = {
   nome: "Novo nome do assunto"
 }
 
@@ -917,9 +917,9 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'post',
   url: 'https://apiminhamente.vercel.app/assunto/:id',
   headers: {
@@ -974,9 +974,9 @@ https://apiminhamente.vercel.app/temas
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'get',
   url: 'https://apiminhamente.vercel.app/temas'
 };
@@ -1029,9 +1029,9 @@ https://apiminhamente.vercel.app/tema/:id
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'get',
   url: 'https://apiminhamente.vercel.app/tema/:id'
 };
@@ -1084,9 +1084,9 @@ https://apiminhamente.vercel.app/tema/slug/:slug
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'get',
   url: 'https://apiminhamente.vercel.app/tema/slug/:slug'
 };
@@ -1146,9 +1146,9 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'post',
   url: 'https://apiminhamente.vercel.app/tema',
   headers: {
@@ -1156,7 +1156,7 @@ var config = {
   }
 };
 
-var data = {
+let data = {
   titulo: "Título do tema",
   assunto: "616d6efb46c45b7f064526e3",
 }
@@ -1208,9 +1208,9 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'put',
   url: 'https://apiminhamente.vercel.app/tema',
   headers: {
@@ -1218,7 +1218,7 @@ var config = {
   }
 };
 
-var data = {
+let data = {
   id: "616d6efb46c45b7f064526e3",
   titulo: "Novo titulo do tema"
 }
@@ -1273,9 +1273,9 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'post',
   url: 'https://apiminhamente.vercel.app/tema/:id',
   headers: {
@@ -1325,9 +1325,9 @@ https://apiminhamente.vercel.app/usuarios
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'get',
   url: 'https://apiminhamente.vercel.app/usuarios',
   headers: {
@@ -1383,9 +1383,9 @@ https://apiminhamente.vercel.app/usuario/:id
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'get',
   url: 'https://apiminhamente.vercel.app/usuario/:id',
   headers: {
@@ -1438,9 +1438,9 @@ https://apiminhamente.vercel.app/usuario/email/:email
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'get',
   url: 'https://apiminhamente.vercel.app/usuario/email/:email',
   headers: {
@@ -1493,14 +1493,14 @@ https://apiminhamente.vercel.app/login
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'post',
   url: 'https://apiminhamente.vercel.app/login'
 };
 
-var data = {
+let data = {
   email: "email@gmail.com",
   senha: "senha",
 }
@@ -1567,9 +1567,9 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'post',
   url: 'https://apiminhamente.vercel.app/logout',
   headers: {
@@ -1760,9 +1760,9 @@ https://apiminhamente.vercel.app/recuperarsenha/:email
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'post',
   url: 'https://apiminhamente.vercel.app/recuperarsenha/:email',
   headers: {
@@ -1813,9 +1813,9 @@ https://apiminhamente.vercel.app/mudarsenha/:token
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'post',
   url: 'https://apiminhamente.vercel.app/mudarsenha/:token',
   headers: {
@@ -1823,7 +1823,7 @@ var config = {
   }
 };
 
-var data = {
+let data = {
   senha: "1234567890"
 };
 
@@ -1876,9 +1876,9 @@ https://apiminhamente.vercel.app/usuario/:id/:email
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'post',
   url: 'https://apiminhamente.vercel.app/usuario/:id/:email',
   headers: {
@@ -1919,9 +1919,9 @@ https://apiminhamente.vercel.app/deletarconta/:token
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'delete',
   url: 'https://apiminhamente.vercel.app/deletarconta/:token',
   headers: {
@@ -1977,9 +1977,9 @@ https://apiminhamente.vercel.app/usuario/:id
 
 ### Requisição
 ```
-var axios = require('axios');
+let axios = require('axios');
 
-var config = {
+let config = {
   method: 'delete',
   url: 'https://apiminhamente.vercel.app/usuario/:id',
   headers: {
