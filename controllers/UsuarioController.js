@@ -158,7 +158,7 @@ export default class UserController {
     
     async criar(req, res) {
         let {nome, sobrenome, email, senha} = req.body
-        
+
         // Validações
         if (req.file == undefined) {
             res.status(400)
@@ -168,7 +168,7 @@ export default class UserController {
 
         let avatar
         if (req.file != undefined) {
-            if (req.file.mimetype != "image/png" && req.file.mimetype != "image/jpg" && req.file.mimetype != "image/jpeg") {
+            if(!new RegExp(/image\/(png|jpg|jpge)/).test(req.file.mimetype)) {
                 await unlinkAsync(req.file.destination+req.file.filename)
                 res.status(400)
                 res.json({erro: "O avatar deve ser uma imagem"})
@@ -279,12 +279,12 @@ export default class UserController {
 
                 let HATEOAS = [
                     {
-                        href: process.env.URL_API+"/usuario/"+usuario.id,
+                        href: process.env.URL_API+"/usuario/"+erroExist.id,
                         method: "get",
                         rel: "usuário_pelo_id",
                     },
                     {
-                        href: process.env.URL_API+"/usuario/email/"+usuario.email,
+                        href: process.env.URL_API+"/usuario/email/"+erroExist.email,
                         method: "get",
                         rel: "usuário_pelo_email"
                     },
@@ -294,17 +294,17 @@ export default class UserController {
                         rel: "editar_usuario"
                     },
                     {
-                        href: process.env.URL_API+"/recuperarsenha"+"/"+usuario.email,
+                        href: process.env.URL_API+"/recuperarsenha"+"/"+erroExist.email,
                         method: "post",
                         rel: "enviar_email_de_recuperação_de_senha"
                     },
                     {
-                        href: process.env.URL_API+"/usuario/"+usuario.id+"/"+usuario.email,
+                        href: process.env.URL_API+"/usuario/"+erroExist.id+"/"+erroExist.email,
                         method: "post",
                         rel: "enviar_email_de_deleção_de_conta"
                     },
                     {
-                        href: process.env.URL_API+"/usuario/"+usuario.id,
+                        href: process.env.URL_API+"/usuario/"+erroExist.id,
                         method: "delete",
                         rel: "adm_deletar_usuário"
                     }
@@ -415,7 +415,7 @@ export default class UserController {
         
         let avatar
         if (req.file != undefined) {
-            if (req.file.mimetype != "image/png" && req.file.mimetype != "image/jpg" && req.file.mimetype != "image/jpeg") {
+            if(!new RegExp(/image\/(png|jpg|jpge)/).test(req.file.mimetype)) {
                 await unlinkAsync(req.file.destination+req.file.filename)
                 res.status(400)
                 res.json({erro: "O avatar deve ser uma imagem"})
@@ -468,12 +468,12 @@ export default class UserController {
 
                     let HATEOAS = [
                         {
-                            href: process.env.URL_API+"/usuario/"+usuario.id,
+                            href: process.env.URL_API+"/usuario/"+erroExist.id,
                             method: "get",
                             rel: "usuário_pelo_id",
                         },
                         {
-                            href: process.env.URL_API+"/usuario/email/"+usuario.email,
+                            href: process.env.URL_API+"/usuario/email/"+erroExist.email,
                             method: "get",
                             rel: "usuário_pelo_email"
                         },
@@ -483,17 +483,17 @@ export default class UserController {
                             rel: "editar_usuario"
                         },
                         {
-                            href: process.env.URL_API+"/recuperarsenha"+"/"+usuario.email,
+                            href: process.env.URL_API+"/recuperarsenha"+"/"+erroExist.email,
                             method: "post",
                             rel: "enviar_email_de_recuperação_de_senha"
                         },
                         {
-                            href: process.env.URL_API+"/usuario/"+usuario.id+"/"+usuario.email,
+                            href: process.env.URL_API+"/usuario/"+erroExist.id+"/"+erroExist.email,
                             method: "post",
                             rel: "enviar_email_de_deleção_de_conta"
                         },
                         {
-                            href: process.env.URL_API+"/usuario/"+usuario.id,
+                            href: process.env.URL_API+"/usuario/"+erroExist.id,
                             method: "delete",
                             rel: "adm_deletar_usuário"
                         }
@@ -516,12 +516,12 @@ export default class UserController {
 
                 let HATEOAS = [
                     {
-                        href: process.env.URL_API+"/usuario/"+usuario.id,
+                        href: process.env.URL_API+"/usuario/"+erroExist.id,
                         method: "get",
                         rel: "usuário_pelo_id",
                     },
                     {
-                        href: process.env.URL_API+"/usuario/email/"+usuario.email,
+                        href: process.env.URL_API+"/usuario/email/"+erroExist.email,
                         method: "get",
                         rel: "usuário_pelo_email"
                     },
@@ -531,17 +531,17 @@ export default class UserController {
                         rel: "editar_usuario"
                     },
                     {
-                        href: process.env.URL_API+"/recuperarsenha"+"/"+usuario.email,
+                        href: process.env.URL_API+"/recuperarsenha"+"/"+erroExist.email,
                         method: "post",
                         rel: "enviar_email_de_recuperação_de_senha"
                     },
                     {
-                        href: process.env.URL_API+"/usuario/"+usuario.id+"/"+usuario.email,
+                        href: process.env.URL_API+"/usuario/"+erroExist.id+"/"+erroExist.email,
                         method: "post",
                         rel: "enviar_email_de_deleção_de_conta"
                     },
                     {
-                        href: process.env.URL_API+"/usuario/"+usuario.id,
+                        href: process.env.URL_API+"/usuario/"+erroExist.id,
                         method: "delete",
                         rel: "adm_deletar_usuário"
                     }
