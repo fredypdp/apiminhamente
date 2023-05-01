@@ -1614,22 +1614,22 @@ https://apiminhamente.vercel.app/usuario
 
 ### Requisição
 ```
-var axios = require('axios');
+import axios from "axios";
 
-var config = {
-  method: 'post',
-  url: 'https://apiminhamente.vercel.app/usuario',
-};
+const formData = new FormData();
+let nome = this.nome
+let sobrenome = this.sobrenome
+let avatar = this.avatar
+let email = this.email
+let senha = this.senha
 
-var data = {
-  nome: "Nome",
-  sobrenome: "Sobrenome",
-  avatar: "file.png"
-  email: "email@gmail.com",
-  senha: "1234567890",
-}
+formData.append('nome', nome);
+formData.append('sobrenome', sobrenome);
+formData.append('avatar', avatar);
+formData.append('email', email);
+formData.append('senha', senha);
 
-axios(config, data)
+axios.post("https://apiminhamente.vercel.app/usuario", formData)
 .then(function (response) {
   console.log(JSON.stringify(response.data));
 })
@@ -1661,6 +1661,12 @@ axios(config, data)
 ```
 {
   "erro": "Erro ao criar conta"
+}
+```
+
+```
+{
+  "erro": "Nome inválido"
 }
 ```
 
