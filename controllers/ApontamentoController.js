@@ -21,7 +21,7 @@ export default class ApontamentoController {
         
         let miniatura
         if (req.file != undefined) {
-            if(!new RegExp(/image\/(png|jpg|jpge)/).test(req.file.mimetype)) {
+            if(!new RegExp(/image\/(png|jpg|jpeg)/).test(req.file.mimetype)) {
                 await unlinkAsync(req.file.destination+req.file.filename)
                 res.status(400)
                 res.json({erro: "A miniatura deve ser uma imagem"})
@@ -206,7 +206,7 @@ export default class ApontamentoController {
         let miniatura
 
         if (req.file != undefined) {
-            if(!new RegExp(/image\/(png|jpg|jpge)/).test(req.file.mimetype)) {
+            if(!new RegExp(/image\/(png|jpg|jpeg)/).test(req.file.mimetype)) {
                 await unlinkAsync(req.file.destination+req.file.filename)
                 res.status(400)
                 res.json({erro: "A miniatura deve ser uma imagem"})
