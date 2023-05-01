@@ -1617,11 +1617,11 @@ https://apiminhamente.vercel.app/usuario
 import axios from "axios";
 
 const formData = new FormData();
-let nome = this.nome
-let sobrenome = this.sobrenome
-let avatar = this.avatar
-let email = this.email
-let senha = this.senha
+let nome = "nome"
+let sobrenome = "sobrenome"
+let avatar = "avatar.png"
+let email = "email"
+let senha = "senha"
 
 formData.append('nome', nome);
 formData.append('sobrenome', sobrenome);
@@ -1690,20 +1690,18 @@ https://apiminhamente.vercel.app/usuario
 
 ### Requisição
 ```
-var axios = require('axios');
+import axios from "axios";
 
-var config = {
-  method: 'put',
-  url: 'https://apiminhamente.vercel.app/usuario',
-};
+const formData = new FormData();
+let id = "616d6efb46c"
+let nome = "Novo nome"
+let senha = "1234567890"
 
-var data = {
-  id: "616d6efb46c",
-  nome: "Novo nome",
-  senha: "1234567890",
-}
+formData.append('id', id);
+formData.append('nome', nome);
+formData.append('senha', senha);
 
-axios(config, data)
+axios.post("https://apiminhamente.vercel.app/usuario", formData)
 .then(function (response) {
   console.log(JSON.stringify(response.data));
 })
@@ -1736,6 +1734,12 @@ axios(config, data)
 ```
 {
   "erro": "Erro ao editar conta"
+}
+```
+
+```
+{
+  "erro": "Nome inválido"
 }
 ```
 
