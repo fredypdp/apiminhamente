@@ -185,6 +185,7 @@ export default class UserController {
 
             res.status(400)
             res.json({erro: "Nome inválido"})
+            return
         }
         
         if (sobrenome == undefined) {
@@ -194,6 +195,7 @@ export default class UserController {
 
             res.status(400)
             res.json({erro: "Sobrenome inválido"})
+            return
         }
 
         if (email == undefined) {
@@ -203,6 +205,7 @@ export default class UserController {
 
             res.status(400)
             res.json({erro: "Email inválido"})
+            return
         }
 
         if (senha == undefined) {
@@ -212,6 +215,7 @@ export default class UserController {
 
             res.status(400)
             res.json({erro: "Senha inválida"})
+            return
         }
 
         if (senha.length < 8) {
@@ -221,6 +225,7 @@ export default class UserController {
 
             res.status(400)
             res.json({erro: "A senha precisa ter no mínimo 8 caracteres"})
+            return
         }
 
         if (nome != undefined) {
@@ -231,6 +236,7 @@ export default class UserController {
     
                 res.status(400)
                 res.json({erro: "Nome inválido"})
+                return
             }
         }
 
@@ -242,6 +248,7 @@ export default class UserController {
     
                 res.status(400)
                 res.json({erro: "Sobrenome inválido"})
+                return
             }
         }
         
@@ -253,6 +260,7 @@ export default class UserController {
 
                 res.status(400)
                 res.json({erro: "Email inválido"})
+                return
             }
         }
 
@@ -264,6 +272,7 @@ export default class UserController {
     
                 res.status(400)
                 res.json({erro: "Senha inválida"})
+                return
             }
         }
 
