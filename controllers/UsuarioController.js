@@ -8,7 +8,6 @@ import FileManager from "../models/FileManager.js";
 
 import fs from "fs";
 import { promisify } from "util";
-import { log } from "console";
 const unlinkAsync = promisify(fs.unlink)
 
 const secret = process.env.SECRET;
@@ -424,7 +423,7 @@ export default class UserController {
         
         let avatar
         if (req.file != undefined) {
-            if(!new RegExp(/image\/(png|jpg|jpge)/).test(req.file.mimetype)) {
+            if(!new RegExp(/image\/(png|jpg|jpeg)/).test(req.file.mimetype)) {
                 await unlinkAsync(req.file.destination+req.file.filename)
                 res.status(400)
                 res.json({erro: "O avatar deve ser uma imagem"})

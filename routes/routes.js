@@ -1,5 +1,4 @@
 import express from "express";
-const app = express();
 const router = express.Router();
 import AssuntoController from "../controllers/AssuntoController.js";
 import TemaController from "../controllers/TemaController.js";
@@ -8,12 +7,9 @@ import UsuarioController from "../controllers/UsuarioController.js";
 import AdminAuth from "../middleware/AdminAuth.js";
 import UsuarioAuth from "../middleware/UsuarioAuth.js";
 
-import path, { dirname } from "path";
-
 // FileManager
 import multer from "multer";
-app.use(express.static('.'));
-app.use(express.static('temp'))
+import path from "path";
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){

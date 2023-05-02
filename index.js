@@ -8,6 +8,8 @@ import "./database/connection.js";
 import cors from "cors";
 
 app.use(cors())
+app.use(express.static('.'));
+app.use(express.static('temp'))
 
 app.use(session({secret: process.env.SECRET, cookie: {maxAge: 604800000}}))
 
