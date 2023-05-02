@@ -157,18 +157,18 @@ export default class UserController {
     
     async criar(req, res) {
         let {nome, sobrenome, email, senha} = req.body
-
+        console.log("1")
         // Validações
         if (req.file == undefined) {
             res.status(400)
             res.json({erro: "Avatar inválido"})
             return
         }
-        console.log("0")
+        
         let avatar
         if (req.file != undefined) {
             if(!new RegExp(/image\/(png|jpg|jpeg)/).test(req.file.mimetype)) {
-                console.log("1")
+                
                 await unlinkAsync(req.file.destination+req.file.filename)
                 res.status(400)
                 res.json({erro: "O avatar deve ser uma imagem"})
@@ -177,7 +177,7 @@ export default class UserController {
             
             avatar = req.file.destination+req.file.filename
         }
-        console.log("2")
+        
         if (nome == undefined) {
             if (req.file != undefined) {
                 await unlinkAsync(req.file.destination+req.file.filename)
