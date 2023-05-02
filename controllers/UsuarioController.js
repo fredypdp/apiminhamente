@@ -242,7 +242,7 @@ export default class UserController {
         if (sobrenome != undefined) {
             if (sobrenome.trim().length === 0) {
                 if (req.file != undefined) {
-                    await unlinkAsync(req.file.destination+req.file.filename)
+//                     await unlinkAsync(req.file.destination+req.file.filename)
                 }
     
                 res.status(400)
@@ -254,7 +254,7 @@ export default class UserController {
         if (email != undefined) {
             if (email.trim().length === 0) {
                 if (req.file != undefined) {
-                    await unlinkAsync(req.file.destination+req.file.filename)
+//                     await unlinkAsync(req.file.destination+req.file.filename)
                 }
 
                 res.status(400)
@@ -266,7 +266,7 @@ export default class UserController {
         if (senha != undefined) {
             if (senha.trim().length === 0) {
                 if (req.file != undefined) {
-                    await unlinkAsync(req.file.destination+req.file.filename)
+//                     await unlinkAsync(req.file.destination+req.file.filename)
                 }
     
                 res.status(400)
