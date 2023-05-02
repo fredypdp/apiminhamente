@@ -9,11 +9,24 @@ import UsuarioAuth from "../middleware/UsuarioAuth.js";
 
 // FileManager
 import multer from "multer";
-import path from "path";
+import path, { dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const storage = multer.diskStorage({
-    destination: function(req, file, cb){
-        cb(null, "temp/")
+    destination: function (req, file, cb) {
+        const folder = path.resolve(__dirname, 'temp')
+  
+        // checa se a pasta existe, se existe, chama o callback
+        if (fs.existsSync(folder)) {
+            cb(null, folder)
+            return
+        }
+  
+        // cria a pasta (so vai cair aqui se n existir)
+        fs.mkdirSync(folder)
+        cb(null, folder);
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname + "-" + Date.now() + path.extname(file.originalname))
