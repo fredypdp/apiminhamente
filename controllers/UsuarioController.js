@@ -164,7 +164,7 @@ export default class UserController {
             res.json({erro: "Avatar inválido"})
             return
         }
-
+        console.log("0")
         let avatar
         if (req.file != undefined) {
             if(!new RegExp(/image\/(png|jpg|jpeg)/).test(req.file.mimetype)) {
