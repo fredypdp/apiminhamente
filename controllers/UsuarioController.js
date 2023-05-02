@@ -157,7 +157,7 @@ export default class UserController {
     
     async criar(req, res) {
         let {nome, sobrenome, email, senha} = req.body
-        console.log("1")
+        
         // Validações
         if (req.file == undefined) {
             res.status(400)

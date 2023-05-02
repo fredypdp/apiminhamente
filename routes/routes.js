@@ -11,7 +11,7 @@ import UsuarioAuth from "../middleware/UsuarioAuth.js";
 import multer from "multer";
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
-
+import fs from "fs";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 const storage = multer.diskStorage({
