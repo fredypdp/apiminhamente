@@ -10,7 +10,6 @@ import UsuarioAuth from "../middleware/UsuarioAuth.js";
 
 import path, { dirname } from "path";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
 // FileManager
 import multer from "multer";
 app.use(express.static('.'));
