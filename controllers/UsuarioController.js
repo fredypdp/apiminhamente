@@ -168,7 +168,8 @@ export default class UserController {
         let avatar
         if (req.file != undefined) {
             if(!new RegExp(/image\/(png|jpg|jpeg)/).test(req.file.mimetype)) {
-//                 await unlinkAsync(req.file.destination+req.file.filename)
+                console.log("1")
+                await unlinkAsync(req.file.destination+req.file.filename)
                 res.status(400)
                 res.json({erro: "O avatar deve ser uma imagem"})
                 return
@@ -176,10 +177,10 @@ export default class UserController {
             
             avatar = req.file.destination+req.file.filename
         }
-
+        console.log("2")
         if (nome == undefined) {
             if (req.file != undefined) {
-//                 await unlinkAsync(req.file.destination+req.file.filename)
+                await unlinkAsync(req.file.destination+req.file.filename)
             }
 
             res.status(400)
@@ -189,7 +190,7 @@ export default class UserController {
         
         if (sobrenome == undefined) {
             if (req.file != undefined) {
-//                 await unlinkAsync(req.file.destination+req.file.filename)
+                await unlinkAsync(req.file.destination+req.file.filename)
             }
 
             res.status(400)
@@ -199,7 +200,7 @@ export default class UserController {
 
         if (email == undefined) {
             if (req.file != undefined) {
-//                 await unlinkAsync(req.file.destination+req.file.filename)
+                await unlinkAsync(req.file.destination+req.file.filename)
             }
 
             res.status(400)
@@ -209,7 +210,7 @@ export default class UserController {
 
         if (senha == undefined) {
             if (req.file != undefined) {
-//                 await unlinkAsync(req.file.destination+req.file.filename)
+                await unlinkAsync(req.file.destination+req.file.filename)
             }
 
             res.status(400)
@@ -219,7 +220,7 @@ export default class UserController {
 
         if (senha.length < 8) {
             if (req.file != undefined) {
-//                 await unlinkAsync(req.file.destination+req.file.filename)
+                await unlinkAsync(req.file.destination+req.file.filename)
             }
 
             res.status(400)
@@ -230,7 +231,7 @@ export default class UserController {
         if (nome != undefined) {
             if (nome.trim().length === 0) {
                 if (req.file != undefined) {
-//                     await unlinkAsync(req.file.destination+req.file.filename)
+                    await unlinkAsync(req.file.destination+req.file.filename)
                 }
     
                 res.status(400)
@@ -242,7 +243,7 @@ export default class UserController {
         if (sobrenome != undefined) {
             if (sobrenome.trim().length === 0) {
                 if (req.file != undefined) {
-//                     await unlinkAsync(req.file.destination+req.file.filename)
+                    await unlinkAsync(req.file.destination+req.file.filename)
                 }
     
                 res.status(400)
@@ -254,7 +255,7 @@ export default class UserController {
         if (email != undefined) {
             if (email.trim().length === 0) {
                 if (req.file != undefined) {
-//                     await unlinkAsync(req.file.destination+req.file.filename)
+                    await unlinkAsync(req.file.destination+req.file.filename)
                 }
 
                 res.status(400)
@@ -266,7 +267,7 @@ export default class UserController {
         if (senha != undefined) {
             if (senha.trim().length === 0) {
                 if (req.file != undefined) {
-//                     await unlinkAsync(req.file.destination+req.file.filename)
+                    await unlinkAsync(req.file.destination+req.file.filename)
                 }
     
                 res.status(400)
