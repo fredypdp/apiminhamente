@@ -37,7 +37,6 @@ router.post("/usuario/:id/:email", UsuarioAuth, new UsuarioController().DeletarM
 router.delete("/deletarconta/:token", UsuarioAuth, new UsuarioController().DeletarMinhaConta) // Deletar minha conta
 router.delete("/usuario/:id", AdminAuth, new UsuarioController().AdmDeletarUsuario) // Adm deletar usuário
 
-
 router.post("/login", new UsuarioController().login) // Fazer login
 router.post("/logout", UsuarioAuth, new UsuarioController().logout) // Terminar sessão
 
