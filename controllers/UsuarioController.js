@@ -178,6 +178,9 @@ export default class UserController {
         }
 
         if (nome == undefined) {
+            if (req.file != undefined) {
+                await unlinkAsync(req.file.destination+req.file.filename)
+            }
 
             res.status(400)
             res.json({erro: "Nome inválido"})
