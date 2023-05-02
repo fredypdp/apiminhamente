@@ -11,7 +11,7 @@ import UsuarioAuth from "../middleware/UsuarioAuth.js";
 // FileManager
 import multer from "multer";
 app.use(express.static('.'));
-app.use(express.static('uploads'))
+app.use(express.static('temp'))
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
