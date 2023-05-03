@@ -22,18 +22,18 @@ export default class ApontamentoController {
         let miniatura
         if (req.file != undefined) {
             if(!new RegExp(/image\/(png|jpg|jpeg)/).test(req.file.mimetype)) {
-                await unlinkAsync(req.file.destination+req.file.filename)
+                await unlinkAsync(req.file.destination+"/"+req.file.filename)
                 res.status(400)
                 res.json({erro: "A miniatura deve ser uma imagem"})
                 return
             }
             
-            miniatura = req.file.destination+req.file.filename
+            miniatura = req.file.destination+"/"+req.file.filename
         }
         
         if (titulo == undefined) {
             if (req.file != undefined) {
-                await unlinkAsync(req.file.destination+req.file.filename)
+                await unlinkAsync(req.file.destination+"/"+req.file.filename)
             }
 
             res.status(400)
@@ -43,7 +43,7 @@ export default class ApontamentoController {
 
         if (conteudo == undefined) {
             if (req.file != undefined) {
-                await unlinkAsync(req.file.destination+req.file.filename)
+                await unlinkAsync(req.file.destination+"/"+req.file.filename)
             }
 
             res.status(400)
@@ -53,7 +53,7 @@ export default class ApontamentoController {
         
         if (assuntos == undefined) {
             if (req.file != undefined) {
-                await unlinkAsync(req.file.destination+req.file.filename)
+                await unlinkAsync(req.file.destination+"/"+req.file.filename)
             }
 
             res.status(400)
@@ -63,7 +63,7 @@ export default class ApontamentoController {
 
         if (assuntos != undefined) {
             if (req.file != undefined) {
-                await unlinkAsync(req.file.destination+req.file.filename)
+                await unlinkAsync(req.file.destination+"/"+req.file.filename)
             }
 
             assuntos.forEach( assunto => {
@@ -77,7 +77,7 @@ export default class ApontamentoController {
         
         if (temas != undefined) {
             if (req.file != undefined) {
-                await unlinkAsync(req.file.destination+req.file.filename)
+                await unlinkAsync(req.file.destination+"/"+req.file.filename)
             }
 
             temas.forEach( tema => {
@@ -92,7 +92,7 @@ export default class ApontamentoController {
         if (titulo != undefined) {
             if (titulo.trim().length === 0) {
                 if (req.file != undefined) {
-                    await unlinkAsync(req.file.destination+req.file.filename)
+                    await unlinkAsync(req.file.destination+"/"+req.file.filename)
                 }
     
                 res.status(400)
@@ -104,7 +104,7 @@ export default class ApontamentoController {
         if (conteudo != undefined) {
             if (conteudo.trim().length === 0) {
                 if (req.file != undefined) {
-                    await unlinkAsync(req.file.destination+req.file.filename)
+                    await unlinkAsync(req.file.destination+"/"+req.file.filename)
                 }
     
                 res.status(400)
@@ -153,7 +153,7 @@ export default class ApontamentoController {
         // Validações
         if (id == undefined) {
             if (req.file != undefined) {
-                await unlinkAsync(req.file.destination+req.file.filename)
+                await unlinkAsync(req.file.destination+"/"+req.file.filename)
             }
 
             res.status(400)
@@ -173,7 +173,7 @@ export default class ApontamentoController {
             assuntos.forEach(async assunto => {
                 if(assunto.trim().length === 0){
                     if (req.file != undefined) {
-                        await unlinkAsync(req.file.destination+req.file.filename)
+                        await unlinkAsync(req.file.destination+"/"+req.file.filename)
                     }
 
                     res.status(400)
@@ -187,7 +187,7 @@ export default class ApontamentoController {
             temas.forEach(async tema => {
                 if(tema.trim().length === 0){
                     if (req.file != undefined) {
-                        await unlinkAsync(req.file.destination+req.file.filename)
+                        await unlinkAsync(req.file.destination+"/"+req.file.filename)
                     }
 
                     res.status(400)
@@ -207,13 +207,13 @@ export default class ApontamentoController {
 
         if (req.file != undefined) {
             if(!new RegExp(/image\/(png|jpg|jpeg)/).test(req.file.mimetype)) {
-                await unlinkAsync(req.file.destination+req.file.filename)
+                await unlinkAsync(req.file.destination+"/"+req.file.filename)
                 res.status(400)
                 res.json({erro: "A miniatura deve ser uma imagem"})
                 return
             }
             
-            miniatura = req.file.destination+req.file.filename
+            miniatura = req.file.destination+"/"+req.file.filename
         }
         
 
