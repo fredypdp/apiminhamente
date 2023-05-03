@@ -37,7 +37,6 @@ const upload = multer({storage})
 
 // Usuario
 router.get('/usuarios', AdminAuth, new UsuarioController().Usuarios) // Todos os usuários
-
 router.get("/usuario/:id", UsuarioAuth, new UsuarioController().UsuarioById) // Usuário pelo id
 router.get("/usuario/email/:email", UsuarioAuth, new UsuarioController().UsuarioByEmail) // Usuário pelo email
 router.post("/usuario", upload.single("avatar"), new UsuarioController().criar) // Criar usuário
