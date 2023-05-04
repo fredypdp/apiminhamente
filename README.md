@@ -1634,16 +1634,15 @@ https://apiminhamente.onrender.com/login
 let axios = require('axios');
 
 let config = {
-  method: 'post',
-  url: 'https://apiminhamente.onrender.com/login'
+     method: 'post',
+     url: 'https://apiminhamente.onrender.com/login',
+     data: {
+        email: this.email,
+        senha: this.senha,
+   }
 };
 
-let data = {
-  email: "email@gmail.com",
-  senha: "senha",
-}
-
-axios(config, data)
+axios(config)
 .then(function (response) {
   console.log(JSON.stringify(response.data));
 })
