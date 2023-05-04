@@ -2,11 +2,10 @@ import jwt from "jsonwebtoken";
 import Usuario from "../models/Usuario.js";
 
 export default async function(req, res, next){
-    const authToken = req.headers["authorization"]
+    const authToken = req.headers["Authorization"]
     
     if(authToken != undefined){
-        const tk = authToken
-        const bearer = tk.split(" ")
+        const bearer = authToken.split(" ")
         let token = bearer[1]
         const tokenValido = await new Usuario().findBlacklist(token)
 

@@ -33,14 +33,14 @@ export default class UserController {
         // Validações
         if (id == undefined) {
             res.status(400)
-            res.json({erro: "id inválido"})
+            res.json({erro: "id inválido, campo vazio"})
             return
         }
 
         if (id != undefined) {
             if (id.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "id inválido"})
+                res.json({erro: "id inválido, campo vazio"})
                 return
             }
         }
@@ -96,14 +96,14 @@ export default class UserController {
         // Validações
         if (email == undefined) {
             res.status(400)
-            res.json({erro: "email inválido"})
+            res.json({erro: "Email inválido, campo vazio"})
             return
         }
         
         if (email != undefined) {
             if (email.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "email inválido"})
+                res.json({erro: "Email inválido, campo vazio"})
                 return
             }
         }
@@ -161,7 +161,7 @@ export default class UserController {
         // Validações
         if (req.file == undefined) {
             res.status(400)
-            res.json({erro: "Avatar inválido"})
+            res.json({erro: "Avatar inválido, campo vazio"})
             return
         }
         
@@ -184,7 +184,7 @@ export default class UserController {
             }
 
             res.status(400)
-            res.json({erro: "Nome inválido"})
+            res.json({erro: "Nome inválido, campo vazio"})
             return
         }
         
@@ -194,7 +194,7 @@ export default class UserController {
             }
 
             res.status(400)
-            res.json({erro: "Sobrenome inválido"})
+            res.json({erro: "Sobrenome inválido, campo vazio"})
             return
         }
 
@@ -204,7 +204,7 @@ export default class UserController {
             }
 
             res.status(400)
-            res.json({erro: "Email inválido"})
+            res.json({erro: "Email inválido, campo vazio"})
             return
         }
 
@@ -214,7 +214,7 @@ export default class UserController {
             }
 
             res.status(400)
-            res.json({erro: "Senha inválida"})
+            res.json({erro: "Senha inválida, campo vazio"})
             return
         }
 
@@ -235,7 +235,7 @@ export default class UserController {
                 }
     
                 res.status(400)
-                res.json({erro: "Nome inválido"})
+                res.json({erro: "Nome inválido, campo vazio"})
                 return
             }
         }
@@ -247,7 +247,7 @@ export default class UserController {
                 }
     
                 res.status(400)
-                res.json({erro: "Sobrenome inválido"})
+                res.json({erro: "Sobrenome inválido, campo vazio"})
                 return
             }
         }
@@ -259,7 +259,7 @@ export default class UserController {
                 }
 
                 res.status(400)
-                res.json({erro: "Email inválido"})
+                res.json({erro: "Email inválido, campo vazio"})
                 return
             }
         }
@@ -271,7 +271,7 @@ export default class UserController {
                 }
     
                 res.status(400)
-                res.json({erro: "Senha inválida"})
+                res.json({erro: "Senha inválida, campo vazio"})
                 return
             }
         }
@@ -331,7 +331,7 @@ export default class UserController {
 
     async editar(req, res){
         let {id, nome, sobrenome, email, senha} = req.body;
-        let tokenBearer = req.headers["authorization"]
+        let tokenBearer = req.headers["Authorization"]
         const bearer = tokenBearer.split(" ")
         let token = bearer[1]
 
@@ -342,7 +342,7 @@ export default class UserController {
             }
 
             res.status(400)
-            res.json({erro: "id inválido"})
+            res.json({erro: "id inválido, campo vazio"})
             return
         }
         
@@ -352,7 +352,7 @@ export default class UserController {
             }
 
             res.status(400)
-            res.json({erro: "senha inválido"})
+            res.json({erro: "Senha inválida, campo vazio"})
             return
         }
 
@@ -369,7 +369,7 @@ export default class UserController {
                 }
 
                 res.status(400)
-                res.json({erro: "id inválido"})
+                res.json({erro: "id inválido, campo vazio"})
                 return
             }
         }
@@ -381,7 +381,7 @@ export default class UserController {
                 }
 
                 res.status(400)
-                res.json({erro: "Nome inválido"})
+                res.json({erro: "Nome inválido, campo vazio"})
                 return
             }
         }
@@ -393,7 +393,7 @@ export default class UserController {
                 }
 
                 res.status(400)
-                res.json({erro: "Sobrenome inválido"})
+                res.json({erro: "Sobrenome inválido, campo vazio"})
                 return
             }
         }
@@ -405,7 +405,7 @@ export default class UserController {
                 }
 
                 res.status(400)
-                res.json({erro: "Email inválido"})
+                res.json({erro: "Email inválido, campo vazio"})
                 return
             }
         }
@@ -417,7 +417,7 @@ export default class UserController {
                 }
 
                 res.status(400)
-                res.json({erro: "senha inválido"})
+                res.json({erro: "Senha inválida, campo vazio"})
                 return
             }
         }
@@ -439,7 +439,7 @@ export default class UserController {
         
         if(tokenValido != null || tokenValido != undefined) {
             res.status(403);
-            res.json({erro: "Token invalido"});
+            res.json({erro: "Token invalido, campo vazio"});
             return
         }
 
@@ -562,27 +562,27 @@ export default class UserController {
         } catch (erro) {
             console.log(erro);
             res.status(400);
-            res.json({erro: "Erro ao editar usuário"});
+            res.json({erro: "Erro ao editar conta"});
         }
     }
 
     async DeletarMinhaConta(req, res){
         let token = req.params.token;
-        let tokenBearer = req.headers["authorization"]
+        let tokenBearer = req.headers["Authorization"]
         const bearer = tokenBearer.split(" ")
         let tokenLogin = bearer[1]
 
         // Validações
         if (token == undefined) {
             res.status(400)
-            res.json({erro: "Token inválido"})
+            res.json({erro: "Token inválido, campo vazio"})
             return
         }
         
         if (token != undefined) {
             if (token.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "Token inválido"})
+                res.json({erro: "Token inválido, campo vazio"})
                 return
             }
         }
@@ -646,13 +646,15 @@ export default class UserController {
         // Validações
         if (id == undefined) {
             res.status(400)
-            res.json({erro: "id inválido"})
+            res.json({erro: "id inválido, campo vazio"})
+            return
         }
         
         if(id != undefined){
             if (id.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "id inválido"})
+                res.json({erro: "id inválido, campo vazio"})
+                return
             }
         }
 
@@ -668,7 +670,7 @@ export default class UserController {
         } catch (erro) {
             console.log(erro);
             res.status(400);
-            res.json({erro: "Erro ao deletar usuário"});
+            res.json({erro: "Erro ao deletar conta"});
         }
     }
 
@@ -678,35 +680,41 @@ export default class UserController {
         // Validações
         if (email == undefined) {
             res.status(400)
-            res.json({erro: "email inválido"})
+            res.json({erro: "Email inválido, campo vazio"})
+            return
         }
         
         if (senha == undefined) {
             res.status(400)
-            res.json({erro: "senha inválido"})
+            res.json({erro: "Senha inválida, campo vazio"})
+            return
         }
         
         if (senha.trim().length === 0) {
             res.status(400)
-            res.json({erro: "senha inválido"})
+            res.json({erro: "Senha inválida, campo vazio"})
+            return
         }
 
         if (senha.length < 8) {
             res.status(400)
             res.json({erro: "A senha precisa ter no mínimo 8 caracteres"})
+            return
         }
 
         if (email != undefined) {
             if (email.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "email inválido"})
+                res.json({erro: "email inválido, campo vazio"})
+                return
             }
         }
         
         if (senha != undefined) {
             if (senha.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "senha inválido"})
+                res.json({erro: "senha inválido, campo vazio"})
+                return
             }
         }
 
@@ -781,26 +789,28 @@ export default class UserController {
 
         }else{
             res.status(404);
-            res.json({erro: "Usuário não encontrado"});
+            res.json({erro: "Conta não encontrada"});
             return
         }
     }
 
     async logout(req, res){
-        let tokenBearer = req.headers["authorization"]
+        let tokenBearer = req.headers["Authorization"]
         const bearer = tokenBearer.split(" ")
         let token = bearer[1]
         
         // Validações
         if (token == undefined) {
             res.status(400)
-            res.json({erro: "token inválido"})
+            res.json({erro: "Token inválido"})
+            return
         }
         
         if (token != undefined) {
             if (token == undefined || token.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "token inválido"})
+                res.json({erro: "Token inválido"})
+                return
             }
         }
         
@@ -822,13 +832,15 @@ export default class UserController {
         // Validações
         if (email == undefined) {
             res.status(400)
-            res.json({erro: "email inválido"})
+            res.json({erro: "Email inválido, campo vazio"})
+            return
         }
         
         if (email != undefined) {
             if (email == undefined || email.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "email inválido"})
+                res.json({erro: "Email inválido, campo vazio"})
+                return
             }
         }
 
@@ -858,13 +870,15 @@ export default class UserController {
         // Validações
         if (email == undefined) {
             res.status(400)
-            res.json({erro: "email inválido"})
+            res.json({erro: "Email inválido, campo vazio"})
+            return
         }
         
         if (email != undefined) {
             if (email == undefined || email.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "email inválido"})
+                res.json({erro: "Email inválido, campo vazio"})
+                return
             }
         }
 
@@ -876,7 +890,6 @@ export default class UserController {
     
                 res.status(200);
                 res.send("Link enviado ao seu email com sucesso")
-                return
             } catch (erro) {
                 console.log(erro);
 
@@ -892,32 +905,36 @@ export default class UserController {
     async mudarSenha(req, res){
         let token = req.params.token;
         let senha = req.body.senha;
-        let tokenBearer = req.headers["authorization"]
+        let tokenBearer = req.headers["Authorization"]
         const bearer = tokenBearer.split(" ")
         let tokenLogin = bearer[1]
         
         // Validações
         if (token == undefined) {
             res.status(400)
-            res.json({erro: "token inválido1"})
+            res.json({erro: "Token inválido, campo vazio"})
+            return
         }
         
         if (senha == undefined) {
             res.status(400)
-            res.json({erro: "senha inválida"})
+            res.json({erro: "Senha inválida, campo vazio"})
+            return
         }
 
         if (token != undefined) {
             if (token == undefined || token.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "token inválido"})
+                res.json({erro: "Token inválido, campo vazio"})
+                return
             }
         }
         
         if (senha != undefined) {
             if (senha == undefined || senha.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "senha inválida"})
+                res.json({erro: "Senha inválida, campo vazio"})
+                return
             }
         }
 
@@ -931,6 +948,7 @@ export default class UserController {
         if (senha.length < 8) {
             res.status(400)
             res.json({erro: "A senha precisa ter no mínimo 8 caracteres"})
+            return
         }
 
         // Validar se a conta a ter a senha mudada pertence a esse usuário

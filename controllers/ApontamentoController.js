@@ -157,14 +157,14 @@ export default class ApontamentoController {
             }
 
             res.status(400)
-            res.json({erro: "_id inválido, o campo está vazio"})
+            res.json({erro: "id inválido, o campo está vazio"})
             return
         }
 
         if (id != undefined) {
             if (_id.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "_id inválido, o campo está vazio"})
+                res.json({erro: "id inválido, o campo está vazio"})
                 return
             }
         }
@@ -328,25 +328,25 @@ export default class ApontamentoController {
     }
 
     async apontamentoById(req, res){
-        let _id = req.params._id
+        let id = req.params.id
 
         // Validações
-        if (_id == undefined) {
+        if (id == undefined) {
             res.status(400)
-            res.json({erro: "_id inválido, o campo está vazio"})
+            res.json({erro: "id inválido, o campo está vazio"})
             return
         }
 
-        if (_id != undefined) {
-            if (_id.trim().length === 0) {
+        if (id != undefined) {
+            if (id.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "_id inválido, o campo está vazio"})
+                res.json({erro: "id inválido, o campo está vazio"})
                 return
             }
         }
         
         try {                
-            let apontamento = await new Apontamento().encontrarPorId(_id)
+            let apontamento = await new Apontamento().encontrarPorId(id)
             
             let HATEOAS = [
                 {
@@ -401,7 +401,7 @@ export default class ApontamentoController {
         } catch (erro) {
             console.log(erro)
             res.status(404)
-            res.json({erro: "Erro ao encontrar apontamento"})
+            res.json({erro: "Erro ao encontrar apontamentos"})
         }
     }
 }

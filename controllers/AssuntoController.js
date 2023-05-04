@@ -10,20 +10,20 @@ export default class AssuntoController {
         // Validações
         if (nome == undefined) {
             res.status(400)
-            res.json({erro: "nome inválido, o campo está vazio"})
+            res.json({erro: "Nome inválido, o campo está vazio"})
             return
         }
 
         if (icone == undefined) {
             res.status(400)
-            res.json({erro: "ícone inválido, o campo está vazio"})
+            res.json({erro: "Ícone inválido, o campo está vazio"})
             return
         }
 
         if (nome != undefined) {
             if (nome.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "nome inválido, o campo está vazio"})
+                res.json({erro: "Nome inválido, o campo está vazio"})
                 return
             }
         }
@@ -31,7 +31,7 @@ export default class AssuntoController {
         if (icone != undefined) {
             if (icone.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "icone inválido, o campo está vazio"})
+                res.json({erro: "Ícone inválido, o campo está vazio"})
                 return
             }
         }
@@ -96,14 +96,14 @@ export default class AssuntoController {
 
         if (nome == undefined && icone == undefined) {
             res.status(400)
-            res.json({erro: "nome e icone inválidos, os campos estão vazios"})
+            res.json({erro: "Nome e icone inválidos, os campos estão vazios"})
             return
         }
         
         if (nome != undefined) {
             if (nome.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "nome inválido, o campo está vazio"})
+                res.json({erro: "Nome inválido, o campo está vazio"})
                 return
             }
         }
@@ -111,7 +111,7 @@ export default class AssuntoController {
         if (icone != undefined) {
             if (icone.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "icone inválido, o campo está vazio"})
+                res.json({erro: "Ícone inválido, o campo está vazio"})
                 return
             }
         }

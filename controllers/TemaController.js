@@ -23,7 +23,7 @@ export default class AssuntoController {
         if (titulo != undefined) {
             if (titulo.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "titulo inválido, o campo está vazio"})
+                res.json({erro: "Titulo inválido, o campo está vazio"})
                 return
             }
         }
@@ -31,7 +31,7 @@ export default class AssuntoController {
         if (assunto != undefined) {
             if (assunto.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "assunto inválido, o campo está vazio"})
+                res.json({erro: "Assunto inválido, o campo está vazio"})
                 return
             }
         }
@@ -88,7 +88,7 @@ export default class AssuntoController {
 
         if (titulo == undefined) {
             res.status(400)
-            res.json({erro: "titulo inválido, o campo está vazio"})
+            res.json({erro: "Titulo inválido, o campo está vazio"})
             return
         }
 
@@ -103,7 +103,7 @@ export default class AssuntoController {
         if (titulo != undefined) {
             if (titulo.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "titulo inválido, o campo está vazio"})
+                res.json({erro: "Titulo inválido, o campo está vazio"})
                 return
             }
         }
