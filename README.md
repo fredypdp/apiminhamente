@@ -1637,8 +1637,8 @@ let config = {
      method: 'post',
      url: 'https://apiminhamente.onrender.com/login',
      data: {
-        email: this.email,
-        senha: this.senha,
+        email: email@gmail.com,
+        senha: 1234567890,
    }
 };
 
@@ -1957,14 +1957,13 @@ let config = {
   url: 'https://apiminhamente.onrender.com/mudarsenha/:token',
   headers: {
     'authorization': 'token de login'
+  },
+  data: {
+    senha: "1234567890"
   }
 };
 
-let data = {
-  senha: "1234567890"
-};
-
-axios(config, data)
+axios(config)
 .then(function (response) {
   console.log(JSON.stringify(response.data));
 })
