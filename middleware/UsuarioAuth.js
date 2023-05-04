@@ -9,7 +9,7 @@ export default async function(req, res, next){
         const bearer = tk.split(" ")
         let token = bearer[1]
         const tokenValido = await new Usuario().findBlacklist(token)
-
+        console.log(token)
         if (tokenValido == null || tokenValido == undefined) {
             jwt.verify(token, process.env.ADMIN_AUTH_SECRET, (erro, decoded) => {
                 if (erro) {
