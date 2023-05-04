@@ -331,7 +331,7 @@ export default class UserController {
 
     async editar(req, res){
         let {id, nome, sobrenome, email, senha} = req.body;
-        let tokenBearer = req.headers["Authorization"]
+        let tokenBearer = req.headers["authorization"]
         const bearer = tokenBearer.split(" ")
         let token = bearer[1]
 
@@ -568,7 +568,7 @@ export default class UserController {
 
     async DeletarMinhaConta(req, res){
         let token = req.params.token;
-        let tokenBearer = req.headers["Authorization"]
+        let tokenBearer = req.headers["authorization"]
         const bearer = tokenBearer.split(" ")
         let tokenLogin = bearer[1]
 
@@ -795,7 +795,7 @@ export default class UserController {
     }
 
     async logout(req, res){
-        let tokenBearer = req.headers["Authorization"]
+        let tokenBearer = req.headers["authorization"]
         const bearer = tokenBearer.split(" ")
         let token = bearer[1]
         
@@ -905,7 +905,7 @@ export default class UserController {
     async mudarSenha(req, res){
         let token = req.params.token;
         let senha = req.body.senha;
-        let tokenBearer = req.headers["Authorization"]
+        let tokenBearer = req.headers["authorization"]
         const bearer = tokenBearer.split(" ")
         let tokenLogin = bearer[1]
         

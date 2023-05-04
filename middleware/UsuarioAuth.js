@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import Usuario from "../models/Usuario.js";
 
 export default async function(req, res, next){
-    const authToken = req.headers["Authorization"]
+    const authToken = req.headers["authorization"]
     console.log(authToken);
     if(authToken != undefined){
         const bearer = authToken.split(" ")
