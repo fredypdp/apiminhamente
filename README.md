@@ -7,26 +7,26 @@
   * [Rotas de usuários comuns](#Rotas-de-usuários-comuns)
 * [Funcionamento](#Funcionamento)
     * [Observações](#Observações)
-    * [Apontamento](#Apontamento)
-      * [Criação do apontamento](#Criação-do-apontamento)
-      * [Edição do apontamento](#Edição-do-apontamento)
-      * [Deleção do apontamento](#Deleção-do-apontamento)
-    * [Assunto](#Assunto)
-      * [Criação do assunto](#Criação-do-assunto)
-      * [Edição do assunto](#Edição-do-assunto)
-      * [Deleção do assunto](#Deleção-do-assunto)
-    * [Tema](#Tema)
-      * [Criação do tema](#Criação-do-tema)
-      * [Edição do tema](#Edição-do-tema)
-      * [Deleção do tema](#Deleção-do-tema)
-    * [Usuário](#Usuário)
-      * [Criação do usuário](#Criação-do-usuário)
-      * [Edição do usuário](#Edição-do-usuário)
-      * [Deleção da minha conta](#Deleção-da-minha-conta)
-      * [Adm deletar usuário](#Adm-deletar-usuário)
-      * [Login](#Login)
-      * [Logout](#Logout)
-      * [Recuperar senha](#Recuperar-senha)
+    * [Apontamento](#Apontamento-(Funcionamento))
+      * [Criação do apontamento](#Criação-do-apontamento-(Funcionamento))
+      * [Edição do apontamento](#Edição-do-apontamento-(Funcionamento))
+      * [Deleção do apontamento](#Deleção-do-apontamento-(Funcionamento))
+    * [Assunto](#Assunto-(Funcionamento))
+      * [Criação do assunto](#Criação-do-assunto-(Funcionamento))
+      * [Edição do assunto](#Edição-do-assunto-(Funcionamento))
+      * [Deleção do assunto](#Deleção-do-assunto-(Funcionamento))
+    * [Tema](#Tema-(Funcionamento))
+      * [Criação do tema](#Criação-do-tema-(Funcionamento))
+      * [Edição do tema](#Edição-do-tema-(Funcionamento))
+      * [Deleção do tema](#Deleção-do-tema-(Funcionamento))
+    * [Usuário](#Usuário-(Funcionamento))
+      * [Criação do usuário](#Criação-do-usuário-(Funcionamento))
+      * [Edição do usuário](#Edição-do-usuário-(Funcionamento))
+      * [Deleção da minha conta](#Deleção-da-minha-conta-(Funcionamento))
+      * [Adm deletar usuário](#Adm-deletar-usuário-(Funcionamento))
+      * [Login](#Login-(Funcionamento))
+      * [Logout](#Logout-(Funcionamento))
+      * [Recuperar senha](#Recuperar-senha-(Funcionamento))
 * [Rotas](#Rotas)
   * [Apontamento](#Apontamento)
     * [Pegar todos os apontamentos](#Pegar-todos-os-apontamentos)
@@ -184,9 +184,9 @@ https://apiminhamente.onrender.com
 https://apiminhamente.vercel.app
 ```
 
-## Apontamento
+## Apontamento (Funcionamento)
 
-### Criação do apontamento
+### Criação do apontamento (Funcionamento)
 
 - Validação dos elementos recebidos (título, conteúdo, assuntos, temas, miniaturas)
 - Fazer upload da miniatura para a pasta "temp" usando o path e multer (no arquivo das rotas)
@@ -194,7 +194,7 @@ https://apiminhamente.vercel.app
 - Deletar a miniatura que tá na pasta "temp"
 - Criar o apontamento no banco de dados
 
-### Edição do apontamento
+### Edição do apontamento (Funcionamento)
 
 - Validação dos elementos recebidos (título, conteúdo, assuntos, temas, miniaturas)
 - Procurar o apontamento recebido e verificar se existe
@@ -204,15 +204,15 @@ https://apiminhamente.vercel.app
 - Deletar a miniatura que tá na pasta "temp"
 - Editar o apontamento no banco de dados
 
-### Deleção do apontamento
+### Deleção do apontamento (Funcionamento)
 
 - Procurar um apontamento que corresponde ao apontamento recebido
 - Deletar ele dos assuntos e temas que ele pertence
 - Deletar o apontamento
 
-## Assunto
+## Assunto (Funcionamento)
 
-### Criação do assunto
+### Criação do assunto (Funcionamento)
 
 - Validação dos elementos recebidos (nome, ícone)
 - Verificar se já existe um assunto com esse nome
@@ -225,36 +225,36 @@ https://apiminhamente.vercel.app
 - Verificar se já existe um assunto com esse nome
 - Editar o assunto no banco de dados
 
-### Deleção do assunto
+### Deleção do assunto (Funcionamento)
 
 - Procurar um assunto que corresponde ao assunto recebido
 - Deletar ele dos apontamentos que pertence e deletar todos os temas que pertencem a ele
 - Deletar o assunto
 
-## Tema
+## Tema (Funcionamento)
 
-### Criação do tema
+### Criação do tema (Funcionamento)
 
 - Validação dos elementos recebidos (nome, ícone)
 - Verificar se já existe um tema com esse nome
 - Criar tema no banco de dados
 
-### Edição do tema
+### Edição do tema (Funcionamento)
 
 - Validação dos elementos recebidos (nome, ícone)
 - Procurar o tema recebido
 - Verificar se já existe um assunto com esse nome
 - Editar o tema no banco de dados
 
-### Deleção do tema
+### Deleção do tema (Funcionamento)
 
 - Procurar um tema que corresponde ao assunto recebido
 - Deletar ele dos assuntos e apontamentos que ele pertence
 - Deletar o tema
 
-## Usuário
+## Usuário (Funcionamento)
 
-### Criação do usuário
+### Criação do usuário (Funcionamento)
 
 - Validação dos elementos recebidos (avatar, nome, email, senha)
 - Verfificar se o email já tá cadastrado
@@ -263,7 +263,7 @@ https://apiminhamente.vercel.app
 - Deleta do avatar que tá na pasta "temp"
 - Criar usuário no banco de dados
 
-### Edição do usuário
+### Edição do usuário (Funcionamento)
 
 - Validação dos elementos recebidos
 - Procurar o assunto recebido, e verificar se existe
@@ -274,7 +274,7 @@ https://apiminhamente.vercel.app
 - Adicionar o token de login antigo à lista negra
 - Editar conta
 
-### Deleção da minha conta
+### Deleção da minha conta (Funcionamento)
 
 - Validar se a conta a ser deletada pertence a esse usuário
 - Criar token de deleção da conta
@@ -284,13 +284,13 @@ https://apiminhamente.vercel.app
 - Deletar o usuário, e o avatar que tá na nuvem
 - Definir o token como usado
 
-### Adm deletar usuário
+### Adm deletar usuário (Funcionamento)
 
 - Validação dos elementos recebidos
 - Verificar se usuário existe
 - Deletar usuário, e o avatar que tá na nuvem
 
-### Login
+### Login (Funcionamento)
 
 - Validação dos elementos recebidos
 - Procurar a conta do usuário usando o email recebido
@@ -299,11 +299,11 @@ https://apiminhamente.vercel.app
 - Verificar se o token criado tá na lista negra
 - Retornar o usuário e o token dele
 
-## Logout
+## Logout (Funcionamento)
 
 - Adicionar o token do usuário à lista negra
 
-## Mudar/recuperar senha
+## Mudar/recuperar senha (Funcionamento)
 
 - Validar se a conta a ter a senha mudada pertence a esse usuário
 - Criar token de recuperação de senha
