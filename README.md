@@ -323,7 +323,7 @@ https://apiminhamente.onrender.com/apontamentos
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'get',
@@ -386,7 +386,7 @@ https://apiminhamente.onrender.com/apontamento/:id
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'get',
@@ -457,7 +457,7 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'post',
@@ -531,7 +531,7 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'put',
@@ -601,7 +601,7 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'delete',
@@ -660,7 +660,7 @@ https://apiminhamente.onrender.com/results
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'get',
@@ -724,7 +724,7 @@ https://apiminhamente.onrender.com/assuntos
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'get',
@@ -787,7 +787,7 @@ https://apiminhamente.onrender.com/assunto/:id
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'get',
@@ -847,7 +847,7 @@ https://apiminhamente.onrender.com/apontamento/assunto/slug/:slug
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'get',
@@ -916,7 +916,7 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'post',
@@ -986,7 +986,7 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'post',
@@ -1055,7 +1055,7 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'post',
@@ -1112,7 +1112,7 @@ https://apiminhamente.onrender.com/temas
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'get',
@@ -1167,7 +1167,7 @@ https://apiminhamente.onrender.com/tema/:id
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'get',
@@ -1222,7 +1222,7 @@ https://apiminhamente.onrender.com/tema/slug/:slug
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'get',
@@ -1284,7 +1284,7 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'post',
@@ -1346,7 +1346,7 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'put',
@@ -1411,7 +1411,7 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'post',
@@ -1463,7 +1463,7 @@ https://apiminhamente.onrender.com/usuarios
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'get',
@@ -1521,7 +1521,7 @@ https://apiminhamente.onrender.com/usuario/:id
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'get',
@@ -1576,7 +1576,7 @@ https://apiminhamente.onrender.com/usuario/email/:email
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'get',
@@ -1631,7 +1631,7 @@ https://apiminhamente.onrender.com/login
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
      method: 'post',
@@ -1704,7 +1704,7 @@ Esta API usa Bearer Token como um método de autenticação.
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'post',
@@ -1897,7 +1897,7 @@ https://apiminhamente.onrender.com/recuperarsenha/:email
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'post',
@@ -1950,7 +1950,7 @@ https://apiminhamente.onrender.com/mudarsenha/:token
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'post',
@@ -2012,7 +2012,7 @@ https://apiminhamente.onrender.com/usuario/:id/:email
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'post',
@@ -2055,7 +2055,7 @@ https://apiminhamente.onrender.com/deletarconta/:token
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'delete',
@@ -2113,7 +2113,7 @@ https://apiminhamente.onrender.com/usuario/:id
 
 ### Requisição
 ```
-let axios = require('axios');
+import axios from "axios";
 
 let config = {
   method: 'delete',
