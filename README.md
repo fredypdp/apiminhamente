@@ -1826,7 +1826,7 @@ formData.append('id', id);
 formData.append('nome', nome);
 formData.append('senha', senha);
 
-axios.put("https://apiminhamente.onrender.com/usuario", formData)
+axios.put("https://apiminhamente.onrender.com/usuario", formData, {headers: {'authorization': 'token de login'}})
 .then(function (response) {
   console.log(JSON.stringify(response.data));
 })
