@@ -466,7 +466,7 @@ export default class UserController {
                 await unlinkAsync(avatar) // Deletando imagem da pasta "temp"
                 
                 
-                let erroExist = await new Usuario().editar(id, nome, sobrenome, email, cdn.secure_url, cdn.public_id, token)
+                let erroExist = await new Usuario().editar(id, nome, sobrenome, email, token, cdn.secure_url, cdn.public_id)
                 if (erroExist.status == 400) {
                     res.status(406)
                     res.json({erro: "Já existe uma conta com esse email"})
@@ -514,7 +514,7 @@ export default class UserController {
                 return
             }
 
-            let erroExist = await new Usuario().editar(id, nome, sobrenome, email, cdn.secure_url, cdn.public_id, token)
+            let erroExist = await new Usuario().editar(id, nome, sobrenome, email, token)
             if (erroExist.status == 400) {
                 res.status(406)
                 res.json({erro: "Já existe uma conta com esse email"})

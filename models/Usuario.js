@@ -58,7 +58,7 @@ export default class User {
         }
     }
 
-    async editar(id, nome, sobrenome, email, avatar, avatar_public_id, token){
+    async editar(id, nome, sobrenome, email, token, avatar, avatar_public_id){
 
         let emailEncontrado = await this.encontrarPorId(email)
         if (emailEncontrado != undefined) {
