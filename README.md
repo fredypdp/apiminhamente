@@ -65,14 +65,14 @@
 
 # Como iniciar o projeto
 
-### Instale todas as dependências
+### 1- Instale todas as dependências
 
 ```
 npm intall
 ```
 
-### Crie variávei de ambiente, siga o exemplo que está no arquivo .env.example
-### Inicie o projeto
+### 2- Crie variávei de ambiente, siga o exemplo que está no arquivo .env.example
+### 3- Inicie o projeto
 
 ```
 node index
@@ -915,15 +915,14 @@ let config = {
   url: 'https://apiminhamente.onrender.com/assunto',
   headers: {
     'authorization': 'token de login'
+  },
+  data: {
+    nome: "Nome do assunto",
+    icone: "<i class='icon solid-icon'></i>",
   }
 };
 
-let data = {
-  nome: "Nome do assunto",
-  icone: "<i class='icon solid-icon'></i>",
-}
-
-axios(config, data)
+axios(config)
 .then(function (response) {
   console.log(JSON.stringify(response.data));
 })
@@ -985,14 +984,13 @@ let config = {
   url: 'https://apiminhamente.onrender.com/assunto',
   headers: {
     'authorization': 'token de login'
+  },
+  data: {
+     nome: "Novo nome do assunto"
   }
 };
 
-let data = {
-  nome: "Novo nome do assunto"
-}
-
-axios(config, data)
+axios(config)
 .then(function (response) {
   console.log(JSON.stringify(response.data));
 })
@@ -1283,15 +1281,14 @@ let config = {
   url: 'https://apiminhamente.onrender.com/tema',
   headers: {
     'authorization': 'token de login'
+  },
+  data: {
+    titulo: "Título do tema",
+    assunto: "616d6efb46c45b7f064526e3",
   }
 };
 
-let data = {
-  titulo: "Título do tema",
-  assunto: "616d6efb46c45b7f064526e3",
-}
-
-axios(config, data)
+axios(config)
 .then(function (response) {
   console.log(JSON.stringify(response.data));
 })
@@ -1345,15 +1342,14 @@ let config = {
   url: 'https://apiminhamente.onrender.com/tema',
   headers: {
     'authorization': 'token de login'
+  },
+  data: {
+    id: "616d6efb46c45b7f064526e3",
+    titulo: "Novo titulo do tema"
   }
 };
 
-let data = {
-  id: "616d6efb46c45b7f064526e3",
-  titulo: "Novo titulo do tema"
-}
-
-axios(config, data)
+axios(config)
 .then(function (response) {
   console.log(JSON.stringify(response.data));
 })
