@@ -67,7 +67,7 @@ export default class User {
         }
 
         let usuario = {};
-
+        console.log(id, nome, sobrenome, email);
         if(nome != undefined){
             usuario.nome = nome;
         }

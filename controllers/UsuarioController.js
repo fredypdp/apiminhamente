@@ -513,7 +513,7 @@ export default class UserController {
                 }
                 return
             }
-
+            console.log(id, nome, sobrenome, email, token);
             let erroExist = await new Usuario().editar(id, nome, sobrenome, email, token)
             if (erroExist.status == 400) {
                 res.status(406)
