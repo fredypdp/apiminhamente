@@ -459,24 +459,22 @@ Esta API usa Bearer Token como um método de autenticação.
 ```
 import axios from "axios";
 
-let config = {
-  method: 'post',
-  url: 'https://apiminhamente.onrender.com/apontamento',
-  headers: {
-    'authorization': 'token de login'
-  }
-};
+const formData = new FormData();
+let titulo = "Título do apontamento"
+let conteudo = "Conteúdo do apontamento"
+let assuntos = ["616d6efb46c45b7f064526e3"]
+let temas = ["616d6efb46c45b7f064526e3"]
+let visibilidade = true
+let miniatura = "file.png"
 
-let data = {
-  titulo: "Título do apontamento",
-  conteudo: "Conteúdo do apontamento",
-  assuntos: ["616d6efb46c45b7f064526e3"],
-  temas: ["616d6efb46c45b7f064526e3"],
-  visibilidade: true,
-  miniatura: "file.png"
-}
+formData.append('titulo', titulo);
+formData.append('conteudo', conteudo);
+formData.append('assuntos', assuntos);
+formData.append('temas', temas);
+formData.append('visibilidade', visibilidade);
+formData.append('miniatura', miniatura);
 
-axios(config, data)
+axios.post("https://apiminhamente.onrender.com/apontamento", formData, {headers: {'authorization': 'token de login'}})
 .then(function (response) {
   console.log(JSON.stringify(response.data));
 })
@@ -533,20 +531,14 @@ Esta API usa Bearer Token como um método de autenticação.
 ```
 import axios from "axios";
 
-let config = {
-  method: 'put',
-  url: 'https://apiminhamente.onrender.com/apontamento',
-  headers: {
-    'authorization': 'token de login'
-  }
-};
+const formData = new FormData();
+let id = "n5jSDHH7dsf"
+let conteudo = "Novo conteúdo"
 
-let data = {
-  id: n5jSDHH7dsf,
-  conteudo: "Novo conteúdo",
-}
+formData.append('id', id);
+formData.append('conteudo', conteudo);
 
-axios(config, data)
+axios.put("https://apiminhamente.onrender.com/apontamento", formData, {headers: {'authorization': 'token de login'}})
 .then(function (response) {
   console.log(JSON.stringify(response.data));
 })
