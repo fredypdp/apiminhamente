@@ -517,9 +517,6 @@ export default class UserController {
                 res.json({erro: "Já existe uma conta com esse email"})
             } else {
 
-                // Terminando sessão / Adicionando o token de login antigo à lista negra
-                await new Usuario().blacklistToken(token)
-
                 let HATEOAS = [
                     {
                         href: process.env.URL_API+"/usuario/"+erroExist.id,
