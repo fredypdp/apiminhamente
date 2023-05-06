@@ -41,7 +41,7 @@ router.get("/usuario/:id", UsuarioAuth, new UsuarioController().UsuarioById) // 
 router.get("/usuario/email/:email", UsuarioAuth, new UsuarioController().UsuarioByEmail) // Usuário pelo email
 router.post("/usuario", upload.single("avatar"), new UsuarioController().criar) // Criar usuário
 router.put("/usuario", UsuarioAuth, upload.single("avatar"), new UsuarioController().editar) // Editar usuário
-router.post("/recuperarsenha/:email", UsuarioAuth, new UsuarioController().recuperarSenha) // Enviar email de recuperação de senha
+router.post("/recuperarsenha/:email", new UsuarioController().recuperarSenha) // Enviar email de recuperação de senha
 router.post("/mudarsenha/:token", new UsuarioController().mudarSenha) // Mudar senha
 router.post("/usuario/:id/:email", UsuarioAuth, new UsuarioController().DeletarMinhaContaEmail) // Enviar email de deleção de conta
 router.delete("/deletarconta/:token", UsuarioAuth, new UsuarioController().DeletarMinhaConta) // Deletar minha conta
