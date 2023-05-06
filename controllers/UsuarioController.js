@@ -899,9 +899,6 @@ export default class UserController {
     async mudarSenha(req, res){
         let token = req.params.token;
         let senha = req.body.senha;
-        let tokenBearer = req.headers["authorization"]
-        const bearer = tokenBearer.split(" ")
-        let tokenLogin = bearer[1]
         
         // Validações
         if (token == undefined) {
@@ -947,10 +944,6 @@ export default class UserController {
 
         try {
             let usuario = await new Usuario().mudarSenha(senha, tokenValido.token.usuario, tokenValido.token.token);
-            await new Usuario().blacklistToken(tokenLogin)
-            
-            // Terminando sessão / Adicionando o token de login antigo à lista negra
-            await new Usuario().blacklistToken(token)
             
             let HATEOAS = [
                 {
