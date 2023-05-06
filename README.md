@@ -208,6 +208,7 @@ https://apiminhamente.vercel.app
 
 - Procurar um apontamento que corresponde ao apontamento recebido
 - Deletar ele dos assuntos e temas que ele pertence
+- Deletar a miniatura no Cloudinary
 - Deletar o apontamento
 
 ## Assunto (Funcionamento)
@@ -260,7 +261,7 @@ https://apiminhamente.vercel.app
 - Verfificar se o email já tá cadastrado
 - Fazer upload do avatar para a pasta "temp" usando o path e multer (no arquivo das rotas)
 - Fazer upload do avatar que tá na pasta "temp" para a Cloudinary e retornando um objeto do CDN da imagem
-- Deleta do avatar que tá na pasta "temp"
+- Deletar o avatar que tá na pasta "temp"
 - Criar usuário no banco de dados
 
 ### Edição do usuário (Funcionamento)
@@ -270,8 +271,7 @@ https://apiminhamente.vercel.app
 - Deletar avatar antigo salvo na nuvem
 - Fazer upload do avatar para a pasta "temp" usando o path e multer (no arquivo das rotas)
 - Fazer upload do avatar que tá na pasta "temp" para a Cloudinary e retornando um objeto do CDN da imagem
-- Deleta do avatar que tá na pasta "temp"
-- Adicionar o token de login antigo à lista negra
+- Deletar o avatar que tá na pasta "temp"
 - Editar conta
 
 ### Deleção da minha conta (Funcionamento)
@@ -282,7 +282,6 @@ https://apiminhamente.vercel.app
 - Validar o token depois do usuário entrar na página e verificar que quer deletar, se o token já foi usado retornar false, mas se não, retorna o token
 - Procurar o dono do token
 - Deletar o usuário, e o avatar que tá na nuvem
-- Definir o token como usado
 
 ### Adm deletar usuário (Funcionamento)
 
@@ -1943,9 +1942,6 @@ import axios from "axios";
 let config = {
   method: 'post',
   url: 'https://apiminhamente.onrender.com/mudarsenha/:token',
-  headers: {
-    'authorization': 'token de login'
-  },
   data: {
     senha: "1234567890"
   }
