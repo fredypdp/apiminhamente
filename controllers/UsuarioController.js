@@ -466,14 +466,11 @@ export default class UserController {
                 await unlinkAsync(avatar) // Deletando imagem da pasta "temp"
                 
                 
-                let erroExist = await new Usuario().editar(id, nome, sobrenome, email, token, cdn.secure_url, cdn.public_id)
+                let erroExist = await new Usuario().editar(id, nome, sobrenome, email, cdn.secure_url, cdn.public_id)
                 if (erroExist.status == 400) {
                     res.status(406)
                     res.json({erro: "Já existe uma conta com esse email"})
                 } else {
-
-                    // Terminando sessão / Adicionando o token de login antigo à lista negra
-                    await new Usuario().blacklistToken(token)
 
                     let HATEOAS = [
                         {
@@ -513,8 +510,8 @@ export default class UserController {
                 }
                 return
             }
-            console.log(id, nome, sobrenome, email, token);
-            let erroExist = await new Usuario().editar(id, nome, sobrenome, email, token)
+
+            let erroExist = await new Usuario().editar(id, nome, sobrenome, email)
             if (erroExist.status == 400) {
                 res.status(406)
                 res.json({erro: "Já existe uma conta com esse email"})
