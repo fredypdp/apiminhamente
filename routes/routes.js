@@ -42,7 +42,7 @@ router.get("/usuario/email/:email", UsuarioAuth, new UsuarioController().Usuario
 router.post("/usuario", upload.single("avatar"), new UsuarioController().criar) // Criar usuário
 router.put("/usuario", UsuarioAuth, upload.single("avatar"), new UsuarioController().editar) // Editar usuário
 router.post("/recuperarsenha/:email", UsuarioAuth, new UsuarioController().recuperarSenha) // Enviar email de recuperação de senha
-router.post("/mudarsenha/:token", UsuarioAuth, new UsuarioController().mudarSenha) // Mudar senha
+router.post("/mudarsenha/:token", new UsuarioController().mudarSenha) // Mudar senha
 router.post("/usuario/:id/:email", UsuarioAuth, new UsuarioController().DeletarMinhaContaEmail) // Enviar email de deleção de conta
 router.delete("/deletarconta/:token", UsuarioAuth, new UsuarioController().DeletarMinhaConta) // Deletar minha conta
 router.delete("/usuario/:id", AdminAuth, new UsuarioController().AdmDeletarUsuario) // Adm deletar usuário
