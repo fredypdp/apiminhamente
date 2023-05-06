@@ -945,32 +945,6 @@ export default class UserController {
             return
         }
 
-        // Validar se a conta a ter a senha mudada pertence a esse usuário
-        const tokenMudarSenhaValido = await new Usuario().findBlacklist(tokenLogin)
-        
-        if(tokenMudarSenhaValido != null || tokenMudarSenhaValido != undefined) {
-            res.status(403);
-            res.json({erro: "Token invalido"});
-            return
-        }
-
-        try {
-            let usuario = await new Usuario().encontrarPorId(tokenValido.token.usuario);
-            let decoded = await jwt.verify(tokenLogin, secret)
-
-            if(decoded.usuario.senha != usuario.senha){
-                res.status(403);
-                res.json({erro: "Erro ao mudar senha!"});
-                return
-            }
-        } catch (erro) {
-            res.status(401);
-            res.json({erro: "Token inválido"});
-            return
-        }
-
-
-
         try {
             let usuario = await new Usuario().mudarSenha(senha, tokenValido.token.usuario, tokenValido.token.token);
             await new Usuario().blacklistToken(tokenLogin)
