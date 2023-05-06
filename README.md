@@ -1906,7 +1906,7 @@ axios(config)
 
 ### Exemplo de resposta de sucesso
 ```
-{msg: "Link enviado ao seu email com sucesso"}
+"Link enviado ao seu email com sucesso"
 ```
 
 ### Exemplos de respostas de erro
@@ -2021,7 +2021,7 @@ axios(config)
 
 ### Exemplo de resposta de sucesso
 ```
-{msg: "Email de deleção enviado com sucesso"}
+"Email de deleção enviado com sucesso ao seu email"
 ```
 
 ### Exemplos de respostas de erro
