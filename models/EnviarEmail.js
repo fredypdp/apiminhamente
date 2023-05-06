@@ -22,7 +22,7 @@ export default class Email{
         transporter.sendMail({
             from: `MinhaMente ${siteEmail}`,
             to: email,
-            subject: "Mudar a senha",
+            subject: "Mudar senha",
             text: `Mude a sua senha clicando aqui: ${urlSenha}/${token}`,
             html: `Mude a sua senha clicando <a href='${urlSenha}/${token}'>aqui</a>`
         }).then( message => {
