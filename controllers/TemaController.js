@@ -193,6 +193,59 @@ export default class AssuntoController {
         }
     }
 
+    async TemaTitulo(req, res){
+        let titulo = req.params.titulo
+
+        // Validações
+        if (titulo == undefined) {
+            res.status(400)
+            res.json({erro: "Slug inválido, o campo está vazio"})
+            return
+        }
+
+        if (titulo != undefined) {
+            if (titulo.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "Titulo inválido, o campo está vazio"})
+                return
+            }
+        }
+
+        try {
+            let tema = await new Tema().encontrarPorTitulo(titulo)
+
+            let HATEOAS = [
+                {
+                    href: process.env.URL_API+"/tema/"+tema._id,
+                    method: "get",
+                    rel: "tema_pelo_id",
+                },
+                {
+                    href: process.env.URL_API+"/tema/slug/"+tema.slug,
+                    method: "get",
+                    rel: "tema_pelo_slug",
+                },
+                {
+                    href: process.env.URL_API+"/tema",
+                    method: "put",
+                    rel: "editar_tema",
+                },
+                {
+                    href: process.env.URL_API+"/tema/"+tema._id,
+                    method: "delete",
+                    rel: "deletar_tema",
+                },
+            ]
+
+            res.status(200)
+            res.json({tema: tema, _links: HATEOAS})
+        } catch (erro) {
+            console.log(erro)
+            res.status(404)
+            res.json({erro: "Erro ao encontrar tema"})
+        }
+    }
+
     async TemaSlug(req, res){
         let slug = req.params.slug
 

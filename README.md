@@ -1264,6 +1264,61 @@ axios(config)
 }
 ```
 
+### Pegar o tema pelo titulo
+
+```
+https://apiminhamente.onrender.com/tema/titulo/:titulo
+```
+
+#### Parâmetros
+
+* titulo - É o titulo do tema
+
+### Requisição
+```
+import axios from "axios";
+
+let config = {
+  method: 'get',
+  url: 'https://apiminhamente.onrender.com/tema/titulo/:titulo'
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+```
+
+### Exemplo de resposta de sucesso
+```
+{
+  "_id": ObjectId("616d6efb46c45b7f064526e3"),
+  "titulo": "Título do tema",
+  "slug": "Título-do-tema",
+  "assunto": "616d6efb46c45b7f064526e3",
+  "apontamentos": ["616d6efb46c45b7f064526e3"],
+  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+}
+```
+
+### Exemplo de resposta de erro
+```
+{
+  "erro": "Erro ao encontrar o tema"
+}
+```
+
+### Exemplo de resposta não encontrada
+```
+{
+  "erro": "Nenhum tema encontrado"
+}
+```
+
 ### Pegar o tema pelo slug
 
 ```

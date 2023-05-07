@@ -64,6 +64,7 @@ router.delete("/assunto/:id", AdminAuth, new AssuntoController().deletar) // Del
 // Temas
 router.get("/temas", new TemaController().Temas) // Todos os temas
 router.get("/tema/:id", new TemaController().TemaById) // Tema pelo id
+router.get("/tema/titulo/:titulo", new TemaController().TemaTitulo) // Tema pelo titulo
 router.get("/tema/slug/:slug", new TemaController().TemaSlug) // Tema pelo slug
 router.post("/tema", AdminAuth, new TemaController().criar) // Criar tema
 router.put("/tema", AdminAuth, new TemaController().editar) // Editar tema
