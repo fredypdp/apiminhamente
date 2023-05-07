@@ -89,27 +89,27 @@ export default class UserController {
             res.json({erro: "Erro ao encontrar usuário"});
         }
     }
-    
-    async UsuarioBySobrenome(req, res){
-        let sobrenome = req.params.sobrenome
+
+    async UsuarioByNome(req, res){
+        let nome = req.params.nome
 
         // Validações
-        if (sobrenome == undefined) {
+        if (nome == undefined) {
             res.status(400)
-            res.json({erro: "Sobrenome inválido, campo vazio"})
+            res.json({erro: "Nome inválido, campo vazio"})
             return
         }
         
-        if (sobrenome != undefined) {
-            if (email.trim().length === 0) {
+        if (nome != undefined) {
+            if (nome.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "Sobrenome inválido, campo vazio"})
+                res.json({erro: "Nome inválido, campo vazio"})
                 return
             }
         }
 
         try {                
-            let usuario = await new Usuario().encontrarPorSobrenome(sobrenome);
+            let usuario = await new Usuario().encontrarPorNome(nome);
 
             let HATEOAS = [
                 {
@@ -153,26 +153,26 @@ export default class UserController {
         }
     }
 
-    async UsuarioByNome(req, res){
-        let nome = req.params.nome
+    async UsuarioBySobrenome(req, res){
+        let sobrenome = req.params.sobrenome
 
         // Validações
-        if (nome == undefined) {
+        if (sobrenome == undefined) {
             res.status(400)
-            res.json({erro: "Nome inválido, campo vazio"})
+            res.json({erro: "Sobrenome inválido, campo vazio"})
             return
         }
         
-        if (nome != undefined) {
-            if (email.trim().length === 0) {
+        if (sobrenome != undefined) {
+            if (sobrenome.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "Nome inválido, campo vazio"})
+                res.json({erro: "Sobrenome inválido, campo vazio"})
                 return
             }
         }
 
         try {                
-            let usuario = await new Usuario().encontrarPorNome(nome);
+            let usuario = await new Usuario().encontrarPorSobrenome(sobrenome);
 
             let HATEOAS = [
                 {

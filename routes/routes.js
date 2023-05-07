@@ -55,6 +55,7 @@ router.post("/logout", UsuarioAuth, new UsuarioController().logout) // Terminar 
 // Assuntos
 router.get("/assuntos", new AssuntoController().Assuntos) // Todos os assuntos
 router.get("/assunto/:id", new AssuntoController().AssuntoById) // Assunto pelo id
+router.get("/assunto/nome/:nome", new AssuntoController().AssuntoNome) // Assunto pelo nome
 router.get("/assunto/slug/:slug", new AssuntoController().AssuntoSlug) // Assunto pelo slug
 router.post("/assunto", AdminAuth, new AssuntoController().criar) // Criar assunto
 router.put("/assunto", AdminAuth, new AssuntoController().editar) // Editar assunto

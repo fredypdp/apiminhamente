@@ -38,6 +38,7 @@
   * [Assunto](#Assunto)
     * [Pegar todos os assuntos](#Pegar-todos-os-assuntos)
     * [Pegar o assunto pelo id](#Pegar-o-assunto-pelo-id)
+    * [Pegar o assunto pelo nome](#Pegar-o-assunto-pelo-nome)
     * [Pegar o assunto pelo slug](#Pegar-o-assunto-pelo-slug)
     * [Criar assunto](#Criar-assunto)
     * [Editar assunto](#Editar-assunto)
@@ -811,6 +812,68 @@ axios(config)
 ],
 "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
 "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+}
+```
+
+### Exemplo de resposta de erro
+```
+{
+  "erro": "Erro ao encontrar o assunto"
+}
+```
+
+### Exemplo de resposta não encontrada
+```
+{
+  "erro": "Nenhum assunto encontrado"
+}
+```
+
+### Pegar o assunto pelo nome
+
+```
+https://apiminhamente.onrender.com/apontamento/assunto/nome/:nome
+```
+
+#### Parâmetros
+
+* nome - É o nome do assunto
+
+### Requisição
+```
+import axios from "axios";
+
+let config = {
+  method: 'get',
+  url: 'https://apiminhamente.onrender.com/assunto/nome/:nome'
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+```
+
+### Exemplo de resposta de sucesso
+```
+{
+ {
+  "_id": ObjectId("616d6efb46c45b7f064526e3"),
+  "nome": "Nome do assunto",
+  "slug": "Nome_do_assunto",
+  "icone": "<i class='icon solid-icon'></i>",
+  "apontamentos": [
+    "616d6efb46c45b7f064526e3"
+  ],
+  "temas": [
+    "616d6efb46c45b7f064526e3"
+  ],
+  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+ }
 }
 ```
 

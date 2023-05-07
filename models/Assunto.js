@@ -104,6 +104,15 @@ export default class Assunto {
         }
     }
 
+    async encontrarPorNome(nome){
+        try {
+            let result = await AssuntoSchema.findOne({nome: nome}).populate("apontamentos").populate("temas")
+            return result
+        } catch (erro) {
+            return erro
+        }
+    }
+
     async encontrarPorSlug(slug){
         try {
             let result = await AssuntoSchema.findOne({slug: slug}).populate("apontamentos").populate("temas")

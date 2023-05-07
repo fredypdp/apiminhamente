@@ -207,6 +207,59 @@ export default class AssuntoController {
         }
     }
 
+    async AssuntoNome(req, res){
+        let nome = req.params.nome
+
+        // Validações
+        if (nome == undefined) {
+            res.status(400)
+            res.json({erro: "Nome inválido, o campo está vazio"})
+            return
+        }
+        
+        if (nome != undefined) {
+            if (nome.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "Nome inválido, o campo está vazio"})
+                return
+            }
+        }
+
+        try {
+            let assunto = await new Assunto().encontrarPorNome(nome)
+
+            let HATEOAS = [
+                {
+                    href: process.env.URL_API+"/assunto/"+assunto._id,
+                    method: "get",
+                    rel: "assunto_pelo_id",
+                },
+                {
+                    href: process.env.URL_API+"/assunto/slug/"+assunto.slug,
+                    method: "get",
+                    rel: "assunto_pelo_slug",
+                },
+                {
+                    href: process.env.URL_API+"/assunto",
+                    method: "put",
+                    rel: "editar_assunto",
+                },
+                {
+                    href: process.env.URL_API+"/assunto/"+assunto._id,
+                    method: "delete",
+                    rel: "deletar_assunto",
+                },
+            ]
+
+            res.status(200)
+            res.json({assunto: assunto, _links: HATEOAS})
+        } catch (erro) {
+            console.log(erro)
+            res.status(404)
+            res.json({erro: "Erro ao encontrar assunto"})
+        }
+    }
+
     async AssuntoSlug(req, res){
         let slug = req.params.slug
 
