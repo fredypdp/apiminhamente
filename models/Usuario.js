@@ -24,6 +24,24 @@ export default class User {
         }
     }
 
+    async encontrarPorNome(nome){
+        try{
+            let usuario = await UsuarioSchema.findOne({nome: nome})
+            return usuario
+        }catch(erro){
+            return erro;
+        }
+    }
+
+    async encontrarPorSobrenome(sobrenome){
+        try{
+            let usuario = await UsuarioSchema.findOne({sobrenome: sobrenome})
+            return usuario
+        }catch(erro){
+            return erro;
+        }
+    }
+
     async encontrarPorEmail(email){
         try{
             let usuario = await UsuarioSchema.findOne({email: email})

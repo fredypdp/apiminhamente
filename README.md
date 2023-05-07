@@ -52,6 +52,8 @@
   * [Usuário](#Usuário)
     * [Pegar todos os usuários](#Pegar-todos-os-usuários)
     * [Pegar o usuário pelo id](#Pegar-o-usuário-pelo-id)
+    * [Pegar o usuário pelo nome](#Pegar-o-usuário-pelo-nome)
+    * [Pegar o usuário pelo sobrenome](#Pegar-o-usuário-pelo-sobrenome)
     * [Pegar o usuário pelo email](#Pegar-o-usuário-pelo-email)
     * [Login](#Login)
     * [Logout](#Logout)
@@ -1513,6 +1515,116 @@ import axios from "axios";
 let config = {
   method: 'get',
   url: 'https://apiminhamente.onrender.com/usuario/:id',
+  headers: {
+    'authorization': 'token de login'
+  }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+```
+
+### Exemplo de resposta de sucesso
+```
+{
+  "_id": ObjectId("616d6efb46c45b7f064526e3"),
+  "id": "616d6efb46c",
+  "nome": "Nome",
+  "sobrenome": "Sobrenome",
+  "email": "email@gmail.com",
+  "senha": "senha",
+  "role": 1,
+  "avatar": "https://avatar.com",
+  "avatar_public_id": {"avatar324f.jpg",
+  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+}
+```
+
+### Exemplo de resposta de erro
+```
+{
+  "erro": "Erro ao encontrar o usuário"
+}
+```
+
+### Pegar o usuário pelo nome
+
+```
+https://apiminhamente.onrender.com/usuario/nome/:nome
+```
+
+#### Parâmetros
+
+* nome - nome do usuario
+
+### Requisição
+```
+import axios from "axios";
+
+let config = {
+  method: 'get',
+  url: 'https://apiminhamente.onrender.com/usuario/nome/:nome',
+  headers: {
+    'authorization': 'token de login'
+  }
+};
+
+axios(config)
+.then(function (response) {
+  console.log(JSON.stringify(response.data));
+})
+.catch(function (error) {
+  console.log(error);
+});
+```
+
+### Exemplo de resposta de sucesso
+```
+{
+  "_id": ObjectId("616d6efb46c45b7f064526e3"),
+  "id": "616d6efb46c",
+  "nome": "Nome",
+  "sobrenome": "Sobrenome",
+  "email": "email@gmail.com",
+  "senha": "senha",
+  "role": 1,
+  "avatar": "https://avatar.com",
+  "avatar_public_id": {"avatar324f.jpg",
+  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+}
+```
+
+### Exemplo de resposta de erro
+```
+{
+  "erro": "Erro ao encontrar o usuário"
+}
+```
+
+### Pegar o usuário pelo sobrenome
+
+```
+https://apiminhamente.onrender.com/usuario/sobrenome/:sobrenome
+```
+
+#### Parâmetros
+
+* sobrenome - sobrenome do usuario
+
+### Requisição
+```
+import axios from "axios";
+
+let config = {
+  method: 'get',
+  url: 'https://apiminhamente.onrender.com/usuario/sobrenome/:sobrenome',
   headers: {
     'authorization': 'token de login'
   }

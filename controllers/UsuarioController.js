@@ -90,6 +90,132 @@ export default class UserController {
         }
     }
     
+    async UsuarioBySobrenome(req, res){
+        let sobrenome = req.params.sobrenome
+
+        // Validações
+        if (sobrenome == undefined) {
+            res.status(400)
+            res.json({erro: "Sobrenome inválido, campo vazio"})
+            return
+        }
+        
+        if (sobrenome != undefined) {
+            if (email.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "Sobrenome inválido, campo vazio"})
+                return
+            }
+        }
+
+        try {                
+            let usuario = await new Usuario().encontrarPorSobrenome(sobrenome);
+
+            let HATEOAS = [
+                {
+                    href: process.env.URL_API+"/usuario/"+usuario.id,
+                    method: "get",
+                    rel: "usuário_pelo_id",
+                },
+                {
+                    href: process.env.URL_API+"/usuario/email/"+usuario.email,
+                    method: "get",
+                    rel: "usuário_pelo_email"
+                },
+                {
+                    href: process.env.URL_API+"/usuario",
+                    method: "put",
+                    rel: "editar_usuario"
+                },
+                {
+                    href: process.env.URL_API+"/recuperarsenha"+"/"+usuario.email,
+                    method: "post",
+                    rel: "enviar_email_de_recuperação_de_senha"
+                },
+                {
+                    href: process.env.URL_API+"/usuario/"+usuario.id+"/"+usuario.email,
+                    method: "post",
+                    rel: "enviar_email_de_deleção_de_conta"
+                },
+                {
+                    href: process.env.URL_API+"/usuario/"+usuario.id,
+                    method: "delete",
+                    rel: "adm_deletar_usuário"
+                }
+            ]
+
+            res.status(200)
+            res.json({usuario: usuario, _links: HATEOAS});
+        } catch (erro) {
+            console.log(erro);
+            res.status(404)
+            res.json({erro: "Erro ao encontrar usuário"});
+        }
+    }
+
+    async UsuarioByNome(req, res){
+        let nome = req.params.nome
+
+        // Validações
+        if (nome == undefined) {
+            res.status(400)
+            res.json({erro: "Nome inválido, campo vazio"})
+            return
+        }
+        
+        if (nome != undefined) {
+            if (email.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "Nome inválido, campo vazio"})
+                return
+            }
+        }
+
+        try {                
+            let usuario = await new Usuario().encontrarPorNome(nome);
+
+            let HATEOAS = [
+                {
+                    href: process.env.URL_API+"/usuario/"+usuario.id,
+                    method: "get",
+                    rel: "usuário_pelo_id",
+                },
+                {
+                    href: process.env.URL_API+"/usuario/email/"+usuario.email,
+                    method: "get",
+                    rel: "usuário_pelo_email"
+                },
+                {
+                    href: process.env.URL_API+"/usuario",
+                    method: "put",
+                    rel: "editar_usuario"
+                },
+                {
+                    href: process.env.URL_API+"/recuperarsenha"+"/"+usuario.email,
+                    method: "post",
+                    rel: "enviar_email_de_recuperação_de_senha"
+                },
+                {
+                    href: process.env.URL_API+"/usuario/"+usuario.id+"/"+usuario.email,
+                    method: "post",
+                    rel: "enviar_email_de_deleção_de_conta"
+                },
+                {
+                    href: process.env.URL_API+"/usuario/"+usuario.id,
+                    method: "delete",
+                    rel: "adm_deletar_usuário"
+                }
+            ]
+
+            res.status(200)
+            res.json({usuario: usuario, _links: HATEOAS});
+        } catch (erro) {
+            console.log(erro);
+            res.status(404)
+            res.json({erro: "Erro ao encontrar usuário"});
+        }
+    }
+
     async UsuarioByEmail(req, res){
         let email = req.params.email
 
