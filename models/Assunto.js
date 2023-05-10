@@ -97,7 +97,7 @@ export default class Assunto {
 
     async assuntoAll(){
         try{
-            let result = await AssuntoSchema.find({}).populate("apontamentos").populate("temas").sort({nome: 1 })
+            let result = await AssuntoSchema.find({}).populate("apontamentos").populate("temas")
             return result
         }catch(erro){
             return erro

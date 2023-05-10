@@ -204,7 +204,7 @@ export default class Apontamento {
 
     async apontamentoAll(){
         try{
-            let result = await ApontamentoSchema.find({}).populate("assuntos").populate("temas").sort({titulo: 1 })
+            let result = await ApontamentoSchema.find({}).populate("assuntos").populate("temas")
             return result;
         }catch(erro){
             return erro

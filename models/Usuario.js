@@ -8,7 +8,7 @@ import FileManager from "./FileManager.js";
 export default class User {
     async usuarioAll(){
         try{
-            let usuario = await UsuarioSchema.find({}).sort({nome: 1})
+            let usuario = await UsuarioSchema.find({})
             return usuario;
         }catch(erro){
             return erro
@@ -26,7 +26,7 @@ export default class User {
 
     async encontrarPorNome(nome){
         try{
-            let usuario = await UsuarioSchema.findOne({nome: nome})
+            let usuario = await UsuarioSchema.find({nome: nome})
             return usuario
         }catch(erro){
             return erro;
@@ -35,7 +35,7 @@ export default class User {
 
     async encontrarPorSobrenome(sobrenome){
         try{
-            let usuario = await UsuarioSchema.findOne({sobrenome: sobrenome})
+            let usuario = await UsuarioSchema.find({sobrenome: sobrenome})
             return usuario
         }catch(erro){
             return erro;
