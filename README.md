@@ -1671,7 +1671,7 @@ axios(config)
 }
 ```
 
-### Pegar o usuário pelo nome
+### Pegar o usuários pelo nome
 
 ```
 https://apiminhamente.onrender.com/usuario/nome/:nome
@@ -1704,19 +1704,22 @@ axios(config)
 
 ### Exemplo de resposta de sucesso
 ```
-{
-  "_id": ObjectId("616d6efb46c45b7f064526e3"),
-  "id": "616d6efb46c",
-  "nome": "Nome",
-  "sobrenome": "Sobrenome",
-  "email": "email@gmail.com",
-  "senha": "senha",
-  "role": 1,
-  "avatar": "https://avatar.com",
-  "avatar_public_id": {"avatar324f.jpg",
-  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-}
+[
+  {
+    "_id": ObjectId("616d6efb46c45b7f064526e3"),
+    "id": "616d6efb46c",
+    "nome": "Nome",
+    "sobrenome": "Sobrenome",
+    "email": "email@gmail.com",
+    "senha": "senha",
+    "role": 1,
+    "avatar": "https://avatar.com",
+    "avatar_public_id": {"avatar324f.jpg",
+    "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  }
+  ...
+]
 ```
 
 ### Exemplo de resposta de erro
@@ -1726,7 +1729,7 @@ axios(config)
 }
 ```
 
-### Pegar o usuário pelo sobrenome
+### Pegar o usuários pelo sobrenome
 
 ```
 https://apiminhamente.onrender.com/usuario/sobrenome/:sobrenome
@@ -1759,19 +1762,22 @@ axios(config)
 
 ### Exemplo de resposta de sucesso
 ```
-{
-  "_id": ObjectId("616d6efb46c45b7f064526e3"),
-  "id": "616d6efb46c",
-  "nome": "Nome",
-  "sobrenome": "Sobrenome",
-  "email": "email@gmail.com",
-  "senha": "senha",
-  "role": 1,
-  "avatar": "https://avatar.com",
-  "avatar_public_id": {"avatar324f.jpg",
-  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-}
+[
+  {
+    "_id": ObjectId("616d6efb46c45b7f064526e3"),
+    "id": "616d6efb46c",
+    "nome": "Nome",
+    "sobrenome": "Sobrenome",
+    "email": "email@gmail.com",
+    "senha": "senha",
+    "role": 1,
+    "avatar": "https://avatar.com",
+    "avatar_public_id": {"avatar324f.jpg",
+    "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  }
+  ...
+]
 ```
 
 ### Exemplo de resposta de erro
