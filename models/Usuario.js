@@ -26,8 +26,8 @@ export default class User {
 
     async encontrarPorNome(nome){
         try{
-            let usuario = await UsuarioSchema.find({nome: nome})
-            return usuario
+            let usuarios = await UsuarioSchema.find({nome: nome})
+            return usuarios
         }catch(erro){
             return erro;
         }
@@ -35,8 +35,8 @@ export default class User {
 
     async encontrarPorSobrenome(sobrenome){
         try{
-            let usuario = await UsuarioSchema.find({sobrenome: sobrenome})
-            return usuario
+            let usuarios = await UsuarioSchema.find({sobrenome: sobrenome})
+            return usuarios
         }catch(erro){
             return erro;
         }

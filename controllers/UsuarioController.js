@@ -109,7 +109,7 @@ export default class UserController {
         }
 
         try {                
-            let usuario = await new Usuario().encontrarPorNome(nome);
+            let usuarios = await new Usuario().encontrarPorNome(nome);
 
             let HATEOAS = [
                 {
@@ -145,7 +145,7 @@ export default class UserController {
             ]
 
             res.status(200)
-            res.json({usuario: usuario, _links: HATEOAS});
+            res.json({usuarios: usuarios, _links: HATEOAS});
         } catch (erro) {
             console.log(erro);
             res.status(404)
@@ -172,7 +172,7 @@ export default class UserController {
         }
 
         try {                
-            let usuario = await new Usuario().encontrarPorSobrenome(sobrenome);
+            let usuarios = await new Usuario().encontrarPorSobrenome(sobrenome);
 
             let HATEOAS = [
                 {
@@ -208,7 +208,7 @@ export default class UserController {
             ]
 
             res.status(200)
-            res.json({usuario: usuario, _links: HATEOAS});
+            res.json({usuarios: usuarios, _links: HATEOAS});
         } catch (erro) {
             console.log(erro);
             res.status(404)
