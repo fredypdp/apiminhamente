@@ -204,7 +204,7 @@ export default class Apontamento {
 
     async apontamentoAll(){
         try{
-            let result = await ApontamentoSchema.find({}).populate("assuntos").populate("temas")
+            let result = await ApontamentoSchema.find({}).populate("assuntos").populate("temas").sort({created_at: 1})
             return result;
         }catch(erro){
             return erro
@@ -223,7 +223,7 @@ export default class Apontamento {
 
     async pesquisa(pesquisa){
         try {
-            let result = await ApontamentoSchema.find({ titulo: { $regex: `${pesquisa}`} }).populate("assuntos").populate("temas")
+            let result = await ApontamentoSchema.find({ titulo: { $regex: `${pesquisa}`} }).populate("assuntos").populate("temas").sort({created_at: 1})
 
             return result
         } catch (erro) {
