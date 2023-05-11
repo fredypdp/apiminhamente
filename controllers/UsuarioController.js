@@ -324,6 +324,15 @@ export default class UserController {
             }
         }
 
+        if (email != undefined) {
+            if(!new RegExp(/^[a-zA-Z0-9._%+-]+@gmail\.com$/i).test(email)) {
+                await unlinkAsync(req.file.destination+"/"+req.file.filename)
+                res.status(400)
+                res.json({erro: "Email inválido, precisa ser um gmail"})
+                return
+            }
+        }
+
         if (senha != undefined) {
             if (senha.trim().length === 0) {
                 if (req.file != undefined) {
