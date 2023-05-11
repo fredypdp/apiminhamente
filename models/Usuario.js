@@ -53,7 +53,7 @@ export default class User {
     
     async encontrarPorRole(role){
         try{
-            let usuario = await UsuarioSchema.findOne({role: role})
+            let usuario = await UsuarioSchema.find({role: role})
             return usuario
         }catch(erro){
             return erro;
