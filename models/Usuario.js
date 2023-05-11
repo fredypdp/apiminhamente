@@ -50,6 +50,15 @@ export default class User {
             return erro;
         }
     }
+    
+    async encontrarPorRole(role){
+        try{
+            let usuario = await UsuarioSchema.findOne({role: role})
+            return usuario
+        }catch(erro){
+            return erro;
+        }
+    }
 
     // CRUD 
 
