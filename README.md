@@ -56,6 +56,7 @@
     * [Pegar o usuário pelo nome](#Pegar-o-usuário-pelo-nome)
     * [Pegar o usuário pelo sobrenome](#Pegar-o-usuário-pelo-sobrenome)
     * [Pegar o usuário pelo email](#Pegar-o-usuário-pelo-email)
+    * [Pegar o usuário pelo role](#Pegar-o-usuário-pelo-role)
     * [Login](#Login)
     * [Logout](#Logout)
     * [Criar conta](#Criar-conta)
