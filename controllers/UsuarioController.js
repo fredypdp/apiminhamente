@@ -232,43 +232,10 @@ export default class UserController {
         }
 
         try {                
-            let usuario = await new Usuario().encontrarPorRole(role);
-
-            let HATEOAS = [
-                {
-                    href: process.env.URL_API+"/usuario/"+usuario.id,
-                    method: "get",
-                    rel: "usuário_pelo_id",
-                },
-                {
-                    href: process.env.URL_API+"/usuario/email/"+usuario.email,
-                    method: "get",
-                    rel: "usuário_pelo_email"
-                },
-                {
-                    href: process.env.URL_API+"/usuario",
-                    method: "put",
-                    rel: "editar_usuario"
-                },
-                {
-                    href: process.env.URL_API+"/recuperarsenha"+"/"+usuario.email,
-                    method: "post",
-                    rel: "enviar_email_de_recuperação_de_senha"
-                },
-                {
-                    href: process.env.URL_API+"/usuario/"+usuario.id+"/"+usuario.email,
-                    method: "post",
-                    rel: "enviar_email_de_deleção_de_conta"
-                },
-                {
-                    href: process.env.URL_API+"/usuario/"+usuario.id,
-                    method: "delete",
-                    rel: "adm_deletar_usuário"
-                }
-            ]
+            let usuarios = await new Usuario().encontrarPorRole(role);
 
             res.status(200)
-            res.json({usuario: usuario, _links: HATEOAS});
+            res.json({usuarios: usuarios});
         } catch (erro) {
             console.log(erro);
             res.status(404)
