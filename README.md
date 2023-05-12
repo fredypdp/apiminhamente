@@ -1048,6 +1048,7 @@ Esta API usa Bearer Token como um método de autenticação.
 #### Elementos
 
 * id - ObjectId do assunto (required)
+* Elementos que deseja editar
 
 ### Requisição
 ```
@@ -1060,6 +1061,7 @@ let config = {
     'authorization': 'token de login'
   },
   data: {
+     id: "3dD987FDSFJN4",
      nome: "Novo nome do assunto"
   }
 };
