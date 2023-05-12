@@ -242,7 +242,7 @@ https://apiminhamente.vercel.app
 ### Deleção do assunto (Funcionamento)
 
 - Procurar um assunto que corresponde ao assunto recebido
-- Deletar ele dos apontamentos que pertence e deletar todos os temas que pertencem a ele
+- Deletar ele dos apontamentos que ele pertence e deletar todos os temas que pertencem a ele
 - Deletar o assunto
 
 ## Tema (Funcionamento)
