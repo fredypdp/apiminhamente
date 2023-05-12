@@ -1122,7 +1122,7 @@ Esta API usa Bearer Token como um método de autenticação.
 import axios from "axios";
 
 let config = {
-  method: 'post',
+  method: 'delete',
   url: 'https://apiminhamente.onrender.com/assunto/:id',
   headers: {
     'authorization': 'token de login'
