@@ -24,7 +24,7 @@ export default class Assunto {
     async editar(id, novoNome, novoIcone){
         let assuntoEditar = {}
 
-        let assuntoEncontrado = await this.encontrarPorNome(nome)
+        let assuntoEncontrado = await this.encontrarPorNome(novoNome)
         
         if (assuntoEncontrado != undefined) {
             let erro = {status: 400, msg: "O nome já está cadastrado"}
