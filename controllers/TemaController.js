@@ -214,6 +214,12 @@ export default class AssuntoController {
         try {
             let tema = await new Tema().encontrarPorTitulo(titulo)
 
+            if(tema == undefined) {
+                res.status(200)
+                res.json({tema: tema})
+                return
+            }
+            
             let HATEOAS = [
                 {
                     href: process.env.URL_API+"/tema/"+tema._id,
@@ -267,6 +273,12 @@ export default class AssuntoController {
         try {
             let tema = await new Tema().encontrarPorSlug(slug)
 
+            if(tema == undefined) {
+                res.status(200)
+                res.json({tema: tema})
+                return
+            }
+
             let HATEOAS = [
                 {
                     href: process.env.URL_API+"/tema/"+tema._id,
@@ -318,6 +330,12 @@ export default class AssuntoController {
 
         try {
             let tema = await new Tema().encontrarPorId(id)
+
+            if(tema == undefined) {
+                res.status(200)
+                res.json({tema: tema})
+                return
+            }
 
             let HATEOAS = [
                 {

@@ -48,6 +48,12 @@ export default class UserController {
         try {                
             let usuario = await new Usuario().encontrarPorId(id);
 
+            if(usuario == undefined) {
+                res.status(200)
+                res.json({usuario: usuario});
+                return
+            }
+            
             let HATEOAS = [
                 {
                     href: process.env.URL_API+"/usuario/"+usuario.id,
@@ -170,6 +176,12 @@ export default class UserController {
 
         try {                
             let usuario = await new Usuario().encontrarPorEmail(email);
+
+            if(usuario == undefined) {
+                res.status(200)
+                res.json({usuario: usuario});
+                return
+            }
 
             let HATEOAS = [
                 {

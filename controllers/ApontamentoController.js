@@ -348,6 +348,12 @@ export default class ApontamentoController {
         try {                
             let apontamento = await new Apontamento().encontrarPorId(id)
             
+            if(apontamento == undefined) {              
+                res.status(200)
+                res.json({apontamento: apontamento})
+                return
+            }
+            
             let HATEOAS = [
                 {
                     href: process.env.URL_API+"/apontamento/"+apontamento.id,

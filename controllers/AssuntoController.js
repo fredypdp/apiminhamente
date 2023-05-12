@@ -227,7 +227,13 @@ export default class AssuntoController {
 
         try {
             let assunto = await new Assunto().encontrarPorNome(nome)
-
+            
+            if(assunto == undefined) {              
+                res.status(200)
+                res.json({assunto: assunto})
+                return
+            }
+            
             let HATEOAS = [
                 {
                     href: process.env.URL_API+"/assunto/"+assunto._id,
@@ -281,6 +287,12 @@ export default class AssuntoController {
         try {
             let assunto = await new Assunto().encontrarPorSlug(slug)
 
+            if(assunto == undefined) {              
+                res.status(200)
+                res.json({assunto: assunto})
+                return
+            }
+            
             let HATEOAS = [
                 {
                     href: process.env.URL_API+"/assunto/"+assunto._id,
@@ -334,6 +346,12 @@ export default class AssuntoController {
         try {
             let assunto = await new Assunto().encontrarPorId(id)
             
+            if(assunto == undefined) {              
+                res.status(200)
+                res.json({assunto: assunto})
+                return
+            }
+            
             let HATEOAS = [
                 {
                     href: process.env.URL_API+"/assunto/"+assunto._id,
@@ -356,7 +374,7 @@ export default class AssuntoController {
                     rel: "deletar_assunto",
                 },
             ]
-            
+
             res.status(200)
             res.json({assunto: assunto, _links: HATEOAS})
         } catch (erro) {
