@@ -96,7 +96,7 @@ export default class Tema {
 
     async temaAll(){
         try{
-            let result = await TemaSchema.find({}).populate("apontamentos").sort({created_at: -1})
+            let result = await TemaSchema.find({}).populate("apontamentos").sort({titulo: 1})
             return result
         }catch(erro){
             return erro
