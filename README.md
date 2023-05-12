@@ -1055,7 +1055,7 @@ Esta API usa Bearer Token como um método de autenticação.
 import axios from "axios";
 
 let config = {
-  method: 'post',
+  method: 'put',
   url: 'https://apiminhamente.onrender.com/assunto',
   headers: {
     'authorization': 'token de login'
@@ -1533,7 +1533,7 @@ Esta API usa Bearer Token como um método de autenticação.
 import axios from "axios";
 
 let config = {
-  method: 'post',
+  method: 'delete',
   url: 'https://apiminhamente.onrender.com/tema/:id',
   headers: {
     'authorization': 'token de login'
