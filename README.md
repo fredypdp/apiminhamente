@@ -46,6 +46,7 @@
   * [Tema](#Tema)
     * [Pegar todos os temas](#Pegar-todos-os-temas)
     * [Pegar o tema pelo id](#Pegar-o-tema-pelo-id)
+    * [Pegar o tema pelo título](#Pegar-o-tema-pelo-titulo)
     * [Pegar o tema pelo slug](#Pegar-o-tema-pelo-slug)
     * [Criar tema](#Criar-tema)
     * [Editar tema](#Editar-tema)
