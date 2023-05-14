@@ -113,12 +113,12 @@ export default class AssuntoController {
 
            let HATEOAS = [
                 {
-                    href: process.env.URL_API+"/tema/"+erroExist._id,
+                    href: process.env.URL_API+"/tema/"+tema._id,
                     method: "get",
                     rel: "tema_pelo_id",
                 },
                 {
-                    href: process.env.URL_API+"/tema/slug/"+erroExist.slug,
+                    href: process.env.URL_API+"/tema/slug/"+tema.slug,
                     method: "get",
                     rel: "tema_pelo_slug",
                 },
@@ -128,7 +128,7 @@ export default class AssuntoController {
                     rel: "editar_tema",
                 },
                 {
-                    href: process.env.URL_API+"/tema/"+erroExist._id,
+                    href: process.env.URL_API+"/tema/"+tema._id,
                     method: "delete",
                     rel: "deletar_tema",
                 },
