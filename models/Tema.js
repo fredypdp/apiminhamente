@@ -114,7 +114,7 @@ export default class Tema {
     
     async encontrarPorTitulo(titulo){
         try {
-            let result = await TemaSchema.findOne({titulo: titulo}).populate("apontamentos")
+            let result = await TemaSchema.findOne({titulo: { $regex: `${titulo}`}}).populate("apontamentos")
             return result
         } catch (erro) {
             return erro

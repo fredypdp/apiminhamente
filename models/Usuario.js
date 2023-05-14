@@ -26,7 +26,7 @@ export default class User {
 
     async encontrarPorNome(nome){
         try{
-            let usuarios = await UsuarioSchema.find({nome: nome}).sort({created_at: -1})
+            let usuarios = await UsuarioSchema.find({nome: { $regex: `${nome}`}}).sort({created_at: -1})
             return usuarios
         }catch(erro){
             return erro;
@@ -35,7 +35,7 @@ export default class User {
 
     async encontrarPorSobrenome(sobrenome){
         try{
-            let usuarios = await UsuarioSchema.find({sobrenome: sobrenome}).sort({created_at: -1})
+            let usuarios = await UsuarioSchema.find({sobrenome: { $regex: `${sobrenome}`}}).sort({created_at: -1})
             return usuarios
         }catch(erro){
             return erro;
@@ -44,7 +44,7 @@ export default class User {
 
     async encontrarPorEmail(email){
         try{
-            let usuario = await UsuarioSchema.findOne({email: email})
+            let usuario = await UsuarioSchema.findOne({email: { $regex: `${email}`}})
             return usuario
         }catch(erro){
             return erro;
