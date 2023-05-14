@@ -46,7 +46,7 @@
   * [Tema](#Tema)
     * [Pegar todos os temas](#Pegar-todos-os-temas)
     * [Pegar o tema pelo id](#Pegar-o-tema-pelo-id)
-    * [Pegar o tema pelo título](#Pegar-o-tema-pelo-titulo)
+    * [Pegar o tema pelo título](#Pegar-o-tema-pelo-título)
     * [Pegar o tema pelo slug](#Pegar-o-tema-pelo-slug)
     * [Criar tema](#Criar-tema)
     * [Editar tema](#Editar-tema)
@@ -54,10 +54,10 @@
   * [Usuário](#Usuário)
     * [Pegar todos os usuários](#Pegar-todos-os-usuários)
     * [Pegar o usuário pelo id](#Pegar-o-usuário-pelo-id)
-    * [Pegar o usuário pelo nome](#Pegar-o-usuário-pelo-nome)
-    * [Pegar o usuário pelo sobrenome](#Pegar-o-usuário-pelo-sobrenome)
+    * [Pegar o usuários pelo nome](#Pegar-o-usuários-pelo-nome)
+    * [Pegar o usuários pelo sobrenome](#Pegar-o-usuários-pelo-sobrenome)
     * [Pegar o usuário pelo email](#Pegar-o-usuário-pelo-email)
-    * [Pegar o usuário pelo role](#Pegar-o-usuário-pelo-role)
+    * [Pegar o usuários pelo role](#Pegar-o-usuários-pelo-role)
     * [Login](#Login)
     * [Logout](#Logout)
     * [Criar conta](#Criar-conta)
@@ -354,23 +354,25 @@ axios(config)
 
 ### Exemplo de resposta de sucesso
 ```
-[
- {
-  "_id": ObjectId("616d6efb46c45b7f064526e3"),
-  "id": "616d6efb46c",
-  "titulo": "Título do apontamento",
-  "slug": "Título_do_apontamento",
-  "conteudo": "Conteúdo do apontamento",
-  "miniatura": "https://miniatura.com.br",
-  "miniatura_public_id": "miniaturaDSF35.jpg",
-  "visibilidade": true,
-  "assuntos": [],
-  "temas": [],
-  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
- }
- ...
-]
+{
+  apontamentos: [
+    {
+      "_id": ObjectId("616d6efb46c45b7f064526e3"),
+      "id": "616d6efb46c",
+      "titulo": "Título do apontamento",
+      "slug": "Título_do_apontamento",
+      "conteudo": "Conteúdo do apontamento",
+      "miniatura": "https://miniatura.com.br",
+      "miniatura_public_id": "miniaturaDSF35.jpg",
+      "visibilidade": true,
+      "assuntos": [],
+      "temas": [],
+      "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+      "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    }
+    ...
+  ]
+}
 ```
 
 ### Exemplo de resposta de erro
@@ -418,18 +420,22 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
-  "_id": ObjectId("616d6efb46c45b7f064526e3"),
-  "id": "616d6efb46c",
-  "titulo": "Título do apontamento",
-  "slug": "Título_do_apontamento",
-  "conteudo": "Conteúdo do apontamento",
-  "miniatura": "https://miniatura.com.br",
-  "miniatura_public_id": "miniaturaDSF35.jpg",
-  "visibilidade": true,
-  "assuntos": [],
-  "temas": [],
-  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  apontamento: {
+    "_id": ObjectId("616d6efb46c45b7f064526e3"),
+    "id": "616d6efb46c",
+    "titulo": "Título do apontamento",
+    "slug": "Título_do_apontamento",
+    "conteudo": "Conteúdo do apontamento",
+    "miniatura": "https://miniatura.com.br",
+    "miniatura_public_id": "miniaturaDSF35.jpg",
+    "visibilidade": true,
+    "assuntos": [],
+    "temas": [],
+    "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  },
+  _links: [],
+  msg: ""
 }
 ```
 
@@ -499,7 +505,7 @@ axios.post("https://apiminhamente.onrender.com/apontamento", formData, {headers:
 ### Exemplo de resposta de sucesso
 ```
 {
- {
+ apontamento: {
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "id": "616d6efb46c",
   "titulo": "Título do apontamento",
@@ -513,6 +519,7 @@ axios.post("https://apiminhamente.onrender.com/apontamento", formData, {headers:
   "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
   "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
  },
+ _links: [],
  "msg": "apontamento criado com sucesso"
 }
 ```
@@ -539,6 +546,7 @@ Esta API usa Bearer Token como um método de autenticação.
 #### Elementos
 
 * id - id do apontamento (required)
+* Elementos que serão editados
 
 ### Requisição
 ```
@@ -563,7 +571,7 @@ axios.put("https://apiminhamente.onrender.com/apontamento", formData, {headers: 
 ### Exemplo de resposta de sucesso
 ```
 {
- {
+ apontamento: {
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "id": "616d6efb46c",
   "titulo": "Título do apontamento",
@@ -577,6 +585,7 @@ axios.put("https://apiminhamente.onrender.com/apontamento", formData, {headers: 
   "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
   "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
  },
+ _links: [],
  "msg": "apontamento editado com sucesso"
 }
 ```
@@ -628,7 +637,7 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
- {
+ apontamento: {
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "id": "616d6efb46c",
   "titulo": "Título do apontamento",
@@ -686,23 +695,25 @@ axios(config)
 
 ### Exemplo de resposta de sucesso
 ```
-[
- {
-  "_id": ObjectId("616d6efb46c45b7f064526e3"),
-  "id": "616d6efb46c",
-  "titulo": "Título do apontamento",
-  "slug": "Título_do_apontamento",
-  "conteudo": "Conteúdo do apontamento",
-  "miniatura": "https://miniatura.com.br",
-  "miniatura_public_id": "miniaturaDSF35.jpg",
-  "visibilidade": true,
-  "assuntos": [],
-  "temas": [],
-  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
- }
- ...
-]
+{
+  apontamentos: [
+    {
+      "_id": ObjectId("616d6efb46c45b7f064526e3"),
+      "id": "616d6efb46c",
+      "titulo": "Título do apontamento",
+      "slug": "Título_do_apontamento",
+      "conteudo": "Conteúdo do apontamento",
+      "miniatura": "https://miniatura.com.br",
+      "miniatura_public_id": "miniaturaDSF35.jpg",
+      "visibilidade": true,
+      "assuntos": [],
+      "temas": [],
+      "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+      "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    }
+    ...
+  ]
+}
 ```
 
 ### Exemplo de resposta de erro
@@ -747,23 +758,25 @@ axios(config)
 
 ### Exemplo de resposta de sucesso
 ```
-[
- {
-  "_id": ObjectId("616d6efb46c45b7f064526e3"),
-  "nome": "Nome do assunto",
-  "slug": "Nome_do_assunto",
-  "icone": "<i class='icon solid-icon'></i>",
-  "apontamentos": [
-    "616d6efb46c45b7f064526e3"
-  ],
-  "temas": [
-    "616d6efb46c45b7f064526e3"
-  ],
-  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
- }
- ...
-]
+{
+  assuntos: [
+    {
+      "_id": ObjectId("616d6efb46c45b7f064526e3"),
+      "nome": "Nome do assunto",
+      "slug": "Nome_do_assunto",
+      "icone": "<i class='icon solid-icon'></i>",
+      "apontamentos": [
+        "616d6efb46c45b7f064526e3"
+      ],
+      "temas": [
+        "616d6efb46c45b7f064526e3"
+      ],
+      "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+      "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    }
+    ...
+  ]
+}
 ```
 
 ### Exemplo de resposta de erro
@@ -810,20 +823,24 @@ axios(config)
 
 ### Exemplo de resposta de sucesso
 ```
-{
-"_id": ObjectId("616d6efb46c45b7f064526e3"),
-"nome": "Nome do assunto",
-"slug": "Nome_do_assunto",
-"icone": "<i class='icon solid-icon'></i>",
-"apontamentos": [
-  "616d6efb46c45b7f064526e3"
-],
-"temas": [
-  "616d6efb46c45b7f064526e3"
-],
-"created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-"edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-}
+[
+  assunto: {
+    "_id": ObjectId("616d6efb46c45b7f064526e3"),
+    "nome": "Nome do assunto",
+    "slug": "Nome_do_assunto",
+    "icone": "<i class='icon solid-icon'></i>",
+    "apontamentos": [
+      "616d6efb46c45b7f064526e3"
+    ],
+    "temas": [
+      "616d6efb46c45b7f064526e3"
+    ],
+    "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  },
+  _links: [],
+  msg: ""
+]
 ```
 
 ### Exemplo de resposta de erro
@@ -871,20 +888,22 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
- {
-  "_id": ObjectId("616d6efb46c45b7f064526e3"),
-  "nome": "Nome do assunto",
-  "slug": "Nome_do_assunto",
-  "icone": "<i class='icon solid-icon'></i>",
-  "apontamentos": [
-    "616d6efb46c45b7f064526e3"
-  ],
-  "temas": [
-    "616d6efb46c45b7f064526e3"
-  ],
-  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
- }
+  assunto: {
+    "_id": ObjectId("616d6efb46c45b7f064526e3"),
+    "nome": "Nome do assunto",
+    "slug": "Nome_do_assunto",
+    "icone": "<i class='icon solid-icon'></i>",
+    "apontamentos": [
+      "616d6efb46c45b7f064526e3"
+    ],
+    "temas": [
+      "616d6efb46c45b7f064526e3"
+    ],
+    "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  },
+  _links: [],
+  msg: ""
 }
 ```
 
@@ -933,7 +952,7 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
- {
+ assunto: {
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "nome": "Nome do assunto",
   "slug": "Nome_do_assunto",
@@ -946,7 +965,9 @@ axios(config)
   ],
   "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
   "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
- }
+ },
+ _links: [],
+ msg: ""
 }
 ```
 
@@ -1009,7 +1030,7 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
- {
+ assunto: {
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "nome": "Nome do assunto",
   "slug": "Nome-do-assunto",
@@ -1023,6 +1044,7 @@ axios(config)
   "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
   "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
  },
+ _links: [],
  "msg": "Assunto criado com sucesso"
 }
 ```
@@ -1049,7 +1071,7 @@ Esta API usa Bearer Token como um método de autenticação.
 #### Elementos
 
 * id - ObjectId do assunto (required)
-* Elementos que deseja editar
+* Elementos que serão editados
 
 ### Requisição
 ```
@@ -1079,7 +1101,7 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
- {
+ assunto: {
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "nome": "Novo nome do assunto",
   "slug": "Novo-nome-do-assunto",
@@ -1093,6 +1115,7 @@ axios(config)
   "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
   "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
  },
+ _links: [],
  "msg": "Assunto editado com sucesso"
 }
 ```
@@ -1144,7 +1167,7 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
- {
+ assunto: {
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "nome": "Novo nome do assunto",
   "slug": "Novo-nome-do-assunto",
@@ -1197,15 +1220,18 @@ axios(config)
 
 ### Exemplo de resposta de sucesso
 ```
-{
-  "_id": ObjectId("616d6efb46c45b7f064526e3"),
-  "titulo": "Título do tema",
-  "slug": "Título-do-tema",
-  "assunto": "616d6efb46c45b7f064526e3",
-  "apontamentos": ["616d6efb46c45b7f064526e3"],
-  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-}
+[
+  temas: {
+    "_id": ObjectId("616d6efb46c45b7f064526e3"),
+    "titulo": "Título do tema",
+    "slug": "Título-do-tema",
+    "assunto": "616d6efb46c45b7f064526e3",
+    "apontamentos": ["616d6efb46c45b7f064526e3"],
+    "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  }
+  ...
+]
 ```
 
 ### Exemplo de resposta de erro
@@ -1253,13 +1279,17 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
-"_id": ObjectId("616d6efb46c45b7f064526e3"),
-"titulo": "Título do tema",
-"slug": "Título-do-tema",
-"assunto": "616d6efb46c45b7f064526e3",
-"apontamentos": ["616d6efb46c45b7f064526e3"],
-"created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-"edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  tema: {
+    "_id": ObjectId("616d6efb46c45b7f064526e3"),
+    "titulo": "Título do tema",
+    "slug": "Título-do-tema",
+    "assunto": "616d6efb46c45b7f064526e3",
+    "apontamentos": ["616d6efb46c45b7f064526e3"],
+    "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  },
+  _links: [],
+  msg: ""
 }
 ```
 
@@ -1277,7 +1307,7 @@ axios(config)
 }
 ```
 
-### Pegar o tema pelo titulo
+### Pegar o tema pelo título
 
 ```
 https://apiminhamente.onrender.com/tema/titulo/:titulo
@@ -1308,13 +1338,17 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
-  "_id": ObjectId("616d6efb46c45b7f064526e3"),
-  "titulo": "Título do tema",
-  "slug": "Título-do-tema",
-  "assunto": "616d6efb46c45b7f064526e3",
-  "apontamentos": ["616d6efb46c45b7f064526e3"],
-  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  tema: {
+    "_id": ObjectId("616d6efb46c45b7f064526e3"),
+    "titulo": "Título do tema",
+    "slug": "Título-do-tema",
+    "assunto": "616d6efb46c45b7f064526e3",
+    "apontamentos": ["616d6efb46c45b7f064526e3"],
+    "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  },
+  _links: [],
+  msg: ""
 }
 ```
 
@@ -1363,13 +1397,17 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
-  "_id": ObjectId("616d6efb46c45b7f064526e3"),
-  "titulo": "Título do tema",
-  "slug": "Título-do-tema",
-  "assunto": "616d6efb46c45b7f064526e3",
-  "apontamentos": ["616d6efb46c45b7f064526e3"],
-  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  tema: {
+    "_id": ObjectId("616d6efb46c45b7f064526e3"),
+    "titulo": "Título do tema",
+    "slug": "Título-do-tema",
+    "assunto": "616d6efb46c45b7f064526e3",
+    "apontamentos": ["616d6efb46c45b7f064526e3"],
+    "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  },
+  _links: [],
+  msg: ""
 }
 ```
 
@@ -1432,12 +1470,16 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
-  "_id": ObjectId("616d6efb46c45b7f064526e3"),
-  "titulo": "Título do tema",
-  "slug": "Título-do-tema",
-  "assunto": "616d6efb46c45b7f064526e3",
-  "apontamentos": ["616d6efb46c45b7f064526e3"],
-  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100
+  tema: {
+    "_id": ObjectId("616d6efb46c45b7f064526e3"),
+    "titulo": "Título do tema",
+    "slug": "Título-do-tema",
+    "assunto": "616d6efb46c45b7f064526e3",
+    "apontamentos": ["616d6efb46c45b7f064526e3"],
+    "created_at": Thu Apr 20 2023 23:29:42 GMT+0100
+  },
+  _links: [],
+  msg: ""
 }
 ```
 
@@ -1463,7 +1505,7 @@ Esta API usa Bearer Token como um método de autenticação.
 #### Elementos
 
 * id - ObjectId do tema (required)
-* titulo - String (required)
+* titulo - String (required, apenas ele pode ser editado)
 
 ### Requisição
 ```
@@ -1493,15 +1535,16 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
- {
-    "_id": ObjectId("616d6efb46c45b7f064526e3"),
-    "titulo": "Novo título do tema",
-    "slug": "Novo-título-do-tema",
-    "assunto": "616d6efb46c45b7f064526e3",
-    "apontamentos": ["616d6efb46c45b7f064526e3"],
-    "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-    "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+ tema: {
+  "_id": ObjectId("616d6efb46c45b7f064526e3"),
+  "titulo": "Novo título do tema",
+  "slug": "Novo-título-do-tema",
+  "assunto": "616d6efb46c45b7f064526e3",
+  "apontamentos": ["616d6efb46c45b7f064526e3"],
+  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
  },
+ _links: [],
  "msg": "Tema editado com sucesso"
 }
 ```
@@ -1663,17 +1706,22 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
-  "_id": ObjectId("616d6efb46c45b7f064526e3"),
-  "id": "616d6efb46c",
-  "nome": "Nome",
-  "sobrenome": "Sobrenome",
-  "email": "email@gmail.com",
-  "senha": "senha",
-  "role": 1,
-  "avatar": "https://avatar.com",
-  "avatar_public_id": {"avatar324f.jpg",
-  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  usuario:  {
+      "_id": ObjectId("616d6efb46c45b7f064526e3"),
+      "id": "616d6efb46c",
+      "nome": "Nome",
+      "sobrenome": "Sobrenome",
+      "email": "email@gmail.com",
+      "senha": "senha",
+      "role": 1,
+      "avatar": "https://avatar.com",
+      "avatar_public_id": {"avatar324f.jpg",
+      "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+      "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    }
+  ,
+  _links: [],
+  msg: ""
 }
 ```
 
@@ -1717,22 +1765,26 @@ axios(config)
 
 ### Exemplo de resposta de sucesso
 ```
-[
-  {
-    "_id": ObjectId("616d6efb46c45b7f064526e3"),
-    "id": "616d6efb46c",
-    "nome": "Nome",
-    "sobrenome": "Sobrenome",
-    "email": "email@gmail.com",
-    "senha": "senha",
-    "role": 1,
-    "avatar": "https://avatar.com",
-    "avatar_public_id": {"avatar324f.jpg",
-    "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-    "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  }
-  ...
-]
+{
+  usuarios: [
+    {
+      "_id": ObjectId("616d6efb46c45b7f064526e3"),
+      "id": "616d6efb46c",
+      "nome": "Nome",
+      "sobrenome": "Sobrenome",
+      "email": "email@gmail.com",
+      "senha": "senha",
+      "role": 1,
+      "avatar": "https://avatar.com",
+      "avatar_public_id": {"avatar324f.jpg",
+      "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+      "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    }
+    ...
+  ],
+  _links: [],
+  msg: ""
+}
 ```
 
 ### Exemplo de resposta de erro
@@ -1775,22 +1827,26 @@ axios(config)
 
 ### Exemplo de resposta de sucesso
 ```
-[
-  {
-    "_id": ObjectId("616d6efb46c45b7f064526e3"),
-    "id": "616d6efb46c",
-    "nome": "Nome",
-    "sobrenome": "Sobrenome",
-    "email": "email@gmail.com",
-    "senha": "senha",
-    "role": 1,
-    "avatar": "https://avatar.com",
-    "avatar_public_id": {"avatar324f.jpg",
-    "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-    "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  }
-  ...
-]
+{
+  usuarios: [
+    {
+      "_id": ObjectId("616d6efb46c45b7f064526e3"),
+      "id": "616d6efb46c",
+      "nome": "Nome",
+      "sobrenome": "Sobrenome",
+      "email": "email@gmail.com",
+      "senha": "senha",
+      "role": 1,
+      "avatar": "https://avatar.com",
+      "avatar_public_id": {"avatar324f.jpg",
+      "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+      "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    }
+    ...
+  ],
+  _links: [],
+  msg: ""
+}
 ```
 
 ### Exemplo de resposta de erro
@@ -1834,17 +1890,21 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
-  "_id": ObjectId("616d6efb46c45b7f064526e3"),
-  "id": "616d6efb46c",
-  "nome": "Nome",
-  "sobrenome": "Sobrenome",
-  "email": "email@gmail.com",
-  "senha": "senha",
-  "role": 1,
-  "avatar": "https://avatar.com",
-  "avatar_public_id": {"avatar324f.jpg",
-  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  usuario: {
+    "_id": ObjectId("616d6efb46c45b7f064526e3"),
+    "id": "616d6efb46c",
+    "nome": "Nome",
+    "sobrenome": "Sobrenome",
+    "email": "email@gmail.com",
+    "senha": "senha",
+    "role": 1,
+    "avatar": "https://avatar.com",
+    "avatar_public_id": {"avatar324f.jpg",
+    "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  },
+  _links: [],
+  msg: ""
 }
 ```
 
@@ -1855,7 +1915,7 @@ axios(config)
 }
 ```
 
-### Pegar o usuário pelo role
+### Pegar o usuários pelo role
 
 ```
 https://apiminhamente.onrender.com/usuario/role/:role
@@ -1889,17 +1949,22 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
-  "_id": ObjectId("616d6efb46c45b7f064526e3"),
-  "id": "616d6efb46c",
-  "nome": "Nome",
-  "sobrenome": "Sobrenome",
-  "email": "email@gmail.com",
-  "senha": "senha",
-  "role": 1,
-  "avatar": "https://avatar.com",
-  "avatar_public_id": {"avatar324f.jpg",
-  "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
-  "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+  usuarios: [
+    {
+      "_id": ObjectId("616d6efb46c45b7f064526e3"),
+      "id": "616d6efb46c",
+      "nome": "Nome",
+      "sobrenome": "Sobrenome",
+      "email": "email@gmail.com",
+      "senha": "senha",
+      "role": 1,
+      "avatar": "https://avatar.com",
+      "avatar_public_id": {"avatar324f.jpg",
+      "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+      "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
+    }
+    ...
+  ]
 }
 ```
 
@@ -2016,7 +2081,7 @@ axios(config)
 
 ### Exemplo de resposta de sucesso
 ```
-{"Sessão terminada com sucesso"}
+"Sessão terminada com sucesso"
 ```
 
 ### Exemplos de respostas de erro
@@ -2069,7 +2134,7 @@ axios.post("https://apiminhamente.onrender.com/usuario", formData)
 ### Exemplo de resposta de sucesso
 ```
 {
- {
+ usuario: {
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "id": "616d6efb46c",
   "nome": "Nome",
@@ -2081,6 +2146,7 @@ axios.post("https://apiminhamente.onrender.com/usuario", formData)
   "avatar_public_id": "avatarDSF35.jpg",
   "created_at": Thu Apr 20 2023 23:29:42 GMT+0100
  },
+ _links: [],
  "msg": "Conta criada com sucesso"
 }
 ```
@@ -2115,6 +2181,7 @@ https://apiminhamente.onrender.com/usuario
 * id - String (required)
 * nome - String
 * senha - String de no mínimo 8 caracteres(required)
+* Elementos que serão editados
 
 ### Requisição
 ```
@@ -2141,7 +2208,7 @@ axios.put("https://apiminhamente.onrender.com/usuario", formData, {headers: {'au
 ### Exemplo de resposta de sucesso
 ```
 {
- {
+ usuario: {
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "id": "616d6efb46c",
   "nome": "Novo nome",
@@ -2154,6 +2221,7 @@ axios.put("https://apiminhamente.onrender.com/usuario", formData, {headers: {'au
   "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
   "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
  },
+ _links: [],
  "msg": "Conta editada com sucesso"
 }
 ```
@@ -2263,7 +2331,7 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
- {
+ usuario: {
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "id": "616d6efb46c",
   "nome": "Novo nome",
@@ -2276,6 +2344,7 @@ axios(config)
   "created_at": Thu Apr 20 2023 23:29:42 GMT+0100,
   "edited_at": Thu Apr 20 2023 23:29:42 GMT+0100,
  },
+ _links: [],
  "msg": "Senha alterada com sucesso"
 }
 ```
@@ -2365,7 +2434,7 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
- {
+ usuario: {
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "id": "616d6efb46c",
   "nome": "Novo nome",
@@ -2423,7 +2492,7 @@ axios(config)
 ### Exemplo de resposta de sucesso
 ```
 {
- {
+ usuario: {
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "id": "616d6efb46c",
   "nome": "Novo nome",

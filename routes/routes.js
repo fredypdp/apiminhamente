@@ -38,10 +38,10 @@ const upload = multer({storage})
 // Usuario
 router.get('/usuarios', AdminAuth, new UsuarioController().Usuarios) // Todos os usuários
 router.get("/usuario/:id", UsuarioAuth, new UsuarioController().UsuarioById) // Usuário pelo id
-router.get("/usuario/nome/:nome", UsuarioAuth, new UsuarioController().UsuarioByNome) // Usuário pelo nome
-router.get("/usuario/sobrenome/:sobrenome", UsuarioAuth, new UsuarioController().UsuarioBySobrenome) // Usuário pelo sobrenome
+router.get("/usuario/nome/:nome", UsuarioAuth, new UsuarioController().UsuariosByNome) // Usuário pelo nome
+router.get("/usuario/sobrenome/:sobrenome", UsuarioAuth, new UsuarioController().UsuariosBySobrenome) // Usuário pelo sobrenome
 router.get("/usuario/email/:email", UsuarioAuth, new UsuarioController().UsuarioByEmail) // Usuário pelo email
-router.get("/usuario/role/:role", UsuarioAuth, new UsuarioController().UsuarioByRole) // Usuário pelo role
+router.get("/usuario/role/:role", UsuarioAuth, new UsuarioController().UsuariosByRole) // Usuário pelo role
 router.post("/usuario", upload.single("avatar"), new UsuarioController().criar) // Criar usuário
 router.put("/usuario", UsuarioAuth, upload.single("avatar"), new UsuarioController().editar) // Editar usuário
 router.post("/recuperarsenha/:email", new UsuarioController().recuperarSenha) // Enviar email de recuperação de senha

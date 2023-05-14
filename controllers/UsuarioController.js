@@ -96,7 +96,7 @@ export default class UserController {
         }
     }
 
-    async UsuarioByNome(req, res){
+    async UsuariosByNome(req, res){
         let nome = req.params.nome
 
         // Validações
@@ -126,7 +126,7 @@ export default class UserController {
         }
     }
 
-    async UsuarioBySobrenome(req, res){
+    async UsuariosBySobrenome(req, res){
         let sobrenome = req.params.sobrenome
 
         // Validações
@@ -225,7 +225,7 @@ export default class UserController {
         }
     }
     
-    async UsuarioByRole(req, res){
+    async UsuariosByRole(req, res){
         let role = req.params.role
 
         // Validações
