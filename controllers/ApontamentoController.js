@@ -86,6 +86,12 @@ export default class ApontamentoController {
         }
 
         if (assuntos != undefined) {
+            if(!Array.isArray(assuntos)) {
+                assuntos = JSON.parse(assuntos)
+            }
+        }
+
+        if (assuntos != undefined) {
             if (req.file != undefined) {
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
             }
@@ -98,11 +104,13 @@ export default class ApontamentoController {
             })
             return
         }
-
-        if(!Array.isArray(assuntos)) {
-            assuntos = JSON.parse(assuntos)
-        }
         
+        if (temas != undefined) {
+            if(!Array.isArray(temas)) {
+                temas = JSON.parse(temas)
+            }
+        }
+
         if (temas != undefined) {
             if (req.file != undefined) {
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
@@ -115,10 +123,6 @@ export default class ApontamentoController {
                 }
             })
             return
-        }
-
-        if(!Array.isArray(temas)) {
-            temas = JSON.parse(temas)
         }
         
         // Criando
@@ -177,6 +181,12 @@ export default class ApontamentoController {
             }
         }
 
+        if(assuntos != undefined) {
+            if(!Array.isArray(assuntos)) {
+                assuntos = JSON.parse(assuntos)
+            }
+        }
+        
         if (assuntos != undefined) {
             assuntos.forEach(async assunto => {
                 if(assunto.trim().length === 0){
@@ -190,11 +200,13 @@ export default class ApontamentoController {
                 }
             })
         }
-
-        if(!Array.isArray(assuntos)) {
-            assuntos = JSON.parse(assuntos)
-        }
         
+        if (temas != undefined) {
+            if(!Array.isArray(temas)) {
+                temas = JSON.parse(temas)
+            }
+        }
+
         if (temas != undefined) {
             temas.forEach(async tema => {
                 if(tema.trim().length === 0){
@@ -207,10 +219,6 @@ export default class ApontamentoController {
                     return
                 }
             })
-        }
-
-        if(!Array.isArray(temas)) {
-            temas = JSON.parse(temas)
         }
         
         if (req.file == undefined && titulo == undefined && conteudo == undefined && assuntos == undefined && temas == undefined && visibilidade == undefined) {
