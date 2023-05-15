@@ -471,7 +471,7 @@ Esta API usa Bearer Token como um método de autenticação.
 * conteudo - String (required)
 * assuntos - Array com o _id dos assuntos (required)
 * temas - Array com o _id dos temas
-* visibilidade - Boolean, (required, false é o valor padrão)
+* visibilidade - Boolean, (required, true é o valor padrão)
 * miniatura - Imagem (png, jpg, jpeg) (required)
 
 ### Requisição
