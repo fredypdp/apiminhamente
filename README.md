@@ -469,8 +469,8 @@ Esta API usa Bearer Token como um método de autenticação.
 
 * titulo - String (required)
 * conteudo - String (required)
-* assuntos - Array com o _id dos assuntos (required)
-* temas - Array com o _id dos temas
+* assuntos - Array com o _id dos assuntos (required), caso use formData converta em JSON
+* temas - Array com o _id dos temas, caso use formData converta em JSON
 * visibilidade - Boolean, (required, true é o valor padrão)
 * miniatura - Imagem (png, jpg, jpeg) (required)
 
@@ -488,8 +488,8 @@ let miniatura = "file.png"
 
 formData.append('titulo', titulo);
 formData.append('conteudo', conteudo);
-formData.append('assuntos', assuntos);
-formData.append('temas', temas);
+formData.append('assuntos', JSON.stringify(assuntos))
+formData.append('temas', JSON.stringify(temas));
 formData.append('visibilidade', visibilidade);
 formData.append('miniatura', miniatura);
 
