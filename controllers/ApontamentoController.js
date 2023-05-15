@@ -84,7 +84,7 @@ export default class ApontamentoController {
             
             miniatura = req.file.destination+"/"+req.file.filename
         }
-
+        console.log("1")
         if (assuntos != undefined) {
             if(!Array.isArray(assuntos)) {
                 assuntos = JSON.parse(assuntos)
@@ -94,7 +94,7 @@ export default class ApontamentoController {
                 }
             }
         }
-
+        console.log("2")
         if (assuntos != undefined) {
             if (req.file != undefined) {
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
