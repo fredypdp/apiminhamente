@@ -95,7 +95,7 @@ export default class ApontamentoController {
                 }
             }
         }
-        console.log("1")
+        
         if (assuntos != undefined) {
             if (req.file != undefined) {
                await unlinkAsync(req.file.destination+"/"+req.file.filename)
@@ -109,8 +109,6 @@ export default class ApontamentoController {
                 }
             })
         }
-        
-        console.log(assuntos)
         
         if (temas != undefined) {
             if(!Array.isArray(temas)) {
@@ -132,12 +130,10 @@ export default class ApontamentoController {
                 if(tema.trim().length === 0){
                     res.status(400)
                     res.json({erro: "Tema inválido, o campo está vazio"})
+                    return
                 }
             })
-            return
         }
-        
-        ocnsole.log(temas)
         
         // Criando
         try {
