@@ -12,25 +12,7 @@ export default class ApontamentoController {
     async criar(req, res) {
         let {titulo, conteudo, assuntos, temas, visibilidade,} = req.body
 
-        // Validações
-        if (req.file == undefined) {
-            res.status(400)
-            res.json({erro: "Miniatura inválida, o campo está vazio"})
-            return
-        }
-        
-        let miniatura
-        if (req.file != undefined) {
-            if(!new RegExp(/image\/(png|jpg|jpeg)/).test(req.file.mimetype)) {
-                await unlinkAsync(req.file.destination+"/"+req.file.filename)
-                res.status(400)
-                res.json({erro: "A miniatura deve ser uma imagem"})
-                return
-            }
-            
-            miniatura = req.file.destination+"/"+req.file.filename
-        }
-        
+        // Validações     
         if (titulo == undefined) {
             if (req.file != undefined) {
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
@@ -50,6 +32,12 @@ export default class ApontamentoController {
             res.json({erro: "Conteúdo inválido, o campo está vazio"})
             return
         }
+
+        if (req.file == undefined) {
+            res.status(400)
+            res.json({erro: "Miniatura inválida, o campo está vazio"})
+            return
+        }
         
         if (assuntos == undefined) {
             if (req.file != undefined) {
@@ -58,34 +46,6 @@ export default class ApontamentoController {
 
             res.status(400)
             res.json({erro: "Assuntos inválidos, o campo está vazio"})
-            return
-        }
-
-        if (assuntos != undefined) {
-            if (req.file != undefined) {
-                await unlinkAsync(req.file.destination+"/"+req.file.filename)
-            }
-
-            assuntos.forEach( assunto => {
-                if(assunto.trim().length === 0){
-                    res.status(400)
-                    res.json({erro: "Assunto inválido, o campo está vazio"})
-                }
-            })
-            return
-        }
-        
-        if (temas != undefined) {
-            if (req.file != undefined) {
-                await unlinkAsync(req.file.destination+"/"+req.file.filename)
-            }
-
-            temas.forEach( tema => {
-                if(tema.trim().length === 0){
-                    res.status(400)
-                    res.json({erro: "Tema inválido, o campo está vazio"})
-                }
-            })
             return
         }
 
@@ -112,13 +72,65 @@ export default class ApontamentoController {
                 return
             }
         }
+
+        let miniatura
+        if (req.file != undefined) {
+            if(!new RegExp(/image\/(png|jpg|jpeg)/).test(req.file.mimetype)) {
+                await unlinkAsync(req.file.destination+"/"+req.file.filename)
+                res.status(400)
+                res.json({erro: "A miniatura deve ser uma imagem"})
+                return
+            }
+            
+            miniatura = req.file.destination+"/"+req.file.filename
+        }
+
+        if (assuntos != undefined) {
+            if (req.file != undefined) {
+                await unlinkAsync(req.file.destination+"/"+req.file.filename)
+            }
+
+            if(assuntos.length == 0) {
+                res.status(400)
+                res.json({erro: "Assunto inválido, o campo está vazio"})
+                return
+            }
+
+            assuntos.forEach( assunto => {
+                if(assunto.trim().length === 0){
+                    res.status(400)
+                    res.json({erro: "Assunto inválido, o campo está vazio"})
+                }
+            })
+            return
+        }
+        
+        if (temas != undefined && temas.length == 0) {
+            if (req.file != undefined) {
+                await unlinkAsync(req.file.destination+"/"+req.file.filename)
+            }
+
+            if(temas.length == 0) {
+                res.status(400)
+                res.json({erro: "Tema inválido, o campo está vazio"})
+                return
+            }
+
+            temas.forEach( tema => {
+                if(tema.trim().length === 0){
+                    res.status(400)
+                    res.json({erro: "Tema inválido, o campo está vazio"})
+                }
+            })
+            return
+        }
         
         // Criando
         try {
             let cdn = await new FileManager().upload(miniatura) // Upload da miniatura para a Cloudinary e retornando a cdn
             await unlinkAsync(miniatura) // Deletando miniatura da pasta "temp"
 
-            let apontamento = await new Apontamento().novo(titulo, conteudo, assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
+            let apontamento = await new Apontamento().novo(titulo.trim(), conteudo.trim(), assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
 
             let HATEOAS = [
                 {
@@ -170,6 +182,12 @@ export default class ApontamentoController {
         }
 
         if (assuntos != undefined) {
+            if(assuntos.length == 0) {
+                res.status(400)
+                res.json({erro: "Assunto inválido, o campo está vazio"})
+                return
+            }
+
             assuntos.forEach(async assunto => {
                 if(assunto.trim().length === 0){
                     if (req.file != undefined) {
@@ -184,6 +202,12 @@ export default class ApontamentoController {
         }
         
         if (temas != undefined) {
+            if(temas.length == 0) {
+                res.status(400)
+                res.json({erro: "Tema inválido, o campo está vazio"})
+                return
+            }
+
             temas.forEach(async tema => {
                 if(tema.trim().length === 0){
                     if (req.file != undefined) {
@@ -215,7 +239,6 @@ export default class ApontamentoController {
             
             miniatura = req.file.destination+"/"+req.file.filename
         }
-        
 
         // Editando
         try {
@@ -223,7 +246,7 @@ export default class ApontamentoController {
             if (miniatura != undefined) {
                 cdn = await new FileManager().upload(miniatura) // Upload da miniatura para a Cloudinary e retornando a cdn
                 await unlinkAsync(miniatura) // Deletando miniatura da pasta "temp"
-                let apontamento = await new Apontamento().editar(id, titulo, conteudo, assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
+                let apontamento = await new Apontamento().editar(id, titulo.trim(), conteudo.trim(), assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
 
                 let HATEOAS = [
                     {
@@ -400,7 +423,7 @@ export default class ApontamentoController {
         }
 
         try {
-            let apontamentos = await new Apontamento().pesquisa(pesquisa);
+            let apontamentos = await new Apontamento().pesquisa(pesquisa.trim());
 
             res.status(200)
             res.json({apontamentos: apontamentos})

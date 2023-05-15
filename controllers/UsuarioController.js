@@ -115,7 +115,7 @@ export default class UserController {
         }
 
         try {                
-            let usuarios = await new Usuario().encontrarPorNome(nome);
+            let usuarios = await new Usuario().encontrarPorNome(nome.trim());
 
             res.status(200)
             res.json({usuarios: usuarios});
@@ -145,7 +145,7 @@ export default class UserController {
         }
 
         try {                
-            let usuarios = await new Usuario().encontrarPorSobrenome(sobrenome);
+            let usuarios = await new Usuario().encontrarPorSobrenome(sobrenome.trim());
 
             res.status(200)
             res.json({usuarios: usuarios});
@@ -175,7 +175,7 @@ export default class UserController {
         }
 
         try {                
-            let usuario = await new Usuario().encontrarPorEmail(email);
+            let usuario = await new Usuario().encontrarPorEmail(email.trim());
 
             if(usuario == undefined) {
                 res.status(200)
@@ -267,19 +267,6 @@ export default class UserController {
             return
         }
         
-        let avatar
-        if (req.file != undefined) {
-            if(!new RegExp(/image\/(png|jpg|jpeg)/).test(req.file.mimetype)) {
-                
-                await unlinkAsync(req.file.destination+"/"+req.file.filename)
-                res.status(400)
-                res.json({erro: "O avatar deve ser uma imagem"})
-                return
-            }
-            
-            avatar = req.file.destination+"/"+req.file.filename
-        }
-        
         if (nome == undefined) {
             if (req.file != undefined) {
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
@@ -328,6 +315,19 @@ export default class UserController {
             res.status(400)
             res.json({erro: "A senha precisa ter no mínimo 8 caracteres"})
             return
+        }
+
+        let avatar
+        if (req.file != undefined) {
+            if(!new RegExp(/image\/(png|jpg|jpeg)/).test(req.file.mimetype)) {
+                
+                await unlinkAsync(req.file.destination+"/"+req.file.filename)
+                res.status(400)
+                res.json({erro: "O avatar deve ser uma imagem"})
+                return
+            }
+            
+            avatar = req.file.destination+"/"+req.file.filename
         }
 
         if (nome != undefined) {
@@ -391,7 +391,7 @@ export default class UserController {
             let cdn = await new FileManager().upload(avatar) // Upload da imagem para a Cloudinary e retornando a cdn
             await unlinkAsync(avatar) // Deletando imagem da pasta "temp"
 
-            let erroExist = await new Usuario().novo(nome, sobrenome, email, senha, cdn.secure_url, cdn.public_id)
+            let erroExist = await new Usuario().novo(nome.trim(), sobrenome.trim(), email.trim(), senha.trim(), cdn.secure_url, cdn.public_id)
             if (erroExist.status == 400) {
                 res.status(406)
                 res.json({erro: "Já existe uma conta com esse email"})
@@ -577,7 +577,7 @@ export default class UserController {
                 await unlinkAsync(avatar) // Deletando imagem da pasta "temp"
                 
                 
-                let erroExist = await new Usuario().editar(id, nome, sobrenome, email, cdn.secure_url, cdn.public_id)
+                let erroExist = await new Usuario().editar(id, nome.trim(), sobrenome.trim(), email.trim(), cdn.secure_url, cdn.public_id)
                 if (erroExist.status == 400) {
                     res.status(406)
                     res.json({erro: "Já existe uma conta com esse email"})
@@ -823,7 +823,7 @@ export default class UserController {
             }
         }
 
-        let usuario = await new Usuario().encontrarPorEmail(email);
+        let usuario = await new Usuario().encontrarPorEmail(email.trim());
         if(usuario != undefined || usuario != null){
 
             let resultado = await bcrypt.compare(senha, usuario.senha);
@@ -949,11 +949,11 @@ export default class UserController {
             }
         }
 
-        let result = await new DelecaoToken().criar(email);
+        let result = await new DelecaoToken().criar(email.trim());
 
         if(result.status == true){
             try {
-                new EnviarEmail().enviarDelecaoLink(email, result.token)
+                new EnviarEmail().enviarDelecaoLink(email.trim(), result.token)
                 
                 res.status(200);
                 res.send("Email de deleção enviado com sucesso")
@@ -987,11 +987,11 @@ export default class UserController {
             }
         }
 
-        let result = await new SenhaToken().criar(email);
+        let result = await new SenhaToken().criar(email.trim());
 
         if(result.status == true){
             try {
-                new EnviarEmail().enviarNovaSenhaLink(email, result.token)
+                new EnviarEmail().enviarNovaSenhaLink(email.trim(), result.token)
     
                 res.status(200);
                 res.send("Link enviado ao seu email com sucesso")
@@ -1054,7 +1054,7 @@ export default class UserController {
         }
 
         try {
-            let usuario = await new Usuario().mudarSenha(senha, tokenValido.token.usuario, tokenValido.token.token);
+            let usuario = await new Usuario().mudarSenha(senha.trim(), tokenValido.token.usuario, tokenValido.token.token);
             
             let HATEOAS = [
                 {

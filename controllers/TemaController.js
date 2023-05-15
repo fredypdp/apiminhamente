@@ -37,7 +37,7 @@ export default class AssuntoController {
         }
 
         try {
-            let erroExist = await new Tema().novo(titulo, assunto)
+            let erroExist = await new Tema().novo(titulo.trim(), assunto.trim())
             if (erroExist.status == 400) {
                 res.status(406)
                 res.json({erro: "Já existe um tema com esse nome"})
@@ -109,7 +109,7 @@ export default class AssuntoController {
         }
 
         try {
-           let tema = await new Tema().editar(id, titulo)
+           let tema = await new Tema().editar(id, titulo.trim())
 
            let HATEOAS = [
                 {
@@ -212,7 +212,7 @@ export default class AssuntoController {
         }
 
         try {
-            let tema = await new Tema().encontrarPorTitulo(titulo)
+            let tema = await new Tema().encontrarPorTitulo(titulo.trim())
 
             if(tema == undefined) {
                 res.status(200)
@@ -271,7 +271,7 @@ export default class AssuntoController {
         }
 
         try {
-            let tema = await new Tema().encontrarPorSlug(slug)
+            let tema = await new Tema().encontrarPorSlug(slug.trim())
 
             if(tema == undefined) {
                 res.status(200)

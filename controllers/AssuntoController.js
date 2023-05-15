@@ -37,7 +37,7 @@ export default class AssuntoController {
         }
 
         try {
-            let erroExist = await new Assunto().novo(nome, icone)
+            let erroExist = await new Assunto().novo(nome.trim(), icone.trim())
             if (erroExist.status == 400) {
                 res.status(406)
                 res.json({erro: "Já existe um assunto com esse nome"})
@@ -118,7 +118,7 @@ export default class AssuntoController {
 
         // Editando assunto
         try {
-            let erroExist = await new Assunto().editar(id, nome, icone)
+            let erroExist = await new Assunto().editar(id, nome.trim(), icone.trim())
             if (erroExist.status == 400) {
                 res.status(406)
                 res.json({erro: "Já existe um assunto com esse nome"})
@@ -226,7 +226,7 @@ export default class AssuntoController {
         }
 
         try {
-            let assunto = await new Assunto().encontrarPorNome(nome)
+            let assunto = await new Assunto().encontrarPorNome(nome.trim())
             
             if(assunto == undefined) {              
                 res.status(200)
@@ -285,7 +285,7 @@ export default class AssuntoController {
         }
 
         try {
-            let assunto = await new Assunto().encontrarPorSlug(slug)
+            let assunto = await new Assunto().encontrarPorSlug(slug.trim())
 
             if(assunto == undefined) {              
                 res.status(200)
