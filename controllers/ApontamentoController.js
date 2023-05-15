@@ -91,7 +91,6 @@ export default class ApontamentoController {
                 if (assuntos.length == 0) {
                     res.status(400)
                     res.json({erro: "Assunto inválido, o campo está vazio"})
-                    return
                 }
             }
         }
@@ -116,7 +115,6 @@ export default class ApontamentoController {
                 if (temas.length == 0) {
                     res.status(400)
                     res.json({erro: "Tema inválido, o campo está vazio"})
-                    return
                 }
             }
         }
@@ -197,7 +195,6 @@ export default class ApontamentoController {
                 if (assuntos.length == 0) {
                     res.status(400)
                     res.json({erro: "Assunto inválido, o campo está vazio"})
-                    return
                 }
             }
         }
@@ -222,7 +219,6 @@ export default class ApontamentoController {
                 if (temas.length == 0) {
                     res.status(400)
                     res.json({erro: "Tema inválido, o campo está vazio"})
-                    return
                 }
             }
         }
