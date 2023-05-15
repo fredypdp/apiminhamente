@@ -88,6 +88,10 @@ export default class ApontamentoController {
         if (assuntos != undefined) {
             if(!Array.isArray(assuntos)) {
                 assuntos = JSON.parse(assuntos)
+                if (assuntos.length == 0) {
+                    res.status(400)
+                    res.json({erro: "Assunto inválido, o campo está vazio"})
+                }
             }
         }
 
@@ -108,6 +112,10 @@ export default class ApontamentoController {
         if (temas != undefined) {
             if(!Array.isArray(temas)) {
                 temas = JSON.parse(temas)
+                if (temas.length == 0) {
+                    res.status(400)
+                    res.json({erro: "Tema inválido, o campo está vazio"})
+                }
             }
         }
 
@@ -184,6 +192,10 @@ export default class ApontamentoController {
         if(assuntos != undefined) {
             if(!Array.isArray(assuntos)) {
                 assuntos = JSON.parse(assuntos)
+                if (assuntos.length == 0) {
+                    res.status(400)
+                    res.json({erro: "Assunto inválido, o campo está vazio"})
+                }
             }
         }
         
@@ -204,6 +216,10 @@ export default class ApontamentoController {
         if (temas != undefined) {
             if(!Array.isArray(temas)) {
                 temas = JSON.parse(temas)
+                if (temas.length == 0) {
+                    res.status(400)
+                    res.json({erro: "Tema inválido, o campo está vazio"})
+                }
             }
         }
 
