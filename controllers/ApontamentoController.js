@@ -89,12 +89,6 @@ export default class ApontamentoController {
             if (req.file != undefined) {
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
             }
-
-            if(assuntos.length == 0) {
-                res.status(400)
-                res.json({erro: "Assunto inválido, o campo está vazio"})
-                return
-            }
             
             assuntos.forEach( assunto => {
                 if(assunto.trim().length === 0){
@@ -105,15 +99,9 @@ export default class ApontamentoController {
             return
         }
         
-        if (temas != undefined && temas.length == 0) {
+        if (temas != undefined) {
             if (req.file != undefined) {
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
-            }
-
-            if(temas.length == 0) {
-                res.status(400)
-                res.json({erro: "Tema inválido, o campo está vazio"})
-                return
             }
 
             temas.forEach( tema => {
@@ -182,12 +170,6 @@ export default class ApontamentoController {
         }
 
         if (assuntos != undefined) {
-            if(assuntos.length == 0) {
-                res.status(400)
-                res.json({erro: "Assunto inválido, o campo está vazio"})
-                return
-            }
-
             assuntos.forEach(async assunto => {
                 if(assunto.trim().length === 0){
                     if (req.file != undefined) {
@@ -202,12 +184,6 @@ export default class ApontamentoController {
         }
         
         if (temas != undefined) {
-            if(temas.length == 0) {
-                res.status(400)
-                res.json({erro: "Tema inválido, o campo está vazio"})
-                return
-            }
-
             temas.forEach(async tema => {
                 if(tema.trim().length === 0){
                     if (req.file != undefined) {
