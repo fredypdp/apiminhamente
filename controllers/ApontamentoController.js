@@ -95,7 +95,7 @@ export default class ApontamentoController {
                 res.json({erro: "Assunto inválido, o campo está vazio"})
                 return
             }
-
+            console.log(assuntos);
             assuntos.forEach( assunto => {
                 if(assunto.trim().length === 0){
                     res.status(400)
