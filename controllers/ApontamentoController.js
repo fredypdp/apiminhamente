@@ -97,17 +97,17 @@ export default class ApontamentoController {
         }
         console.log("1")
         if (assuntos != undefined) {
-            //if (req.file != undefined) {
-               // await unlinkAsync(req.file.destination+"/"+req.file.filename)
-            //}
+            if (req.file != undefined) {
+               await unlinkAsync(req.file.destination+"/"+req.file.filename)
+            }
             
             assuntos.forEach( assunto => {
                 if(assunto.trim().length === 0){
                     res.status(400)
                     res.json({erro: "Assunto inválido, o campo está vazio"})
+                    return
                 }
             })
-            return
         }
         
         console.log(assuntos)
