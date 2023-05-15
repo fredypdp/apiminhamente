@@ -92,7 +92,9 @@ export default class ApontamentoController {
 
             if(!Array.isArray(assuntos)) {
                 assuntos = JSON.parse(assuntos)
+                console.log(assuntos);
             }
+            console.log(assuntos);
             
             assuntos.forEach( assunto => {
                 if(assunto.trim().length === 0){
