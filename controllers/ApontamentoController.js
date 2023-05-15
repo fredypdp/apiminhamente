@@ -84,17 +84,18 @@ export default class ApontamentoController {
             
             miniatura = req.file.destination+"/"+req.file.filename
         }
-        console.log("1")
+        
         if (assuntos != undefined) {
             if(!Array.isArray(assuntos)) {
                 assuntos = JSON.parse(assuntos)
                 if (assuntos.length == 0) {
                     res.status(400)
                     res.json({erro: "Assunto inválido, o campo está vazio"})
+                    return
                 }
             }
         }
-        console.log("2")
+        console.log("1")
         if (assuntos != undefined) {
             if (req.file != undefined) {
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
@@ -117,6 +118,7 @@ export default class ApontamentoController {
                 if (temas.length == 0) {
                     res.status(400)
                     res.json({erro: "Tema inválido, o campo está vazio"})
+                    return
                 }
             }
         }
