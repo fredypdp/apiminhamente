@@ -89,6 +89,10 @@ export default class ApontamentoController {
             if (req.file != undefined) {
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
             }
+
+            if(!Array.isArray(assuntos)) {
+                assuntos = JSON.parse(assuntos)
+            }
             
             assuntos.forEach( assunto => {
                 if(assunto.trim().length === 0){
@@ -102,6 +106,10 @@ export default class ApontamentoController {
         if (temas != undefined) {
             if (req.file != undefined) {
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
+            }
+
+            if(!Array.isArray(temas)) {
+                temas = JSON.parse(temas)
             }
 
             temas.forEach( tema => {
@@ -170,6 +178,10 @@ export default class ApontamentoController {
         }
 
         if (assuntos != undefined) {
+            if(!Array.isArray(assuntos)) {
+                assuntos = JSON.parse(assuntos)
+            }
+
             assuntos.forEach(async assunto => {
                 if(assunto.trim().length === 0){
                     if (req.file != undefined) {
@@ -184,6 +196,10 @@ export default class ApontamentoController {
         }
         
         if (temas != undefined) {
+            if(!Array.isArray(temas)) {
+                temas = JSON.parse(temas)
+            }
+
             temas.forEach(async tema => {
                 if(tema.trim().length === 0){
                     if (req.file != undefined) {
