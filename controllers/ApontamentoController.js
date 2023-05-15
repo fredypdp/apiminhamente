@@ -109,6 +109,8 @@ export default class ApontamentoController {
             return
         }
         
+        console.log(assuntos)
+        
         if (temas != undefined) {
             if(!Array.isArray(temas)) {
                 temas = JSON.parse(temas)
@@ -118,7 +120,7 @@ export default class ApontamentoController {
                 }
             }
         }
-
+        
         if (temas != undefined) {
             if (req.file != undefined) {
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
@@ -132,6 +134,8 @@ export default class ApontamentoController {
             })
             return
         }
+        
+        ocnsole.log(temas)
         
         // Criando
         try {
