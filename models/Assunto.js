@@ -63,7 +63,7 @@ export default class Assunto {
            
             // Remover o assunto de todos os apontamentos que ele pertence
             assunto.apontamentos.forEach( async apontamento => {
-                let apontamentoEncontrado = await ApontamentoSchema.findOne({id: apontamento})
+                let apontamentoEncontrado = await ApontamentoSchema.findById(apontamento)
                 
                 if (apontamentoEncontrado != null && apontamentoEncontrado != undefined) {
                     let assuntoRemover = apontamentoEncontrado.assuntos.indexOf(assunto._id)
@@ -73,7 +73,7 @@ export default class Assunto {
                 }
             })
             
-            // Deletando todos os temas que fazem parte do assunto e apontamentos
+            // Deletando todos os temas que fazem parte do assunto e removendo-o dos apontamentos
             assunto.temas.forEach( async tema => {
                 await TemaSchema.findByIdAndDelete(tema)
 

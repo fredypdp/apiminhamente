@@ -78,7 +78,7 @@ export default class Tema {
 
             // Remover o tema de todos os apontamentos que ele pertence
             tema.apontamentos.forEach( async apontamento => {
-                let apontamentoEncontrado = await ApontamentoSchema.findOne({id: apontamento})
+                let apontamentoEncontrado = await ApontamentoSchema.findById(apontamento)
 
                 if (apontamentoEncontrado != null && apontamentoEncontrado != undefined) {
                     let temaRemover = apontamentoEncontrado.temas.indexOf(tema._id)

@@ -21,14 +21,14 @@ export default class Apontamento {
             
             assuntos.forEach( async assunto => {
                 let assuntoEncontrado = await AssuntoSchema.findById(assunto)
-                assuntoEncontrado.apontamentos.push(ApontamentoCriado.id)
+                assuntoEncontrado.apontamentos.push(ApontamentoCriado._id)
                 assuntoEncontrado.save()
             })
             
             if (temas != undefined || temas.length > 0) {
                 temas.forEach( async tema => {
                     let temaEncontrado = await TemaSchema.findById(tema)
-                    temaEncontrado.apontamentos.push(ApontamentoCriado.id)
+                    temaEncontrado.apontamentos.push(ApontamentoCriado._id)
                     temaEncontrado.save()
                 })
             }
@@ -86,8 +86,9 @@ export default class Apontamento {
             if (assuntos != undefined) {
                 let assuntos = await AssuntoSchema.find({})
 
-                assuntos.forEach( assunto => {
-                    let remover = assunto.apontamentos.indexOf(id)
+                assuntos.forEach(async assunto => {
+                    let apontamentoEncontrado = await ApontamentoSchema.findOne({id: id})
+                    let remover = assunto.apontamentos.indexOf(apontamentoEncontrado._id)
                     
                     if (remover != -1) {
                         assunto.apontamentos.splice(remover, 1)
@@ -100,8 +101,9 @@ export default class Apontamento {
             if (temas != undefined) {
                 let temas = await TemaSchema.find({})
 
-                temas.forEach( tema => {
-                    let remover = tema.apontamentos.indexOf(id)
+                temas.forEach(async tema => {
+                    let apontamentoEncontrado = await ApontamentoSchema.findOne({id: id})
+                    let remover = tema.apontamentos.indexOf(apontamentoEncontrado._id)
                             
                     if (remover != -1) {
                         tema.apontamentos.splice(remover, 1)
@@ -120,15 +122,15 @@ export default class Apontamento {
                     assuntos.forEach( async assunto => {
                         let assuntoEncontrado = await AssuntoSchema.findById(assunto)
                         if (assuntoEncontrado != null && assuntoEncontrado != undefined) {
-                            let editar = assuntoEncontrado.apontamentos.indexOf(ApontamentoEditado.id)
+                            let editar = assuntoEncontrado.apontamentos.indexOf(ApontamentoEditado._id)
                             
                             if (editar != -1) {
                                 assuntoEncontrado.apontamentos.splice(editar, 1)
-                                assuntoEncontrado.apontamentos.push(ApontamentoEditado.id)
+                                assuntoEncontrado.apontamentos.push(ApontamentoEditado._id)
                                 assuntoEncontrado.save()
                                 return
                             }
-                            assuntoEncontrado.apontamentos.push(ApontamentoEditado.id)
+                            assuntoEncontrado.apontamentos.push(ApontamentoEditado._id)
                             assuntoEncontrado.save()
                         }
                     })
@@ -140,16 +142,16 @@ export default class Apontamento {
                         let temaEncontrado = await TemaSchema.findById(tema)
                         
                         if (temaEncontrado != null && assuntoEncontrado != undefined) {
-                            let editar = temaEncontrado.apontamentos.indexOf(ApontamentoEditado.id)
+                            let editar = temaEncontrado.apontamentos.indexOf(ApontamentoEditado._id)
                             
                             if (editar != -1) {
                                 temaEncontrado.apontamentos.splice(editar, 1)
-                                temaEncontrado.apontamentos.push(ApontamentoEditado.id)
+                                temaEncontrado.apontamentos.push(ApontamentoEditado._id)
                                 temaEncontrado.save()
                                 return
                             }
         
-                            temaEncontrado.apontamentos.push(ApontamentoEditado.id)
+                            temaEncontrado.apontamentos.push(ApontamentoEditado._id)
                             temaEncontrado.save()
                         }
                     })
@@ -182,7 +184,7 @@ export default class Apontamento {
                 let assuntoEncontrado = await AssuntoSchema.findById(assunto)
 
                 if (assuntoEncontrado != null && assuntoEncontrado != undefined) {
-                    let apontamentoRemover = assuntoEncontrado.apontamentos.indexOf(apontamento.id)
+                    let apontamentoRemover = assuntoEncontrado.apontamentos.indexOf(apontamento._id)
 
                     assuntoEncontrado.apontamentos.splice(apontamentoRemover, 1)
                     assuntoEncontrado.save()
@@ -194,7 +196,7 @@ export default class Apontamento {
                 let temaEncontrado = await TemaSchema.findById(tema)
 
                 if (temaEncontrado != null && temaEncontrado != undefined) {
-                    let apontamentoRemover = temaEncontrado.apontamentos.indexOf(apontamento.id)
+                    let apontamentoRemover = temaEncontrado.apontamentos.indexOf(apontamento._id)
 
                     temaEncontrado.apontamentos.splice(apontamentoRemover, 1)
                     temaEncontrado.save()
