@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import slugify from "slugify";
 import FileManager from "./FileManager.js";
 import TemaSchema from "../Schemas/TemaSchema.js";
