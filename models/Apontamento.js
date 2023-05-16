@@ -11,16 +11,16 @@ export default class Apontamento {
         const buffer = crypto.randomBytes(64)
         let idbase64 = buffer.toString('hex')
         let idUsar = idbase64.slice(0, 11)
-
-        if(visibilidade == undefined) {
-            visibilidade = true
-        }
-        
-        console.log(visibilidade)
         
         try {
-            let ApontamentoCriado = await ApontamentoSchema.create({id: idUsar, titulo: titulo, slug: slugify(titulo), conteudo: conteudo, miniatura: miniatura, miniatura_public_id: miniatura_public_id, visibilidade: visibilidade, assuntos: assuntos, temas: temas, created_at: new Date})
             
+            let ApontamentoCriado
+            if(visibilidade != undefined) {
+                ApontamentoCriado = await ApontamentoSchema.create({id: idUsar, titulo: titulo, slug: slugify(titulo), conteudo: conteudo, miniatura: miniatura, miniatura_public_id: miniatura_public_id, visibilidade: visibilidade, assuntos: assuntos, temas: temas, created_at: new Date})
+            } else {
+                ApontamentoCriado = await ApontamentoSchema.create({id: idUsar, titulo: titulo, slug: slugify(titulo), conteudo: conteudo, miniatura: miniatura, miniatura_public_id: miniatura_public_id, assuntos: assuntos, temas: temas, created_at: new Date})
+            }
+                
             assuntos.forEach( async assunto => {
                 let assuntoEncontrado = await AssuntoSchema.findById(assunto)
                 assuntoEncontrado.apontamentos.push(ApontamentoCriado._id)
