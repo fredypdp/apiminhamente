@@ -16,6 +16,8 @@ export default class Apontamento {
             visibilidade = true
         }
         
+        console.log(visibilidade)
+        
         try {
             let ApontamentoCriado = await ApontamentoSchema.create({id: idUsar, titulo: titulo, slug: slugify(titulo), conteudo: conteudo, miniatura: miniatura, miniatura_public_id: miniatura_public_id, visibilidade: visibilidade, assuntos: assuntos, temas: temas, created_at: new Date})
             
