@@ -13,7 +13,7 @@ export default class Apontamento {
         let idUsar = idbase64.slice(0, 11)
         
         if(visibilidade == undefined) {
-                visibilidade = true
+            visibilidade = true
         }
         
         try {
