@@ -18,23 +18,23 @@ export default class Apontamento {
         
         try {
             
-            let ApontamentoCriado = await ApontamentoSchema.create({id: idUsar, titulo: titulo, slug: slugify(titulo), conteudo: conteudo, miniatura: miniatura, miniatura_public_id: miniatura_public_id, visibilidade: visibilidade, assuntos: assuntos, temas: temas, created_at: new Date})
+            let apontamento = await ApontamentoSchema.create({id: idUsar, titulo: titulo, slug: slugify(titulo), conteudo: conteudo, miniatura: miniatura, miniatura_public_id: miniatura_public_id, visibilidade: visibilidade, assuntos: assuntos, temas: temas, created_at: new Date})
             
             assuntos.forEach( async assunto => {
                 let assuntoEncontrado = await AssuntoSchema.findById(assunto)
-                assuntoEncontrado.apontamentos.push(ApontamentoCriado._id)
+                assuntoEncontrado.apontamentos.push(apontamento._id)
                 assuntoEncontrado.save()
             })
             
             if (temas != undefined || temas.length > 0) {
                 temas.forEach( async tema => {
                     let temaEncontrado = await TemaSchema.findById(tema)
-                    temaEncontrado.apontamentos.push(ApontamentoCriado._id)
+                    temaEncontrado.apontamentos.push(apontamento._id)
                     temaEncontrado.save()
                 })
             }
-            
-            return ApontamentoCriado
+            console.log(apontamento);
+            return apontamento
         } catch (erro) {
             await new FileManager().deletar(miniatura_public_id)
             return erro
