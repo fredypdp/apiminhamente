@@ -25,7 +25,7 @@ export default class Apontamento {
                 assuntoEncontrado.save()
             })
             
-            if (temas != undefined || temas.length > 0) {
+            if (temas != undefined && temas.length > 0) {
                 temas.forEach( async tema => {
                     let temaEncontrado = await TemaSchema.findById(tema)
                     temaEncontrado.apontamentos.push(apontamento._id)
@@ -178,7 +178,7 @@ export default class Apontamento {
             
             // Deletar a miniatura do apontamento no Cloudinary
             await new FileManager().delete(apontamento.miniatura_public_id)
-            
+            console.log(apontamento);
             // Remover o apontamento de todos os assuntos que ele pertence
             apontamento.assuntos.forEach( async assunto => {
                 let assuntoEncontrado = await AssuntoSchema.findById(assunto)
