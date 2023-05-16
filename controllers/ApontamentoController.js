@@ -142,6 +142,14 @@ export default class ApontamentoController {
                 }
             })
         }
+
+        if(typeof visibilidade == 'string') {
+            if(visibilidade == "undefined") {
+                visibilidade = undefined
+            } else {
+                visibilidade = JSON.parse(visibilidade)
+            }
+        }
         
         // Criando
         try {
@@ -253,6 +261,14 @@ export default class ApontamentoController {
                     return
                 }
             })
+        }
+
+        if(typeof visibilidade == 'string') {
+            if(visibilidade == "undefined") {
+                visibilidade = undefined
+            } else {
+                visibilidade = JSON.parse(visibilidade)
+            }
         }
         
         if (req.file == undefined && titulo == undefined && conteudo == undefined && assuntos == undefined && temas == undefined && visibilidade == undefined) {
