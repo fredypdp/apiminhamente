@@ -175,7 +175,7 @@ export default class ApontamentoController {
                     rel: "deletar_apontamento",
                 },
             ]
-            console.log(cdn);
+            
             res.status(200)
             res.json({apontamento: apontamento, _links: HATEOAS, msg: "Apontamento criado com sucesso"})
         } catch (erro) {
