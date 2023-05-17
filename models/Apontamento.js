@@ -186,7 +186,7 @@ export default class Apontamento {
 
                 console.log(assunto);
                 if (assuntoEncontrado != null && assuntoEncontrado != undefined) {
-                    console.log(assunto);
+                    console.log(assuntoEncontrado);
                     let apontamentoRemover = assuntoEncontrado.apontamentos.indexOf(apontamento._id)
                     assuntoEncontrado.apontamentos.splice(apontamentoRemover, 1)
                     assuntoEncontrado.save()

@@ -14,9 +14,7 @@ export default class Image {
 
     async deletar(imagem){
         try {
-            console.log(imagem);
             let result = await cloudinary.uploader.destroy(imagem)
-            console.log(result);
             return result
         } catch (erro) {
             console.log(erro);
