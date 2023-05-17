@@ -184,9 +184,7 @@ export default class Apontamento {
             apontamento.assuntos.forEach( async assunto => {
                 let assuntoEncontrado = await AssuntoSchema.findById(assunto)
 
-                console.log(assunto);
                 if (assuntoEncontrado != null && assuntoEncontrado != undefined) {
-                    console.log(assuntoEncontrado);
                     let apontamentoRemover = assuntoEncontrado.apontamentos.indexOf(apontamento._id)
                     assuntoEncontrado.apontamentos.splice(apontamentoRemover, 1)
                     assuntoEncontrado.save()
