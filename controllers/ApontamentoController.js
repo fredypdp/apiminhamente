@@ -200,7 +200,7 @@ export default class ApontamentoController {
         }
 
         if (id != undefined) {
-            if (_id.trim().length === 0) {
+            if (id.trim().length === 0) {
                 res.status(400)
                 res.json({erro: "id inválido, o campo está vazio"})
                 return
