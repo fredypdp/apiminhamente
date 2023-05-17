@@ -177,8 +177,8 @@ export default class Apontamento {
             let apontamento = await ApontamentoSchema.findByIdAndDelete(apontamentoEncontrado._id);
             
             // Deletar a miniatura do apontamento no Cloudinary
-            console.log(apontamento);
-            await new FileManager().delete(apontamento.miniatura_public_id)
+            let deletadaImg = await new FileManager().delete(apontamento.miniatura_public_id)
+            console.log(deletadaImg);
             console.log(apontamento);
             // Remover o apontamento de todos os assuntos que ele pertence
             apontamento.assuntos.forEach( async assunto => {
