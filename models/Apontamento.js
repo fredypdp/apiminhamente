@@ -178,14 +178,15 @@ export default class Apontamento {
             
             // Deletar a miniatura do apontamento no Cloudinary
             await new FileManager().delete(apontamento.miniatura_public_id)
-            console.log(apontamento);
+            
             // Remover o apontamento de todos os assuntos que ele pertence
             apontamento.assuntos.forEach( async assunto => {
                 let assuntoEncontrado = await AssuntoSchema.findById(assunto)
 
+                console.log(assunto);
                 if (assuntoEncontrado != null && assuntoEncontrado != undefined) {
-                    let apontamentoRemover = assuntoEncontrado.apontamentos.indexOf(apontamento._id)
                     console.log(assunto);
+                    let apontamentoRemover = assuntoEncontrado.apontamentos.indexOf(apontamento._id)
                     assuntoEncontrado.apontamentos.splice(apontamentoRemover, 1)
                     assuntoEncontrado.save()
                 }
