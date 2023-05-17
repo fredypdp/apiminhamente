@@ -16,6 +16,7 @@ export default class Image {
         try {
             let result = await cloudinary.uploader.destroy(imagem)
             console.log(result);
+            console.log(imagem);
             return result
         } catch (erro) {
             console.log(erro);
