@@ -206,6 +206,22 @@ export default class ApontamentoController {
                 return
             }
         }
+        
+        if (titulo != undefined) {
+            if (titulo.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "Título inválido, o campo está vazio"})
+                return
+            }
+        }
+
+        if (conteudo != undefined) {
+            if (conteudo.trim().length === 0) {
+                res.status(400)
+                res.json({erro: "Conteúdo inválido, o campo está vazio"})
+                return
+            }
+        }
 
         if(assuntos != undefined) {
             if(!Array.isArray(assuntos)) {
