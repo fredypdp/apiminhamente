@@ -230,7 +230,7 @@ export default class Apontamento {
 
     async pesquisa(pesquisa){
         try {
-            let result = await ApontamentoSchema.find({ titulo: { $regex: `${pesquisa}`, $options: 'iu'}}).populate("assuntos").populate("temas").sort({created_at: -1})
+            let result = await ApontamentoSchema.find({ titulo: { $regex: `${pesquisa}`, $options: 'i'}}).populate("assuntos").populate("temas").sort({created_at: -1})
 
             return result
         } catch (erro) {
