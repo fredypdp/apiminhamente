@@ -472,7 +472,7 @@ Esta API usa Bearer Token como um método de autenticação.
 * assuntos - Array com o _id dos assuntos (required), caso use formData converta em JSON
 * temas - Array com o _id dos temas, caso use formData converta em JSON
 * visibilidade - Boolean, (required, true é o valor padrão)
-* miniatura - Imagem (png, jpg, jpeg) (required)
+* miniatura - Imagem (png, jpg, jpeg, svg) (required)
 
 ### Requisição
 ```
@@ -764,7 +764,8 @@ axios(config)
       "_id": ObjectId("616d6efb46c45b7f064526e3"),
       "nome": "Nome do assunto",
       "slug": "Nome_do_assunto",
-      "icone": "<i class='icon solid-icon'></i>",
+      "icone": "https://icone.com.br",
+      "icone_public_id": "iconeDSF35.jpg",
       "apontamentos": [
         "616d6efb46c45b7f064526e3"
       ],
@@ -828,7 +829,8 @@ axios(config)
     "_id": ObjectId("616d6efb46c45b7f064526e3"),
     "nome": "Nome do assunto",
     "slug": "Nome_do_assunto",
-    "icone": "<i class='icon solid-icon'></i>",
+    "icone": "https://icone.com.br",
+    "icone_public_id": "iconeDSF35.jpg",
     "apontamentos": [
       "616d6efb46c45b7f064526e3"
     ],
@@ -892,7 +894,8 @@ axios(config)
     "_id": ObjectId("616d6efb46c45b7f064526e3"),
     "nome": "Nome do assunto",
     "slug": "Nome_do_assunto",
-    "icone": "<i class='icon solid-icon'></i>",
+    "icone": "https://icone.com.br",
+    "icone_public_id": "iconeDSF35.jpg",
     "apontamentos": [
       "616d6efb46c45b7f064526e3"
     ],
@@ -956,7 +959,8 @@ axios(config)
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "nome": "Nome do assunto",
   "slug": "Nome_do_assunto",
-  "icone": "<i class='icon solid-icon'></i>",
+  "icone": "https://icone.com.br",
+  "icone_public_id": "iconeDSF35.jpg",
   "apontamentos": [
     "616d6efb46c45b7f064526e3"
   ],
@@ -1001,24 +1005,21 @@ Esta API usa Bearer Token como um método de autenticação.
 
 * nome - String (required)
 * icone - String da classe do ícone do fontawesome (required)
+* icone - Imagem (png, jpg, jpeg, svg) (required)
 
 ### Requisição
 ```
 import axios from "axios";
 
-let config = {
-  method: 'post',
-  url: 'https://apiminhamente.onrender.com/assunto',
-  headers: {
-    'authorization': 'token de login'
-  },
-  data: {
-    nome: "Nome do assunto",
-    icone: "<i class='icon solid-icon'></i>",
-  }
-};
+const formData = new FormData();
+let nome = "Nome do assunto"
+let icone = "file.svg"
 
-axios(config)
+formData.append('nome', nome);
+formData.append('icone', icone);
+
+axios.post('https://apiminhamente.onrender.com/assunto', formData, headers: {'authorization': 'token de login'
+})
 .then(function (response) {
   console.log(JSON.stringify(response.data));
 })
@@ -1034,7 +1035,8 @@ axios(config)
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "nome": "Nome do assunto",
   "slug": "Nome-do-assunto",
-  "icone": "<i class='icon solid-icon'></i>",
+  "icone": "https://icone.com.br",
+  "icone_public_id": "iconeDSF35.jpg",
   "apontamentos": [
     "616d6efb46c45b7f064526e3"
   ],
@@ -1077,20 +1079,13 @@ Esta API usa Bearer Token como um método de autenticação.
 ```
 import axios from "axios";
 
-let config = {
-  method: 'put',
-  url: 'https://apiminhamente.onrender.com/assunto',
-  headers: {
-    'authorization': 'token de login'
-  },
-  data: {
-     id: "3dD987FDSFJN4",
-     nome: "Novo nome do assunto"
-  }
-};
+const formData = new FormData();
+let nome = "Novo nome do assunto"
 
-axios(config)
-.then(function (response) {
+formData.append('nome', nome);
+
+axios.put('https://apiminhamente.onrender.com/assunto', formData, headers: {'authorization': 'token de login'
+}).then(function (response) {
   console.log(JSON.stringify(response.data));
 })
 .catch(function (error) {
@@ -1105,7 +1100,8 @@ axios(config)
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "nome": "Novo nome do assunto",
   "slug": "Novo-nome-do-assunto",
-  "icone": "<i class='icon solid-icon'></i>",
+  "icone": "https://icone.com.br",
+  "icone_public_id": "iconeDSF35.jpg",
   "apontamentos": [
     "616d6efb46c45b7f064526e3"
   ],
@@ -1171,7 +1167,8 @@ axios(config)
   "_id": ObjectId("616d6efb46c45b7f064526e3"),
   "nome": "Novo nome do assunto",
   "slug": "Novo-nome-do-assunto",
-  "icone": "<i class='icon solid-icon'></i>",
+  "icone": "https://icone.com.br",
+  "icone_public_id": "iconeDSF35.jpg",
   "apontamentos": [
     "616d6efb46c45b7f064526e3"
   ],
@@ -2101,7 +2098,7 @@ https://apiminhamente.onrender.com/usuario
 
 * nome - String (required)
 * sobrenome - String(required)
-* avatar - Imagem (png, jpg, jpeg) (required)
+* avatar - Imagem (png, jpg, jpeg, svg) (required)
 * email - String(required)
 * senha - String de no mínimo 8 caracteres(required)
 

@@ -1,11 +1,12 @@
-import ApontamentoSchema from "../Schemas/ApontamentoSchema.js";
-import AssuntoSchema from "../Schemas/AssuntoSchema.js";
-import TemaSchema from "../Schemas/TemaSchema.js";
 import slugify from "slugify";
+import FileManager from "./FileManager.js";
+import TemaSchema from "../Schemas/TemaSchema.js";
+import AssuntoSchema from "../Schemas/AssuntoSchema.js";
+import ApontamentoSchema from "../Schemas/ApontamentoSchema.js";
 
 export default class Assunto {
     
-    async novo(nome, icone){
+    async novo(nome, icone, icone_public_id){
         let assuntoEncontrado = await this.encontrarPorNome(nome)
         
         if (assuntoEncontrado != undefined) {
@@ -14,38 +15,51 @@ export default class Assunto {
         }
 
         try {
-            let assunto = await AssuntoSchema.create({nome: nome, slug: slugify(nome), icone: icone, created_at: new Date})
+            let assunto = await AssuntoSchema.create({nome: nome, slug: slugify(nome), icone: icone, icone_public_id: icone_public_id, created_at: new Date})
             return assunto
         } catch (erro) {
+            await new FileManager().deletar(icone_public_id)
             return erro
         }
     }
 
-    async editar(id, novoNome, novoIcone){
+    async editar(id, nome, icone, icone_public_id){
         let assuntoEditar = {}
 
-        let assuntoEncontrado = await this.encontrarPorNome(novoNome)
+        let assuntoEncontrado = await this.encontrarPorNome(nome)
         
         if (assuntoEncontrado != undefined) {
             let erro = {status: 400, msg: "O nome já está cadastrado"}
             return erro
         }
 
-        if (novoNome != undefined) {
-            assuntoEditar.nome = novoNome
-            assuntoEditar.slug = slugify(novoNome)
+        if (nome != undefined) {
+            assuntoEditar.nome = nome
+            assuntoEditar.slug = slugify(nome)
         }
         
-        if (novoIcone != undefined) {
-            assuntoEditar.icone = novoIcone
+        if (icone != undefined) {
+            assuntoEditar.icone = icone
+        }
+        
+        if (icone_public_id != undefined) {
+            assuntoEditar.icone_public_id = icone_public_id
         }
 
-        assuntoEditar.edited_at = new Date
+        assuntoEditar.edited_at = new Date()
 
         try {
+            // Deletando o icone antigo do Cloudinary
+            if (icone != undefined) {
+                let assunto = await AssuntoSchema.findById(id)
+                
+                await new FileManager().deletar(assunto.icone_public_id)
+            }
+
             let assunto = await AssuntoSchema.findByIdAndUpdate(id, assuntoEditar, {new: true})
             return assunto           
         } catch (erro) {
+            await new FileManager().deletar(icone_public_id)
             return erro
         }
     }
@@ -60,6 +74,9 @@ export default class Assunto {
 
         try{
            let assunto = await AssuntoSchema.findByIdAndDelete(id)
+
+           // Deletar a miniatura do apontamento no Cloudinary
+           await new FileManager().deletar(assunto.icone_public_id)
            
             // Remover o assunto de todos os apontamentos que ele pertence
             assunto.apontamentos.forEach( async apontamento => {

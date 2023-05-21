@@ -72,7 +72,7 @@ export default class Apontamento {
             apontamento.miniatura_public_id = miniatura_public_id
         }
 
-        apontamento.edited_at = new Date
+        apontamento.edited_at = new Date()
         try {
 
             // Deletando a miniatura antiga do Cloudinary
@@ -177,7 +177,6 @@ export default class Apontamento {
             let apontamento = await ApontamentoSchema.findOneAndDelete({id: id});
             
             // Deletar a miniatura do apontamento no Cloudinary
-            
             await new FileManager().deletar(apontamento.miniatura_public_id)
             
             // Remover o apontamento de todos os assuntos que ele pertence

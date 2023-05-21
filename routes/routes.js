@@ -58,8 +58,8 @@ router.get("/assuntos", new AssuntoController().Assuntos) // Todos os assuntos
 router.get("/assunto/:id", new AssuntoController().AssuntoById) // Assunto pelo id
 router.get("/assunto/nome/:nome", new AssuntoController().AssuntoNome) // Assunto pelo nome
 router.get("/assunto/slug/:slug", new AssuntoController().AssuntoSlug) // Assunto pelo slug
-router.post("/assunto", AdminAuth, new AssuntoController().criar) // Criar assunto
-router.put("/assunto", AdminAuth, new AssuntoController().editar) // Editar assunto
+router.post("/assunto", AdminAuth, upload.single("icone"), new AssuntoController().criar) // Criar assunto
+router.put("/assunto", AdminAuth, upload.single("icone"), new AssuntoController().editar) // Editar assunto
 router.delete("/assunto/:id", AdminAuth, new AssuntoController().deletar) // Deletar assunto
 
 // Temas

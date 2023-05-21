@@ -4,6 +4,7 @@ const AssuntoSchema = mongoose.Schema({
     nome: {type: String, required: true},
     slug: {type: String, required: true},
     icone: {type: String, required: true},
+    icone_public_id: {type: String, required: true},
     apontamentos: [
         {
             type: String,
