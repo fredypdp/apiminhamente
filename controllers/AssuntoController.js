@@ -41,7 +41,7 @@ export default class AssuntoController {
 
         let icone
         if (req.file != undefined) {
-            if(!new RegExp(/image\/(png|jpg|jpeg|svg+xml)/).test(req.file.mimetype)) {
+            if(!new RegExp(/image\/(png|jpg|jpeg|svg)/).test(req.file.mimetype)) {
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
                 res.status(400)
                 res.json({erro: "O ícone deve ser uma imagem"})
