@@ -319,7 +319,7 @@ export default class UserController {
 
         let avatar
         if (req.file != undefined) {
-            if(!new RegExp(/image\/(png|jpg|jpeg|svg)/).test(req.file.mimetype)) {
+            if(!new RegExp.match(/image\/(png|jpg|jpeg|svg)/g).length) {
                 
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
                 res.status(400)
@@ -535,7 +535,7 @@ export default class UserController {
         
         let avatar
         if (req.file != undefined) {
-            if(!new RegExp(/image\/(png|jpg|jpeg)/).test(req.file.mimetype)) {
+            if(!new RegExp.match(/image\/(png|jpg|jpeg|svg)/g).length) {
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
                 res.status(400)
                 res.json({erro: "O avatar deve ser uma imagem"})
