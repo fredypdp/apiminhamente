@@ -150,6 +150,12 @@ export default class ApontamentoController {
                 visibilidade = JSON.parse(visibilidade)
             }
         }
+
+        if (titulo.length > 200) {
+            res.status(400)
+            res.json({erro: "O título deve ter menos de 200 cacteres"})
+            return
+        }
         
         // Criando
         try {
@@ -303,6 +309,12 @@ export default class ApontamentoController {
             }
             
             miniatura = req.file.destination+"/"+req.file.filename
+        }
+
+        if (titulo != undefined && titulo.length > 200) {
+            res.status(400)
+            res.json({erro: "O título deve ter menos de 200 cacteres"})
+            return
         }
 
         // Editando

@@ -51,6 +51,12 @@ export default class AssuntoController {
             icone = req.file.destination+"/"+req.file.filename
         }
 
+        if (nome.length > 100) {
+            res.status(400)
+            res.json({erro: "O nome deve ter menos de 100 cacteres"})
+            return
+        }
+
         try {
             let cdn = await new FileManager().upload(icone) // Upload do ícone para a Cloudinary e retornando a cdn
             await unlinkAsync(icone) // Deletando ícone da pasta "temp"
@@ -137,6 +143,12 @@ export default class AssuntoController {
             }
             
             icone = req.file.destination+"/"+req.file.filename
+        }
+
+        if (nome != undefined && nome.length > 100) {
+            res.status(400)
+            res.json({erro: "O nome deve ter menos de 100 cacteres"})
+            return
         }
 
         // Editando assunto
