@@ -387,6 +387,18 @@ export default class UserController {
             }
         }
 
+        if (nome.length > 25) {
+            res.status(400)
+            res.json({erro: "O nome deve ter menos de 25 cacteres"})
+            return
+        }
+        
+        if (sobrenome.length > 25) {
+            res.status(400)
+            res.json({erro: "O sobrenome deve ter menos de 25 cacteres"})
+            return
+        }
+
         try {
             let cdn = await new FileManager().upload(avatar) // Upload da imagem para a Cloudinary e retornando a cdn
             await unlinkAsync(avatar) // Deletando imagem da pasta "temp"
@@ -543,6 +555,18 @@ export default class UserController {
             }
             
             avatar = req.file.destination+"/"+req.file.filename
+        }
+
+        if (nome != undefined && nome.length > 20) {
+            res.status(400)
+            res.json({erro: "O nome deve ter menos de 20 cacteres"})
+            return
+        }
+        
+        if (sobrenome != undefined && sobrenome.length > 20) {
+            res.status(400)
+            res.json({erro: "O sobrenome deve ter menos de 20 cacteres"})
+            return
         }
 
         // Validar se a conta a ser editada pertence a esse usuário

@@ -36,6 +36,12 @@ export default class AssuntoController {
             }
         }
 
+        if (titulo.length > 200) {
+            res.status(400)
+            res.json({erro: "O titulo deve ter menos de 200 cacteres"})
+            return
+        }
+
         try {
             let erroExist = await new Tema().novo(titulo.trim(), assunto.trim())
             if (erroExist.status == 400) {
@@ -106,6 +112,12 @@ export default class AssuntoController {
                 res.json({erro: "Titulo inválido, o campo está vazio"})
                 return
             }
+        }
+
+        if (titulo != undefined && titulo.length > 200) {
+            res.status(400)
+            res.json({erro: "O titulo deve ter menos de 200 cacteres"})
+            return
         }
 
         try {
