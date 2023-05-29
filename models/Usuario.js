@@ -26,7 +26,7 @@ export default class User {
 
     async encontrarPorNome(nome){
         try{
-            let usuarios = await UsuarioSchema.find({nome: { $regex: `${nome}`, $options: 'i'}}).sort({created_at: -1})
+            let usuarios = await UsuarioSchema.find({nome: { $regex: `${nome.trim()}`, $options: 'i'}}).sort({created_at: -1})
             return usuarios
         }catch(erro){
             return erro;
@@ -35,7 +35,7 @@ export default class User {
 
     async encontrarPorSobrenome(sobrenome){
         try{
-            let usuarios = await UsuarioSchema.find({sobrenome: { $regex: `${sobrenome}`, $options: 'i'}}).sort({created_at: -1})
+            let usuarios = await UsuarioSchema.find({sobrenome: { $regex: `${sobrenome.trim()}`, $options: 'i'}}).sort({created_at: -1})
             return usuarios
         }catch(erro){
             return erro;
@@ -44,7 +44,7 @@ export default class User {
 
     async encontrarPorEmail(email){
         try{
-            let usuario = await UsuarioSchema.findOne({email: { $regex: `${email}`}})
+            let usuario = await UsuarioSchema.findOne({email: { $regex: `${email.trim()}`}})
             return usuario
         }catch(erro){
             return erro;
@@ -74,9 +74,9 @@ export default class User {
         }
 
         try {
-            let hash = await bcrypt.hash(senha, 10)
+            let hash = await bcrypt.hash(senha.trim(), 10)
 
-            let usuario = await UsuarioSchema.create({id: idUsar, nome: nome, sobrenome: sobrenome, email: email, senha: hash, avatar: avatar, avatar_public_id: avatar_public_id, created_at: new Date})
+            let usuario = await UsuarioSchema.create({id: idUsar, nome: nome.trim(), sobrenome: sobrenome.trim(), email: email.trim(), senha: hash, avatar: avatar, avatar_public_id: avatar_public_id, created_at: new Date})
 
             return usuario
         } catch (erro) {
@@ -96,15 +96,15 @@ export default class User {
         let usuario = {};
         
         if(nome != undefined){
-            usuario.nome = nome;
+            usuario.nome = nome.trim();
         }
         
         if(sobrenome != undefined){
-            usuario.sobrenome = sobrenome;
+            usuario.sobrenome = sobrenome.trim();
         }
         
         if(email != undefined){
-            usuario.email = email;
+            usuario.email = email.trim();
         }
 
         if(avatar != undefined){
@@ -198,7 +198,7 @@ export default class User {
     }
 
     async mudarSenha(novaSenha, id, token){
-        let  hash = await bcrypt.hash(novaSenha, 10);
+        let  hash = await bcrypt.hash(novaSenha.trim(), 10);
         
         let usuario = await UsuarioSchema.findOneAndUpdate({id: id}, {senha: hash}, {new: true})
         await new SenhaToken().DefinirUsado(token);

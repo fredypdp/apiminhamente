@@ -162,7 +162,7 @@ export default class ApontamentoController {
             let cdn = await new FileManager().upload(miniatura) // Upload da miniatura para a Cloudinary e retornando a cdn
             await unlinkAsync(miniatura) // Deletando miniatura da pasta "temp"
 
-            let apontamento = await new Apontamento().novo(titulo.trim(), conteudo.trim(), assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
+            let apontamento = await new Apontamento().novo(titulo, conteudo, assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
 
             let HATEOAS = [
                 {
@@ -323,7 +323,7 @@ export default class ApontamentoController {
             if (miniatura != undefined) {
                 cdn = await new FileManager().upload(miniatura) // Upload da miniatura para a Cloudinary e retornando a cdn
                 await unlinkAsync(miniatura) // Deletando miniatura da pasta "temp"
-                let apontamento = await new Apontamento().editar(id, titulo.trim(), conteudo.trim(), assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
+                let apontamento = await new Apontamento().editar(id, titulo, conteudo, assuntos, temas, visibilidade, cdn.secure_url, cdn.public_id)
 
                 let HATEOAS = [
                     {

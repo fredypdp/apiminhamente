@@ -43,7 +43,7 @@ export default class AssuntoController {
         }
 
         try {
-            let erroExist = await new Tema().novo(titulo.trim(), assunto.trim())
+            let erroExist = await new Tema().novo(titulo, assunto)
             if (erroExist.status == 400) {
                 res.status(406)
                 res.json({erro: "Já existe um tema com esse nome"})
@@ -121,7 +121,7 @@ export default class AssuntoController {
         }
 
         try {
-           let tema = await new Tema().editar(id, titulo.trim())
+           let tema = await new Tema().editar(id, titulo)
 
            let HATEOAS = [
                 {

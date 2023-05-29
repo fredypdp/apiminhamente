@@ -17,7 +17,7 @@ export default class Apontamento {
         }
         
         try {
-            let apontamento = await ApontamentoSchema.create({id: idUsar, titulo: titulo, slug: slugify(titulo), conteudo: conteudo, miniatura: miniatura, miniatura_public_id: miniatura_public_id, visibilidade: visibilidade, assuntos: assuntos, temas: temas, created_at: new Date})
+            let apontamento = await ApontamentoSchema.create({id: idUsar, titulo: titulo.trim(), slug: slugify(titulo.trim()), conteudo: conteudo.trim(), miniatura: miniatura, miniatura_public_id: miniatura_public_id, visibilidade: visibilidade, assuntos: assuntos, temas: temas, created_at: new Date})
             
             assuntos.forEach( async assunto => {
                 let assuntoEncontrado = await AssuntoSchema.findById(assunto)
@@ -44,12 +44,12 @@ export default class Apontamento {
         let apontamento = {}
 
         if (titulo != undefined) {
-            apontamento.titulo = titulo
-            apontamento.slug = slugify(titulo)
+            apontamento.titulo = titulo.trim()
+            apontamento.slug = slugify(titulo.trim())
         }
         
         if (conteudo != undefined) {
-            apontamento.conteudo = conteudo
+            apontamento.conteudo = conteudo.trim()
         }
         
         if (assuntos != undefined) {

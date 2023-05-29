@@ -15,7 +15,7 @@ export default class Assunto {
         }
 
         try {
-            let assunto = await AssuntoSchema.create({nome: nome, slug: slugify(nome), icone: icone, icone_public_id: icone_public_id, created_at: new Date})
+            let assunto = await AssuntoSchema.create({nome: nome.trim(), slug: slugify(nome.trim()), icone: icone, icone_public_id: icone_public_id, created_at: new Date})
             return assunto
         } catch (erro) {
             await new FileManager().deletar(icone_public_id)
@@ -34,8 +34,8 @@ export default class Assunto {
         }
 
         if (nome != undefined) {
-            assuntoEditar.nome = nome
-            assuntoEditar.slug = slugify(nome)
+            assuntoEditar.nome = nome.trim()
+            assuntoEditar.slug = slugify(nome.trim())
         }
         
         if (icone != undefined) {

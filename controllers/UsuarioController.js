@@ -403,7 +403,7 @@ export default class UserController {
             let cdn = await new FileManager().upload(avatar) // Upload da imagem para a Cloudinary e retornando a cdn
             await unlinkAsync(avatar) // Deletando imagem da pasta "temp"
 
-            let erroExist = await new Usuario().novo(nome.trim(), sobrenome.trim(), email.trim(), senha.trim(), cdn.secure_url, cdn.public_id)
+            let erroExist = await new Usuario().novo(nome, sobrenome, email, senha, cdn.secure_url, cdn.public_id)
             if (erroExist.status == 400) {
                 res.status(406)
                 res.json({erro: "Já existe uma conta com esse email"})
@@ -601,7 +601,7 @@ export default class UserController {
                 await unlinkAsync(avatar) // Deletando imagem da pasta "temp"
                 
                 
-                let erroExist = await new Usuario().editar(id, nome.trim(), sobrenome.trim(), email.trim(), cdn.secure_url, cdn.public_id)
+                let erroExist = await new Usuario().editar(id, nome, sobrenome, email, cdn.secure_url, cdn.public_id)
                 if (erroExist.status == 400) {
                     res.status(406)
                     res.json({erro: "Já existe uma conta com esse email"})
@@ -973,11 +973,11 @@ export default class UserController {
             }
         }
 
-        let result = await new DelecaoToken().criar(email.trim());
+        let result = await new DelecaoToken().criar(email);
 
         if(result.status == true){
             try {
-                new EnviarEmail().enviarDelecaoLink(email.trim(), result.token)
+                new EnviarEmail().enviarDelecaoLink(email, result.token)
                 
                 res.status(200);
                 res.send("Email de deleção enviado com sucesso")
@@ -1011,11 +1011,11 @@ export default class UserController {
             }
         }
 
-        let result = await new SenhaToken().criar(email.trim());
+        let result = await new SenhaToken().criar(email);
 
         if(result.status == true){
             try {
-                new EnviarEmail().enviarNovaSenhaLink(email.trim(), result.token)
+                new EnviarEmail().enviarNovaSenhaLink(email, result.token)
     
                 res.status(200);
                 res.send("Link enviado ao seu email com sucesso")
@@ -1078,7 +1078,7 @@ export default class UserController {
         }
 
         try {
-            let usuario = await new Usuario().mudarSenha(senha.trim(), tokenValido.token.usuario, tokenValido.token.token);
+            let usuario = await new Usuario().mudarSenha(senha, tokenValido.token.usuario, tokenValido.token.token);
             
             let HATEOAS = [
                 {
