@@ -123,7 +123,7 @@ export default class Assunto {
 
     async encontrarPorNome(nome){
         try {
-            let result = await AssuntoSchema.findOne({nome: { $regex: `${nome}`}}).populate("apontamentos").populate("temas")
+            let result = await AssuntoSchema.findOne({nome: { $regex: `${nome}`, $options: 'i'}}).populate("apontamentos").populate("temas")
             return result
         } catch (erro) {
             return erro

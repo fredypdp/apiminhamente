@@ -580,16 +580,16 @@ export default class UserController {
 
         try {
             let usuario = await new Usuario().encontrarPorId(id);
-            let decoded = await jwt.verify(token, secret)  
+            let resultado = await bcrypt.compare(senha, usuario.senha);
             
-            if(decoded.usuario.senha != usuario.senha){
-                res.status(403);
-                res.json({erro: "Erro ao editar o usuário!"});
+            if(!resultado){
+                res.status(406);
+                res.json({erro: "Senha incorreta"});
                 return
             }
         } catch (erro) {
-            res.status(401);
-            res.json({erro: "Token inválido"});
+            res.status(403);
+            res.json({erro: "Erro ao editar o usuário!"});
             return
         }
             
