@@ -387,6 +387,18 @@ export default class UserController {
             }
         }
 
+        if (nome.length < 5) {
+            res.status(400)
+            res.json({erro: "O nome deve ter mais de 5 cacteres"})
+            return
+        }
+        
+        if (sobrenome.length < 5) {
+            res.status(400)
+            res.json({erro: "O sobrenome deve ter mais de 5 cacteres"})
+            return
+        }
+        
         if (nome.length > 25) {
             res.status(400)
             res.json({erro: "O nome deve ter menos de 25 cacteres"})
@@ -557,13 +569,25 @@ export default class UserController {
             avatar = req.file.destination+"/"+req.file.filename
         }
 
-        if (nome != undefined && nome.length > 20) {
+        if (nome != undefined && nome.length < 5) {
+            res.status(400)
+            res.json({erro: "O nome deve ter mais de 5 cacteres"})
+            return
+        }
+        
+        if (sobrenome != undefined && sobrenome.length < 5) {
+            res.status(400)
+            res.json({erro: "O sobrenome deve ter mais de 5 cacteres"})
+            return
+        }
+        
+        if (nome != undefined && nome.length > 25) {
             res.status(400)
             res.json({erro: "O nome deve ter menos de 20 cacteres"})
             return
         }
         
-        if (sobrenome != undefined && sobrenome.length > 20) {
+        if (sobrenome != undefined && sobrenome.length > 25) {
             res.status(400)
             res.json({erro: "O sobrenome deve ter menos de 20 cacteres"})
             return

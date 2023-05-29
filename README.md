@@ -2096,8 +2096,8 @@ https://apiminhamente.onrender.com/usuario
 
 #### Elementos
 
-* nome - String (required)
-* sobrenome - String(required)
+* nome - String, 5-25 caracteres (required)
+* sobrenome - String, 5-25 caracteres (required)
 * avatar - Imagem (png, jpg, jpeg, svg) (required)
 * email - String(required)
 * senha - String de no mínimo 8 caracteres(required)
@@ -2176,7 +2176,7 @@ https://apiminhamente.onrender.com/usuario
 #### Elementos
 
 * id - String (required)
-* nome - String
+* nome - String, 5-25 caracteres
 * senha - String de no mínimo 8 caracteres(required)
 * Elementos que serão editados
 
