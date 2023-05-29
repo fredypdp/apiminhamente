@@ -17,7 +17,7 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         const folder = path.resolve(__dirname, 'temp/')
-  
+        console.log(__dirname);
         // checa se a pasta existe, se existe, chama o callback
         if (fs.existsSync(folder)) {
             cb(null, folder)
