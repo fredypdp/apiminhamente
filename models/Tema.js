@@ -6,7 +6,7 @@ import slugify from "slugify";
 export default class Tema {
 
     async novo(titulo, assunto){
-        let assuntoEncontrado = await AssuntoSchema.findById(assunto)
+        let assuntoEncontrado = await AssuntoSchema.findById(assunto).populate("Temas")
         let temaEncontrado = assuntoEncontrado.temas.some(n => n.titulo == titulo)
         console.log(assuntoEncontrado);
         console.log(temaEncontrado);
