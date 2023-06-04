@@ -143,7 +143,6 @@ export default class ApontamentoController {
             })
         }
 
-		console.log(typeof visibilidade)
 		if (visibilidade != undefined) {
 			if(typeof visibilidade == 'string') {
 				if(visibilidade == "undefined") {
