@@ -143,12 +143,12 @@ export default class ApontamentoController {
             })
         }
 
-		let visibilidade = visibilidade
 		if (visibilidade != undefined) {
 			if(typeof visibilidade == 'string') {
 				if(visibilidade == "undefined") {
 					visibilidade = undefined
 				} else {
+					console.log(visibilidade)
 					visibilidade = JSON.parse(visibilidade)
 				}
 			}
@@ -288,7 +288,6 @@ export default class ApontamentoController {
             })
         }
 
-		let visibilidade = visibilidade 
         if (visibilidade != undefined) {
 			if(typeof visibilidade == 'string') {
 				if(visibilidade == "undefined") {
