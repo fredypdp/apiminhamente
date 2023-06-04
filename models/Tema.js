@@ -7,7 +7,7 @@ export default class Tema {
 
     async novo(titulo, assunto){
         let assuntoEncontrado = await AssuntoSchema.findById(assunto).populate("temas")
-        let temaEncontrado = assuntoEncontrado.temas.some(n => n.titulo.toLowerCase() == titulo.toLowerCase())
+        let temaEncontrado = assuntoEncontrado.temas.some(tema => tema.titulo.toLowerCase() == titulo.toLowerCase())
         
         if (temaEncontrado == true) {
             let erro = {status: 400, msg: "O titulo já está cadastrado"}
@@ -43,11 +43,8 @@ export default class Tema {
 
         let temaEncontrado = await TemaSchema.findById(id)
         let assuntoEncontrado = await AssuntoSchema.findById(temaEncontrado.assunto).populate("temas")
-        console.log(temaEncontrado);
-        console.log(assuntoEncontrado);
-        let tituloExiste = assuntoEncontrado.temas.some(n => n.titulo.toLowerCase() == titulo.toLowerCase())
+        let tituloExiste = assuntoEncontrado.temas.some(n => n.titulo.toLowerCase() == novoTitulo.toLowerCase())
         
-        console.log(tituloExiste);
         if (tituloExiste == true) {
             let erro = {status: 400, msg: "O titulo já está cadastrado"}
             return erro
