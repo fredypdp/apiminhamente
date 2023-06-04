@@ -6,9 +6,10 @@ import slugify from "slugify";
 export default class Tema {
 
     async novo(titulo, assunto){
-        let temaEncontrado = await this.encontrarPorTitulo(titulo)
+        let assuntoEncontrado = await AssuntoSchema.findById(assunto)
+        let temaEncontrado = assuntoEncontrado.temas.some(n => n == titulo)
         
-        if (temaEncontrado != undefined) {
+        if (temaEncontrado == true) {
             let erro = {status: 400, msg: "O titulo já está cadastrado"}
             return erro
         }
