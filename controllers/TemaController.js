@@ -121,33 +121,38 @@ export default class AssuntoController {
         }
 
         try {
-           let tema = await new Tema().editar(id, titulo)
+            let erroExist = await new Tema().editar(id, titulo)
+            if (erroExist.status == 400) {
+                res.status(406)
+                res.json({erro: "Já existe um tema com esse nome"})
+            } else {
 
-           let HATEOAS = [
-                {
-                    href: process.env.URL_API+"/tema/"+tema._id,
-                    method: "get",
-                    rel: "tema_pelo_id",
-                },
-                {
-                    href: process.env.URL_API+"/tema/slug/"+tema.slug,
-                    method: "get",
-                    rel: "tema_pelo_slug",
-                },
-                {
-                    href: process.env.URL_API+"/tema",
-                    method: "put",
-                    rel: "editar_tema",
-                },
-                {
-                    href: process.env.URL_API+"/tema/"+tema._id,
-                    method: "delete",
-                    rel: "deletar_tema",
-                },
-            ]
+                let HATEOAS = [
+                    {
+                        href: process.env.URL_API+"/tema/"+erroExist._id,
+                        method: "get",
+                        rel: "tema_pelo_id",
+                    },
+                    {
+                        href: process.env.URL_API+"/tema/slug/"+erroExist.slug,
+                        method: "get",
+                        rel: "tema_pelo_slug",
+                    },
+                    {
+                        href: process.env.URL_API+"/tema",
+                        method: "put",
+                        rel: "editar_tema",
+                    },
+                    {
+                        href: process.env.URL_API+"/tema/"+erroExist._id,
+                        method: "delete",
+                        rel: "deletar_tema",
+                    },
+                ]
 
-            res.status(200)
-            res.json({tema: tema, _links: HATEOAS, msg: "Tema editado com sucesso"})
+                res.status(200)
+                res.json({tema: erroExist, _links: HATEOAS, msg: "Tema editado com sucesso"})
+            }
         } catch (erro) {
             console.log(erro)
             res.status(406)
