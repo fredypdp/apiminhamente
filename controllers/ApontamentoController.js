@@ -143,13 +143,15 @@ export default class ApontamentoController {
             })
         }
 
-        if(typeof visibilidade == 'string') {
-            if(visibilidade == "undefined") {
-                visibilidade = undefined
-            } else {
-                visibilidade = JSON.parse(visibilidade)
-            }
-        }
+		if (visibilidade != undefined) {
+			if(typeof visibilidade == 'string') {
+				if(visibilidade == "undefined") {
+					visibilidade = undefined
+				} else {
+					visibilidade = JSON.parse(visibilidade)
+				}
+			}
+		}
 
         if (titulo.length > 200) {
             res.status(400)
@@ -285,13 +287,15 @@ export default class ApontamentoController {
             })
         }
 
-        if(typeof visibilidade == 'string') {
-            if(visibilidade == "undefined") {
-                visibilidade = undefined
-            } else {
-                visibilidade = JSON.parse(visibilidade)
-            }
-        }
+        if (visibilidade != undefined) {
+			if(typeof visibilidade == 'string') {
+				if(visibilidade == "undefined") {
+					visibilidade = undefined
+				} else {
+					visibilidade = JSON.parse(visibilidade)
+				}
+			}
+		}
         
         if (req.file == undefined && titulo == undefined && conteudo == undefined && assuntos == undefined && temas == undefined && visibilidade == undefined) {
             res.status(400)
