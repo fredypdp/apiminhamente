@@ -8,7 +8,8 @@ export default class Tema {
     async novo(titulo, assunto){
         let assuntoEncontrado = await AssuntoSchema.findById(assunto)
         let temaEncontrado = assuntoEncontrado.temas.some(n => n == titulo)
-        
+        console.log(assuntoEncontrado);
+        console.log(temaEncontrado);
         if (temaEncontrado == true) {
             let erro = {status: 400, msg: "O titulo já está cadastrado"}
             return erro
