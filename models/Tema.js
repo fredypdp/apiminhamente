@@ -45,6 +45,9 @@ export default class Tema {
         let assuntoEncontrado = await AssuntoSchema.findById(temaEncontrado.assunto).populate("temas")
         let tituloExiste = assuntoEncontrado.temas.some(n => n.titulo.toLowerCase() == titulo.toLowerCase())
         
+        console.log(temaEncontrado);
+        console.log(assuntoEncontrado);
+        console.log(tituloExiste);
         if (tituloExiste == true) {
             let erro = {status: 400, msg: "O titulo já está cadastrado"}
             return erro
