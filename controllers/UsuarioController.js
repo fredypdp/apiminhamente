@@ -307,13 +307,13 @@ export default class UserController {
             return
         }
 
-        if (senha.length < 8) {
+        if (senha.length < process.env.MinSenhaUsuario) {
             if (req.file != undefined) {
                 await unlinkAsync(req.file.destination+"/"+req.file.filename)
             }
 
             res.status(400)
-            res.json({erro: "A senha precisa ter no mínimo 8 caracteres"})
+            res.json({erro: `A senha precisa ter no mínimo ${8} caracteres`})
             return
         }
 
@@ -387,27 +387,27 @@ export default class UserController {
             }
         }
 
-        if (nome.length < 5) {
+        if (nome.length > process.env.MaxNomeUsuario) {
             res.status(400)
-            res.json({erro: "O nome deve ter mais de 5 cacteres"})
+            res.json({erro: `O nome deve ter menos de ${process.env.MaxNomeUsuario} caracteres`})
             return
         }
         
-        if (sobrenome.length < 5) {
+        if (nome.length < process.env.MinNomeUsuario) {
             res.status(400)
-            res.json({erro: "O sobrenome deve ter mais de 5 cacteres"})
+            res.json({erro: `O nome deve ter mais de ${process.env.MinNomeUsuario} caracteres`})
             return
         }
         
-        if (nome.length > 25) {
+        if (sobrenome.length > process.env.MaxSobrenomeUsuario) {
             res.status(400)
-            res.json({erro: "O nome deve ter menos de 25 cacteres"})
+            res.json({erro: `O sobrenome deve ter menos de ${process.env.MaxSobrenomeUsuario} caracteres`})
             return
         }
         
-        if (sobrenome.length > 25) {
+        if (sobrenome.length < process.env.MinSobrenomeUsuario) {
             res.status(400)
-            res.json({erro: "O sobrenome deve ter menos de 25 cacteres"})
+            res.json({erro: `O sobrenome deve ter mais de ${process.env.MinSobrenomeUsuario} caracteres`})
             return
         }
 
@@ -569,27 +569,37 @@ export default class UserController {
             avatar = req.file.destination+"/"+req.file.filename
         }
 
-        if (nome != undefined && nome.length < 5) {
+        if (nome != undefined && nome.length > process.env.MaxNomeUsuario) {
             res.status(400)
-            res.json({erro: "O nome deve ter mais de 5 cacteres"})
+            res.json({erro: `O nome deve ter menos de ${process.env.MaxNomeUsuario} caracteres`})
             return
         }
         
-        if (sobrenome != undefined && sobrenome.length < 5) {
+        if (nome != undefined && nome.length < process.env.MinNomeUsuario) {
             res.status(400)
-            res.json({erro: "O sobrenome deve ter mais de 5 cacteres"})
+            res.json({erro: `O nome deve ter mais de ${process.env.MinNomeUsuario} caracteres`})
             return
         }
         
-        if (nome != undefined && nome.length > 25) {
+        if (sobrenome != undefined && sobrenome.length > process.env.MaxSobrenomeUsuario) {
             res.status(400)
-            res.json({erro: "O nome deve ter menos de 20 cacteres"})
+            res.json({erro: `O sobrenome deve ter menos de ${process.env.MaxSobrenomeUsuario} caracteres`})
             return
         }
         
-        if (sobrenome != undefined && sobrenome.length > 25) {
+        if (sobrenome != undefined && sobrenome.length < process.env.MinSobrenomeUsuario) {
             res.status(400)
-            res.json({erro: "O sobrenome deve ter menos de 20 cacteres"})
+            res.json({erro: `O sobrenome deve ter mais de ${process.env.MinSobrenomeUsuario} caracteres`})
+            return
+        }
+
+        if (senha != undefined && senha.length < process.env.MinSenhaUsuario) {
+            if (req.file != undefined) {
+                await unlinkAsync(req.file.destination+"/"+req.file.filename)
+            }
+
+            res.status(400)
+            res.json({erro: `A senha precisa ter no mínimo ${8} caracteres`})
             return
         }
 

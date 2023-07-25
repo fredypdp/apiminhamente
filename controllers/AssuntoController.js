@@ -51,9 +51,15 @@ export default class AssuntoController {
             icone = req.file.destination+"/"+req.file.filename
         }
 
-        if (nome.length > 100) {
+        if (nome.length > process.env.MaxNomeAssunto) {
             res.status(400)
-            res.json({erro: "O nome deve ter menos de 100 cacteres"})
+            res.json({erro: `O nome deve ter menos de ${process.env.MaxNomeAssunto} caracteres`})
+            return
+        }
+        
+        if (nome.length < process.env.MinNome) {
+            res.status(400)
+            res.json({erro: `O nome deve ter mais de ${process.env.MinNome} caracteres`})
             return
         }
 
@@ -145,9 +151,15 @@ export default class AssuntoController {
             icone = req.file.destination+"/"+req.file.filename
         }
 
-        if (nome != undefined && nome.length > 100) {
+        if (nome.length > process.env.MaxNomeAssunto) {
             res.status(400)
-            res.json({erro: "O nome deve ter menos de 100 cacteres"})
+            res.json({erro: `O nome deve ter menos de ${process.env.MaxNomeAssunto} caracteres`})
+            return
+        }
+        
+        if (nome.length < process.env.MinNome) {
+            res.status(400)
+            res.json({erro: `O nome deve ter mais de ${process.env.MinNome} caracteres`})
             return
         }
 

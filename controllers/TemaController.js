@@ -36,9 +36,15 @@ export default class AssuntoController {
             }
         }
 
-        if (titulo.length > 200) {
+        if (titulo.length > process.env.MaxTituloTema) {
             res.status(400)
-            res.json({erro: "O titulo deve ter menos de 200 cacteres"})
+            res.json({erro: `O título deve ter menos de ${process.env.MaxTituloTema} caracteres`})
+            return
+        }
+        
+        if (titulo.length < process.env.MinTituloTema) {
+            res.status(400)
+            res.json({erro: `O título deve ter mais de ${process.env.MinTituloTema} caracteres`})
             return
         }
 
@@ -114,9 +120,15 @@ export default class AssuntoController {
             }
         }
 
-        if (titulo != undefined && titulo.length > 200) {
+        if (titulo.length > process.env.MaxTituloTema) {
             res.status(400)
-            res.json({erro: "O titulo deve ter menos de 200 cacteres"})
+            res.json({erro: `O título deve ter menos de ${process.env.MaxTituloTema} caracteres`})
+            return
+        }
+        
+        if (titulo.length < process.env.MinTituloTema) {
+            res.status(400)
+            res.json({erro: `O título deve ter mais de ${process.env.MinTituloTema} caracteres`})
             return
         }
 

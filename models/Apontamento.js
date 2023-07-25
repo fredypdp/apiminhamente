@@ -141,7 +141,7 @@ export default class Apontamento {
                     temas.forEach( async tema => {
                         let temaEncontrado = await TemaSchema.findById(tema)
                         
-                        if (temaEncontrado != null && assuntoEncontrado != undefined) {
+                        if (temaEncontrado != null && temaEncontrado != undefined) {
                             let editar = temaEncontrado.apontamentos.indexOf(ApontamentoEditado._id)
                             
                             if (editar != -1) {

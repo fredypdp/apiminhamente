@@ -153,9 +153,15 @@ export default class ApontamentoController {
 			}
 		}
 
-        if (titulo.length > 200) {
+        if (titulo.length > process.env.MaxTituloApontamento) {
             res.status(400)
-            res.json({erro: "O título deve ter menos de 200 cacteres"})
+            res.json({erro: `O título deve ter menos de ${process.env.MaxTituloApontamento} caracteres`})
+            return
+        }
+        
+        if (titulo.length < process.env.MinTitulo) {
+            res.status(400)
+            res.json({erro: `O título deve ter mais de ${process.env.MinTitulo} caracteres`})
             return
         }
         
@@ -315,9 +321,15 @@ export default class ApontamentoController {
             miniatura = req.file.destination+"/"+req.file.filename
         }
 
-        if (titulo != undefined && titulo.length > 200) {
+        if (titulo.length > process.env.MaxTituloApontamento) {
             res.status(400)
-            res.json({erro: "O título deve ter menos de 200 cacteres"})
+            res.json({erro: `O título deve ter menos de ${process.env.MaxTituloApontamento} caracteres`})
+            return
+        }
+        
+        if (titulo.length < process.env.MinTitulo) {
+            res.status(400)
+            res.json({erro: `O título deve ter mais de ${process.env.MinTitulo} caracteres`})
             return
         }
 
