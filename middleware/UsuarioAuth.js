@@ -7,9 +7,9 @@ export default async function(req, res, next){
     if(authToken != undefined){
         const bearer = authToken.split(" ")
         let token = bearer[1]
-        const tokenValido = await new Usuario().findBlacklist(token)
+        const tokenEncontrado = await new Usuario().findBlacklist(token)
         
-        if (tokenValido == null || tokenValido == undefined) {
+        if (tokenEncontrado == null || tokenEncontrado == undefined) {
             jwt.verify(token, process.env.ADMIN_AUTH_SECRET, (erro, decoded) => {
                 if (erro) {
                     res.status(401);
@@ -20,7 +20,7 @@ export default async function(req, res, next){
             });
         } else {
             res.status(403);
-            res.json({erro: "Token invalido"});
+            res.json({erro: "Token não encontrado"});
         }
     }else{
         res.status(403);

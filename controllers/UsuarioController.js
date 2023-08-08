@@ -965,14 +965,14 @@ export default class UserController {
         // Validações
         if (token == undefined) {
             res.status(400)
-            res.json({erro: "Token inválido"})
+            res.json({erro: "Token inválido, nenhum valor encontrado."})
             return
         }
         
         if (token != undefined) {
             if (token == undefined || token.trim().length === 0) {
                 res.status(400)
-                res.json({erro: "Token inválido"})
+                res.json({erro: "Token inválido, nenhum valor encontrado."})
                 return
             }
         }
