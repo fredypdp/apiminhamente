@@ -13,7 +13,7 @@ export default async function(req, res, next){
             jwt.verify(token, process.env.ADMIN_AUTH_SECRET, (erro, decoded) => {
                 if (erro) {
                     res.status(401);
-                    res.json({erro: "Token inválido"});
+                    res.json({erro: "Erro ao acessar rota"});
                 } else {
                     if(decoded.usuario.role == 0){
                         next();
@@ -25,7 +25,7 @@ export default async function(req, res, next){
             });
         } else {
             res.status(403);
-            res.json({erro: "Token não encontrado"});
+            res.json({erro: "Erro ao acessar rota, token inválido"});
         }
     }else{
         res.status(403);

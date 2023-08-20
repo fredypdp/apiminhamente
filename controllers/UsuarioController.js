@@ -887,7 +887,7 @@ export default class UserController {
             let resultado = await bcrypt.compare(senha, usuario.senha);
             
             if(resultado == true){
-                let token = jwt.sign({ usuario }, secret, { expiresIn: 604800})
+                let token = jwt.sign({ usuario }, secret)
 
                 let tokenValido = await new Usuario().findBlacklist(token)
 
@@ -896,7 +896,7 @@ export default class UserController {
                         jwt.verify(token, secret, (erro, decoded) => {
                             if (erro) {
                                 res.status(401);
-                                res.json({erro: "Token inválido"});
+                                res.json({erro: "Erro ao fazer login, token inválido"});
                             } else {
 
                                 let HATEOAS = [
